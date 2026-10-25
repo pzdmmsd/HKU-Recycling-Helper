@@ -1,0 +1,258 @@
+{
+  "version": "2026-10-25.live.1",
+  "reviewed_on": "2026-10-25",
+  "sources": [
+    {
+      "id": "hku-recycling-101",
+      "title": "HKU Recycling 101",
+      "url": "https://www.wastereduction.hku.hk/recycling-101",
+      "locator": "The Correct Choice; Photo Guide link; material sections",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-re-kiosk-facility",
+      "title": "HKU re Facilities — re Kiosk",
+      "url": "https://www.wastereduction.hku.hk/re-facilities",
+      "locator": "re Kiosk → Run Run Shaw Podium, Main Campus; re Kiosk accepts these recyclables",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "epd-clean-recycling",
+      "title": "EPD Clean Recycling",
+      "url": "https://www.wastereduction.gov.hk/en-hk/waste-reduction-programme/clean-recycling",
+      "locator": "Clean Recycling — Paper; Plastic Bottles; Metal; Beverage Cartons",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "epd-permissions",
+      "title": "EPD Important Notices",
+      "url": "https://www.wastereduction.gov.hk/en-hk/important-notices",
+      "locator": "Copyright Notices, both paragraphs",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-pizza-box",
+      "title": "HKU Photo Guide — pizza box",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Paper → Clean pizza box",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-baking-paper",
+      "title": "HKU Photo Guide — baking paper",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Paper → Baking paper",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-coffee-cup-lid",
+      "title": "HKU Photo Guide — coffee cup lid",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Paper → Take-away coffee cup → Clean lid",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-cup-sleeve",
+      "title": "HKU Photo Guide — cup sleeve",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Paper → Take-away coffee cup → Cup Sleeve",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-coffee-cup",
+      "title": "HKU Photo Guide — takeaway coffee cup",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Paper → Take-away coffee cup → Clean Cup",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-foam-net",
+      "title": "HKU Photo Guide — foam net",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Foam nets",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-cleaned-styrofoam",
+      "title": "HKU Photo Guide — styrofoam",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Styrofoam → cleaned with no food residue",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-contact-lens-tray",
+      "title": "HKU Photo Guide — contact lens tray",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Contact lens packaging → Tray",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-contact-lens-foil-lid",
+      "title": "HKU Photo Guide — contact lens foil lid",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Contact lens packaging → Foil lid",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-noodle-lid",
+      "title": "HKU Photo Guide — instant noodle lid",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Instant noodle container → Lid",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-noodle-container",
+      "title": "HKU Photo Guide — instant noodle cup",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Instant noodle container → cup/bowl",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-labelled-cling-film",
+      "title": "HKU Photo Guide — cling film with food label",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Cling film with food label",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-personal-care-bottle",
+      "title": "HKU Photo Guide — personal care bottle",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Plastics → Personal care container → Clean bottle",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "hku-photo-mooncake-tin",
+      "title": "HKU Photo Guide — mooncake tin",
+      "url": "https://www.wastereduction.hku.hk/photo-guide",
+      "locator": "Photo Guide → Metals → Mooncake container",
+      "verified_on": "2026-10-25",
+      "verification_note": "Online source inspected; not owner approval or field verification.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Included as a cited reference for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    }
+  ]
+}

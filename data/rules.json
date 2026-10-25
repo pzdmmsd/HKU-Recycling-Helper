@@ -1,0 +1,430 @@
+{
+  "version": "2026-10-25.live.1",
+  "facility": "re Kiosk — Run Run Shaw Podium, Main Campus",
+  "verified_on": "2026-10-25",
+  "reviewed_on": "2026-10-25",
+  "publication_status": "Included for live course-prototype use by explicit team instruction",
+  "records": [
+    {
+      "id": "candidate-pizza-box",
+      "material": "paper",
+      "item_types": [
+        "pizza box"
+      ],
+      "keywords": [
+        "pizza box"
+      ],
+      "conditions": [
+        "clean"
+      ],
+      "condition_codes": [
+        "clean"
+      ],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Paper stream.",
+      "source_ids": [
+        "hku-photo-pizza-box",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-baking-paper",
+      "material": "paper",
+      "item_types": [
+        "baking paper"
+      ],
+      "keywords": [
+        "baking paper"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Explicit exclusion.",
+      "source_ids": [
+        "hku-photo-baking-paper",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-coffee-cup-lid",
+      "material": "plastic",
+      "item_types": [
+        "coffee cup lid"
+      ],
+      "keywords": [
+        "coffee cup lid"
+      ],
+      "conditions": [
+        "clean"
+      ],
+      "condition_codes": [
+        "clean"
+      ],
+      "decision": "accepted",
+      "preparation": [
+        "Clean the lid."
+      ],
+      "reason": "Plastic stream; lid only.",
+      "source_ids": [
+        "hku-photo-coffee-cup-lid",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-cup-sleeve",
+      "material": "paper",
+      "item_types": [
+        "cup sleeve"
+      ],
+      "keywords": [
+        "cup sleeve"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Paper stream; sleeve only.",
+      "source_ids": [
+        "hku-photo-cup-sleeve",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-coffee-cup",
+      "material": "beverage_carton",
+      "item_types": [
+        "takeaway coffee cup"
+      ],
+      "keywords": [
+        "takeaway coffee cup"
+      ],
+      "conditions": [
+        "clean"
+      ],
+      "condition_codes": [
+        "clean"
+      ],
+      "decision": "accepted",
+      "preparation": [
+        "Clean the cup."
+      ],
+      "reason": "Carton stream; cup only.",
+      "source_ids": [
+        "hku-photo-coffee-cup",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-foam-net",
+      "material": "plastic",
+      "item_types": [
+        "foam net"
+      ],
+      "keywords": [
+        "foam net"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Plastic stream.",
+      "source_ids": [
+        "hku-photo-foam-net",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-cleaned-styrofoam",
+      "material": "plastic",
+      "item_types": [
+        "styrofoam"
+      ],
+      "keywords": [
+        "styrofoam"
+      ],
+      "conditions": [
+        "clean",
+        "no food residue"
+      ],
+      "condition_codes": [
+        "clean"
+      ],
+      "decision": "accepted",
+      "preparation": [
+        "Remove food residue."
+      ],
+      "reason": "Staining alone is not excluded.",
+      "source_ids": [
+        "hku-photo-cleaned-styrofoam",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-contact-lens-tray",
+      "material": "plastic",
+      "item_types": [
+        "contact lens tray"
+      ],
+      "keywords": [
+        "contact lens tray"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Plastic stream; tray only.",
+      "source_ids": [
+        "hku-photo-contact-lens-tray",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-contact-lens-foil-lid",
+      "material": "mixed",
+      "item_types": [
+        "contact lens foil lid"
+      ],
+      "keywords": [
+        "contact lens foil lid"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Explicit exclusion; lid only.",
+      "source_ids": [
+        "hku-photo-contact-lens-foil-lid",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-noodle-lid",
+      "material": "mixed",
+      "item_types": [
+        "instant noodle lid"
+      ],
+      "keywords": [
+        "instant noodle lid"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Explicit exclusion; lid only.",
+      "source_ids": [
+        "hku-photo-noodle-lid",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-noodle-container",
+      "material": "plastic",
+      "item_types": [
+        "instant noodle cup"
+      ],
+      "keywords": [
+        "instant noodle cup"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Plastic stream; container only.",
+      "source_ids": [
+        "hku-photo-noodle-container",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-labelled-cling-film",
+      "material": "plastic",
+      "item_types": [
+        "cling film with food label"
+      ],
+      "keywords": [
+        "cling film with food label"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Explicit exclusion with label attached.",
+      "source_ids": [
+        "hku-photo-labelled-cling-film",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-personal-care-bottle",
+      "material": "plastic",
+      "item_types": [
+        "personal care bottle"
+      ],
+      "keywords": [
+        "personal care bottle"
+      ],
+      "conditions": [
+        "clean"
+      ],
+      "condition_codes": [
+        "clean"
+      ],
+      "decision": "accepted",
+      "preparation": [
+        "Clean the bottle."
+      ],
+      "reason": "Plastic stream; bottle only.",
+      "source_ids": [
+        "hku-photo-personal-care-bottle",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    },
+    {
+      "id": "candidate-mooncake-tin",
+      "material": "metal",
+      "item_types": [
+        "mooncake tin"
+      ],
+      "keywords": [
+        "mooncake tin"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [],
+      "reason": "Metal stream.",
+      "source_ids": [
+        "hku-photo-mooncake-tin",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "included_by_team_instruction"
+    }
+  ]
+}

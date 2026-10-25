@@ -1,0 +1,82 @@
+{
+  "version": "2026-10-25.samples.1",
+  "notice": "Original, pre-authored imaginary examples only. No API calls, official acceptance claims, or model-accuracy results. Referenced fixture creation dates are not source-verification dates.",
+  "samples": [
+    {
+      "id": "sample-accepted",
+      "label": "Accepted · clean cardboard example",
+      "description": "Illustrative example: a clean cardboard box at an imaginary sample facility.",
+      "result": {
+        "status": "accepted",
+        "item": "Sample cardboard box",
+        "facility": "Illustrative sample facility (not HKU)",
+        "preparation": [
+          "Flatten the box for this imaginary example."
+        ],
+        "reason": "This pre-authored example demonstrates an accepted result. Its invented facility accepts this sample item; it does not establish acceptance or preparation at HKU.",
+        "clarification": null,
+        "evidence": [
+          {
+            "rule_id": "sample-fixture-01",
+            "source_id": "original-sample-fixtures",
+            "title": "Project-authored imaginary example — not an official source",
+            "url": "",
+            "locator": "data/samples.json; pre-authored interface fixture only",
+            "verified_on": "2026-10-25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sample-not-accepted",
+      "label": "Not accepted · coated wrapper example",
+      "description": "Illustrative example: a coated wrapper at an imaginary sample facility.",
+      "result": {
+        "status": "not_accepted",
+        "item": "Sample coated wrapper",
+        "facility": "Illustrative sample facility (not HKU)",
+        "preparation": [],
+        "reason": "This pre-authored example demonstrates an explicit rejection. The imaginary sample rules exclude this wrapper; this is not a real HKU recycling decision.",
+        "clarification": null,
+        "evidence": [
+          {
+            "rule_id": "sample-fixture-02",
+            "source_id": "original-sample-fixtures",
+            "title": "Project-authored imaginary example — not an official source",
+            "url": "",
+            "locator": "data/samples.json; pre-authored interface fixture only",
+            "verified_on": "2026-10-25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sample-uncertain",
+      "label": "Cannot determine · missing details",
+      "description": "Illustrative example: “Which bin should I use for this container?”",
+      "result": {
+        "status": "cannot_determine",
+        "item": "Unspecified sample container",
+        "facility": null,
+        "preparation": [],
+        "reason": "This pre-authored example demonstrates uncertainty when material and condition are missing. It makes no recycling recommendation.",
+        "clarification": "What is the container made from, and is it empty and clean?",
+        "evidence": []
+      }
+    },
+    {
+      "id": "sample-refusal",
+      "label": "Outside scope · laboratory waste",
+      "description": "Illustrative example: a request for hazardous laboratory-waste disposal instructions.",
+      "result": {
+        "status": "refused",
+        "item": "Sample hazardous laboratory waste",
+        "facility": null,
+        "preparation": [],
+        "reason": "This pre-authored example demonstrates the project safety boundary. Ask the responsible laboratory or campus staff for the appropriate procedure; the helper does not provide hazardous-waste disposal instructions.",
+        "clarification": null,
+        "evidence": []
+      }
+    }
+  ]
+}
