@@ -4,7 +4,10 @@
 flowchart LR
     Browser[Local browser] --> API[FastAPI on localhost]
     API --> Screen[Scope and ambiguity screening]
-    Screen --> Retrieve[Approved local rule retrieval]
+    Screen -->|Unrecognized wording| Normalize[Translate / correct spelling]
+    Normalize --> Screen2[Re-screen normalized text]
+    Screen2 --> Retrieve[Approved local rule retrieval]
+    Screen -->|Recognized wording| Retrieve
     Sources[Permission-filtered sources and rules] --> Retrieve
     Retrieve --> Prompt[SKILL.md + retrieved records]
     Prompt --> Provider[Alibaba Cloud Bailian]
@@ -17,6 +20,8 @@ flowchart LR
 The server loads versioned JSON records on startup and selects rules explicitly included by the project team with valid official references. It accepts either a documented `approved` status or the explicit `team_override` chosen for this course prototype. Research candidates are in a separate file that the application never reads. `SKILL.md` is read and incorporated into the system instruction for actual provider requests. The transport requests JSON, bounds tokens/time, disables retries and redirects, and permits one request at a time. The course API key never enters frontend configuration.
 
 Retrieval is lexical and inspectable, using item phrases, material and conditions. It is retrieval-augmented generation without embeddings: suitable for a small approved pilot collection, with no hidden vector index or embedding charges. All matching rules must be considered for conflict before narrowing the provider context. General background sources cannot establish facility acceptance.
+
+When deterministic matching cannot understand a typo or non-English description, a separate provider request translates or corrects the text into English. That normalization output is schema-checked and then passed back through the deterministic safety screen and rule retrieval. The prompt forbids adding material, cleanliness, emptiness, food-residue state or preparation facts. If the normalized text is still missing required information or evidence, the app abstains; the model does not make a recycling decision during normalization.
 
 The model selects a single approved rule or abstains. A supported answer must match that rule's decision, facility, preparation, reason and source identifiers. The server assembles evidence from trusted records and displays the canonical fields. This intentionally constrains the model's freedom: it tests record selection and faithful use of evidence, not free-form recycling expertise. Unknown source IDs, invented recommendations and truncated/invalid outputs are errors. The server supplies a safe fixed explanation for model abstention rather than displaying uncontrolled disposal advice.
 

@@ -5,6 +5,7 @@ Implementation checkpoint: 25 October 2026. The proposal was read in full. The t
 Verified locally on macOS with Python 3.14.7 and installed Chrome:
 
 - 80 automated tests passed, using only synthetic records and mocked model calls.
+- On 15 November 2026, the current Windows checkout passed 86 automated tests, including multilingual and typo-normalization cases.
 - All six ambiguous/unsafe draft cases passed through the real HTTP handlers; no provider calls were made.
 - Browser checks passed for all four samples, the 18-entry source library, native dialogs/Escape, simulated request failure, private-file 404s, and desktop/mobile layouts without horizontal overflow.
 - Live `qwen3.8-flash` checks passed for an accepted pizza box, explicitly rejected baking paper and an accepted coffee cup with preparation. Each returned the expected canonical rule and two HKU citations.
@@ -26,6 +27,6 @@ Screenshots and the transport-check metadata are under ignored `artifacts/`. Win
 
 Automated tests and safety checks are engineering validation. They are not evidence that the routine model-accuracy thresholds or novice usability target have been met. The project must not be described as fully accepted against the proposal until the remaining human/source checkpoints are completed.
 
-No image recognition, additional facilities, real-time availability, geolocation or live web search was added. English text is the supported input scope. The language-model provider differs from the proposal's original OpenAI plan because the supplied course sponsorship uses Alibaba Cloud; the interface uses its OpenAI-compatible protocol.
+No image recognition, additional facilities, real-time availability, geolocation or live web search was added. Text input accepts common spelling errors and multiple languages through a constrained normalization step before deterministic screening and retrieval. The language-model provider differs from the proposal's original OpenAI plan because the supplied course sponsorship uses Alibaba Cloud; the interface uses its OpenAI-compatible protocol.
 
 AI assistance: Codex substantially generated and reviewed implementation code, original fictional fixtures, tests, documentation and research drafts. Team members must independently review factual labels and the final report. No human sign-off, consultation or participant result has been fabricated.

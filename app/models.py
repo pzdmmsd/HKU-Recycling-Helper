@@ -55,3 +55,9 @@ class ModelDecision(StrictModel):
     clarification: str | None
     rule_ids: list[str] = Field(max_length=1)
     source_ids: list[str] = Field(max_length=12)
+
+class InputNormalization(StrictModel):
+    """Model output that translates or corrects input without adding facts."""
+
+    normalized_english: str = Field(min_length=1, max_length=1000)
+    detected_language: str = Field(min_length=2, max_length=40)

@@ -145,9 +145,9 @@
     $("sample-picker").hidden = !sampleMode;
     $("description").readOnly = sampleMode;
     $("description").value = sampleMode && state.selectedSample ? state.selectedSample.description : "";
-    $("description").placeholder = sampleMode ? "Choose a sample above to get started." : "For example: one empty plastic drinks bottle, rinsed and clean.";
-    $("input-kind").textContent = sampleMode ? "SAMPLE DESCRIPTION" : "ENGLISH · ONE ITEM";
-    $("input-help").textContent = sampleMode ? "Sample descriptions are fixed. Use Live AI for your own item." : "Include the material, whether it is empty, and any food residue.";
+    $("description").placeholder = sampleMode ? "Choose a sample above to get started." : "For example: 一个干净的披萨盒 / one cleen pizza box / un carton de pizza propre.";
+    $("input-kind").textContent = sampleMode ? "SAMPLE DESCRIPTION" : "ANY-LANGUAGE INPUT · ONE ITEM";
+    $("input-help").textContent = sampleMode ? "Sample descriptions are fixed. Use Live AI for your own item." : "Typos and other languages are accepted. Answers use canonical English evidence with source links.";
     $("mode-description").textContent = sampleMode ? "Explore a pre-authored example. No AI call is made." : "Check your item against the cited live rule collection.";
     $("privacy-mode").textContent = sampleMode ? "Sample mode makes no AI call." : "Live sends your description and permitted records to Alibaba Cloud Bailian. The app does not save query logs.";
     $("character-count").hidden = sampleMode;

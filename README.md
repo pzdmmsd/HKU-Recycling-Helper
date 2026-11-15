@@ -4,12 +4,14 @@ A local browser app for AILT9019 Group 73, built from `HKU_Recycling_Helper_Prop
 
 **Current state:** the app, sample mode, local Python backend, retrieval, actual `SKILL.md` prompt integration, output validation and evaluation tools are implemented. The supplied Alibaba Cloud connection and three end-to-end cited decisions were successfully tested on 25 October 2026 using `qwen3.8-flash`. The project team explicitly chose to proceed without the proposal's documented-permission gate, so 14 project-written factual summaries with official source links are included in the live corpus. This inclusion does not claim source-owner endorsement. Sample examples remain fictional demonstrations and do not establish overall model accuracy.
 
+**Language and spelling support:** Live input accepts common spelling errors and other languages. When local matching cannot understand the wording, a model normalization step translates or corrects it into English before the same deterministic safety, retrieval and evidence checks run. The normalizer is instructed not to add missing material or condition facts; if a fact is still absent, the app returns `cannot determine`. Answers remain in canonical English so that the displayed reason and preparation fields can be checked against the cited source records.
+
 ## Start on Windows
 
 1. Install [Python 3.12 or newer](https://www.python.org/downloads/). Select **Add Python to PATH** in the installer.
 2. Download the project from your private course repository and extract the whole folder. Keep `app`, `data`, `static`, `SKILL.md` and the launchers together.
 3. Double-click **`start.bat`**. First launch installs dependencies into the project's `.venv` folder and creates `.env` from the example. Internet access is needed for dependency installation.
-4. Open **http://127.0.0.1:8000** in your browser. Keep the launcher window open while using the app.
+4. The launcher opens the first available local port automatically, usually **http://127.0.0.1:8001** if port 8000 is reserved. Keep the launcher window open while using the app.
 5. Choose a sample item, press **Check item**, and read its result and evidence explanation. No API account or key is needed for sample mode.
 
 Press **Ctrl+C** in the launcher window to stop. No source-code editing is needed to install, configure a key or start the app.

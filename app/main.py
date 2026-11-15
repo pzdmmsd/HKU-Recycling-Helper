@@ -1,6 +1,7 @@
 """Local browser application. Run with: python -m uvicorn app.main:app."""
 
 from pathlib import Path
+import re
 from urllib.parse import urlparse
 from uuid import uuid4
 
@@ -15,13 +16,20 @@ from app.config import PROMPT_VERSION, PROVIDER, Settings
 from app.corpus import Corpus
 from app.models import CheckRequest, CheckResponse
 from app.provider import ModelProvider, ServiceError
-from app.safety import screen
+from app.safety import needs_language_normalization, screen
 
 
 def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTransport | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     corpus = Corpus(settings.data_dir)
     provider = ModelProvider(settings, transport)
+    normalization_vocabulary = set()
+    for rule in corpus.rules:
+        values = [rule.get("material", "")]
+        for key in ("keywords", "item_types", "conditions", "condition_codes", "preparation"):
+            values.extend(rule.get(key, []))
+        for value in values:
+            normalization_vocabulary.update(re.findall(r"[a-z]+", str(value).casefold()))
     application = FastAPI(title="HKU Recycling Helper", version="1.0.0", docs_url=None, redoc_url=None)
     application.state.corpus = corpus
     application.state.provider = provider
@@ -37,8 +45,8 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             "prompt_version": PROMPT_VERSION,
         }
 
-    def uncertain(description: str, reason: str, clarification: str | None = None, status: str = "cannot_determine") -> CheckResponse:
-        return CheckResponse(**metadata("screening"), status=status, item=description[:150] or "Unspecified item", facility=None, preparation=[], reason=reason, clarification=clarification, evidence=[])
+    def uncertain(description: str, reason: str, clarification: str | None = None, status: str = "cannot_determine", mode: str = "screening") -> CheckResponse:
+        return CheckResponse(**metadata(mode), status=status, item=description[:150] or "Unspecified item", facility=None, preparation=[], reason=reason, clarification=clarification, evidence=[])
 
     @application.middleware("http")
     async def local_request_protection(request: Request, call_next):
@@ -120,27 +128,46 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             return CheckResponse(**metadata("sample"), **result)
         if payload.sample_id is not None:
             raise ServiceError("invalid_request", "Live requests cannot include a sample identifier.", 422)
-        # First screen prohibited requests before inspecting local rule matches.
+        # Cheap deterministic screening runs before any provider request.
         screening = screen(description, known_item=True, require_condition=False)
         if screening:
             return uncertain(description, screening.reason, screening.clarification, screening.status)
+
+        decision_description = description
+        used_normalizer = False
         rules = corpus.retrieve(description)
         screening = screen(description, known_item=bool(rules), require_condition=not any(not rule["conditions"] and not rule.get("condition_codes") for rule in rules))
-        if screening:
+
+        # If local retrieval cannot handle the wording, ask the model to translate
+        # or correct spelling only. The normalized text then goes through the same
+        # deterministic safety, retrieval and evidence checks.
+        if (screening or not rules) and settings.api_key and corpus.rules and needs_language_normalization(description, normalization_vocabulary):
+            normalized = await provider.normalize_input(description)
+            decision_description = normalized.normalized_english
+            used_normalizer = True
+            screening = screen(decision_description, known_item=True, require_condition=False)
+            if screening:
+                return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live")
+            rules = corpus.retrieve(decision_description)
+            screening = screen(decision_description, known_item=bool(rules), require_condition=not any(not rule["conditions"] and not rule.get("condition_codes") for rule in rules))
+            if screening:
+                return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live")
+        elif screening:
             return uncertain(description, screening.reason, screening.clarification, screening.status)
+
         if not rules:
-            return uncertain(description, "No cited, facility-specific live rule supports a decision for this item. Missing evidence does not mean the item is not accepted. Check the official facility guidance or ask campus staff.")
-        applicable = [rule for rule in rules if corpus.conditions_met(rule, description)]
+            return uncertain(decision_description, "No cited, facility-specific live rule supports a decision for this item. Missing evidence does not mean the item is not accepted. Check the official facility guidance or ask campus staff.", mode="live" if used_normalizer else "screening")
+        applicable = [rule for rule in rules if corpus.conditions_met(rule, decision_description)]
         if not applicable:
-            return uncertain(description, "The description does not confirm the conditions required by the matching rule.", "Please confirm the item's exact type and all relevant conditions: " + "; ".join(dict.fromkeys(condition for rule in rules for condition in rule["conditions"])) + ".")
+            return uncertain(decision_description, "The description does not confirm the conditions required by the matching rule.", "Please confirm the item's exact type and all relevant conditions: " + "; ".join(dict.fromkeys(condition for rule in rules for condition in rule["conditions"])) + ".", mode="live" if used_normalizer else "screening")
         if len({rule["decision"] for rule in applicable}) > 1:
-            return uncertain(description, "The matching live rules conflict for the stated conditions. Ask campus staff before deciding.")
+            return uncertain(decision_description, "The matching live rules conflict for the stated conditions. Ask campus staff before deciding.", mode="live" if used_normalizer else "screening")
         retrieved = applicable[:6]
-        decision = await provider.decide(description, corpus, retrieved)
+        decision = await provider.decide(decision_description, corpus, retrieved)
         if decision.status == "cannot_determine":
-            return CheckResponse(**metadata("live"), status="cannot_determine", item=description[:150], facility=None, preparation=[], reason="The model could not establish a supported decision from the retrieved rules. Check the official facility guidance or ask campus staff.", clarification="Please confirm the exact item type, material and condition.", evidence=[])
+            return CheckResponse(**metadata("live"), status="cannot_determine", item=decision_description[:150], facility=None, preparation=[], reason="The model could not establish a supported decision from the retrieved rules. Check the official facility guidance or ask campus staff.", clarification="Please confirm the exact item type, material and condition.", evidence=[])
         rule = next(rule for rule in retrieved if rule["id"] == decision.rule_ids[0])
-        return CheckResponse(**metadata("live"), status=decision.status, item=description[:150], facility=corpus.facility, preparation=rule["preparation"], reason=rule["reason"], clarification=None, evidence=corpus.evidence(rule))
+        return CheckResponse(**metadata("live"), status=decision.status, item=decision_description[:150], facility=corpus.facility, preparation=rule["preparation"], reason=rule["reason"], clarification=None, evidence=corpus.evidence(rule))
 
     @application.get("/")
     async def index():

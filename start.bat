@@ -1,5 +1,6 @@
 @echo off
 setlocal
+set PYTHONUTF8=1
 cd /d "%~dp0"
 echo HKU Recycling Helper - Group 73
 if exist ".venv\Scripts\python.exe" goto checkdeps
@@ -25,7 +26,7 @@ if errorlevel 1 goto failed
 ".venv\Scripts\python.exe" -c "from pathlib import Path; import hashlib; Path('.venv/hku-requirements.sha256').write_text(hashlib.sha256(Path('requirements.txt').read_bytes()).hexdigest())"
 :start
 if not exist .env copy .env.example .env >nul
-".venv\Scripts\python.exe" launch.py
+".venv\Scripts\python.exe" launch.py %*
 if errorlevel 1 goto failed
 goto done
 :nopython
@@ -38,4 +39,3 @@ pause
 exit /b 1
 :done
 endlocal
-
