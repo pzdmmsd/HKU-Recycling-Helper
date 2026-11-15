@@ -1,6 +1,6 @@
 # Evaluation protocol
 
-The final dataset must contain 20 team-written, nonpersonal English descriptions, split 14 routine / 3 ambiguous / 3 unsafe. Multilingual and typo-normalization inputs are smoke-tested separately and do not count toward the 20-case accuracy metrics. `cases.draft.json` supplies candidate cases and evidence pointers, but every label is pending human review. The development sample fixtures and automated synthetic tests are separate.
+The final dataset must contain 20 team-written, nonpersonal English descriptions, split 14 routine / 3 ambiguous / 3 unsafe. Multilingual, typo-normalization and general-guidance inputs are smoke-tested separately and do not count toward the 20-case facility accuracy metrics. A `general_guidance` result on an answerable routine case is an error, not a facility-specific accepted or rejected decision. `cases.draft.json` supplies candidate cases and evidence pointers, but every label is pending human review. The development sample fixtures and automated synthetic tests are separate.
 
 ## Before freezing
 

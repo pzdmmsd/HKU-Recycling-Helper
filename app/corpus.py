@@ -60,6 +60,21 @@ class Corpus:
             if source["id"] in self.sources:
                 raise ValueError("Duplicate approved source identifier")
             self.sources[source["id"]] = source
+
+        general_data = load_json(data_dir / "general-guidance.json", {})
+        self.general_version = str(general_data.get("version", "unconfigured")) if isinstance(general_data, dict) else "unconfigured"
+        raw_general_sources = general_data.get("sources", []) if isinstance(general_data, dict) else []
+        self.general_sources = {}
+        for source in raw_general_sources:
+            if not isinstance(source, dict) or not permitted(source.get("permission")):
+                continue
+            required = ("id", "title", "url", "locator", "verified_on")
+            if not all(isinstance(source.get(key), str) and source[key].strip() for key in required):
+                continue
+            if not official_url(source["url"]) or source["id"] in self.general_sources:
+                continue
+            self.general_sources[source["id"]] = source
+
         self.rules = []
         identifiers = set()
         for rule in rules_data.get("records", []):
@@ -156,6 +171,34 @@ class Corpus:
                 "verified_on": self.sources[source_id]["verified_on"],
             }
             for source_id in rule["source_ids"]
+        ]
+
+    def general_reference_map(self) -> dict[str, dict]:
+        return {**self.sources, **self.general_sources}
+
+    def general_context(self) -> dict:
+        references = self.general_reference_map()
+        return {
+            "version": self.general_version,
+            "sources": [
+                {key: source[key] for key in ("id", "title", "url", "locator", "verified_on")}
+                for source in references.values()
+            ],
+        }
+
+    def general_evidence(self, source_ids: list[str]) -> list[dict]:
+        references = self.general_reference_map()
+        return [
+            {
+                "rule_id": "general-guidance",
+                "source_id": source_id,
+                "title": references[source_id]["title"],
+                "url": references[source_id]["url"],
+                "locator": references[source_id]["locator"],
+                "verified_on": references[source_id]["verified_on"],
+            }
+            for source_id in source_ids
+            if source_id in references
         ]
 
     def context(self, rules: list[dict]) -> dict:

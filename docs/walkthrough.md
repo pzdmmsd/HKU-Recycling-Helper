@@ -24,5 +24,6 @@ Tasks:
 5. Open the source guide, follow an official reference, and distinguish team inclusion from source-owner endorsement and verification date.
 6. Open the other decision/refusal samples. Use Tab/Enter/Escape to operate the controls and dialogs.
 7. Enter one synthetic live description in English, then repeat with a simple typo or another language. Check that the canonical English result still maps to the correct source evidence and that missing facts are not invented.
+8. Enter `banana peel` or `香蕉皮` and verify that the result is labelled general guidance, classified as food waste, cites only allowed general references, and does not claim acceptance at the re Kiosk.
 
 Record failed steps and improve the README/interface before retrying. Automated browser checks do not substitute for these novice walkthroughs.

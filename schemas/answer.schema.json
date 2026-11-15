@@ -60,7 +60,8 @@
         "accepted",
         "not_accepted",
         "cannot_determine",
-        "refused"
+        "refused",
+        "general_guidance"
       ],
       "title": "Status",
       "type": "string"

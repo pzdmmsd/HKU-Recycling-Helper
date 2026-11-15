@@ -4,9 +4,11 @@ A local browser app for AILT9019 Group 73, built from `HKU_Recycling_Helper_Prop
 
 The proposal PDF is retained as the historical course submission. Current implementation details, provider information, language support and known limitations are documented in this README and `docs/`; those current files take precedence if they differ from the proposal.
 
-**Current state:** the app, sample mode, local Python backend, retrieval, actual `SKILL.md` prompt integration, output validation and evaluation tools are implemented. The supplied Alibaba Cloud connection and three baseline cited decisions were successfully tested on 25 October 2026 using `qwen3.8-flash`. On 15 November 2026, the secure Windows checkout passed 86 automated tests and selected live Chinese, typo and French smoke checks. The full 20-case evaluation and two novice walkthroughs remain pending. The project team explicitly chose to proceed without the proposal's documented-permission gate, so 14 project-written factual summaries with official source links are included in the live corpus. This inclusion does not claim source-owner endorsement. Sample examples remain fictional demonstrations and do not establish overall model accuracy.
+**Current state:** the app, sample mode, local Python backend, retrieval, actual `SKILL.md` prompt integration, output validation and evaluation tools are implemented. The supplied Alibaba Cloud connection and three baseline cited decisions were successfully tested on 25 October 2026 using `qwen3.8-flash`. On 15 November 2026, the secure Windows checkout passed 88 automated tests and selected live Chinese, typo, French and general-guidance smoke checks. The full 20-case evaluation and two novice walkthroughs remain pending. The project team explicitly chose to proceed without the proposal's documented-permission gate, so 14 project-written factual summaries with official source links are included in the live corpus. This inclusion does not claim source-owner endorsement. Sample examples remain fictional demonstrations and do not establish overall model accuracy.
 
 **Language and spelling support:** Live input accepts common spelling errors and other languages. When local matching cannot understand the wording, a model normalization step translates or corrects it into English before the same deterministic safety, retrieval and evidence checks run. The normalizer is instructed not to add missing material or condition facts; if a fact is still absent, the app returns `cannot determine`. Answers remain in canonical English so that the displayed reason and preparation fields can be checked against the cited source records. This multilingual path is smoke-tested only; the frozen 20-case accuracy evaluation remains English-language.
+
+**General fallback:** Items outside the 14 facility-specific records can receive a clearly labelled general-guidance result: recycling stream, food waste, general waste, special collection, reuse or unknown. General guidance never claims that the re Kiosk accepts the item. For example, fruit peel is classified as food waste and kept out of dry recycling.
 
 ## Start on Windows
 
@@ -89,7 +91,7 @@ The app never searches the web at query time. It cannot identify the nearest bin
 .venv/bin/python scripts/evaluate.py run --safety-only
 ```
 
-The automated tests use synthetic records and a mocked provider. The safety-only command executes the three ambiguous and three unsafe draft cases through the real request handlers without sending a model request. These are engineering checks, **not the proposal's 20-case live model evaluation**.
+The automated tests use synthetic records and a mocked provider. Additional tests cover multilingual normalization, general guidance and the serial provider queue. The safety-only command executes the three ambiguous and three unsafe draft cases through the real request handlers without sending a model request. These are engineering checks, **not the proposal's 20-case live model evaluation**.
 
 Optional browser QA uses Node 22+ and installed Chrome: start the app, then run `node scripts/browser_check.mjs`. The script defaults to `http://127.0.0.1:8001`; set `HKU_TEST_URL` if the launcher chose another port, and set `CHROME_PATH` if Chrome is installed somewhere other than the default macOS path. It checks samples, dialogs, error handling and mobile overflow, saves screenshots under ignored `artifacts/`, and never submits a live model query. Node is not needed to use the app.
 
@@ -128,6 +130,6 @@ This implementation, synthetic examples, test scaffolding and research drafts we
 | Live mode unavailable | Read the on-screen reason; check the local key, model, `SKILL.md` and live corpus. |
 | Provider rejects the key | Check the key locally, the supplied endpoint and the course expiry date; contact the TA team if needed. |
 | API timeout or rate limit | Wait and retry manually. There is no cached or guessed live answer. Sample mode remains a separate explicit choice. |
-| Unsupported or missing evidence | Provide a single item and relevant details; otherwise ask campus staff. The app will not invent a bin. |
+| Unsupported or missing evidence | Live mode may return clearly labelled general guidance. It never claims facility acceptance; ask campus staff when the site instructions are unclear. |
 
 The authorised distribution is the private GitHub course repository, not public hosting. Keep `.env`, API keys and personal data out of Git.

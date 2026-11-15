@@ -8,6 +8,7 @@
     not_accepted: "Not accepted at the covered facility",
     cannot_determine: "Cannot determine",
     refused: "Outside this helper’s scope",
+    general_guidance: "General guidance - not facility-specific",
   };
   const sampleLabels = {
     "sample-accepted": "Clean cardboard",
@@ -222,7 +223,7 @@
     const metadata = $("result-metadata");
     metadata.replaceChildren();
     const entries = [
-      ["Answer type", sampleMode ? "Pre-authored sample (not a live AI result)" : result.mode === "screening" ? "Local scope / evidence screening (no model call)" : "Live AI response"],
+      ["Answer type", sampleMode ? "Pre-authored sample (not a live AI result)" : result.status === "general_guidance" ? "General AI guidance (not facility-specific)" : result.mode === "screening" ? "Local scope / evidence screening (no model call)" : "Live AI response"],
       ["Provider", sampleMode ? "None — no API call" : result.provider || "Local screening"],
       ["Model", sampleMode ? "None — authored example" : result.model || "No model call"],
       ["Corpus", result.corpus_version || state.config?.corpus_version || "Not available"],
@@ -240,17 +241,17 @@
     $("result-loading").hidden = true;
     $("result-content").hidden = false;
     $("result-card").setAttribute("aria-labelledby", "decision-heading");
-    $("result-label").textContent = sampleMode ? "SAMPLE · AUTHORED EXAMPLE" : result.mode === "screening" ? "LOCAL SCREENING · NO AI CALL" : "LIVE · SOURCE-BACKED CHECK";
+    $("result-label").textContent = sampleMode ? "SAMPLE · AUTHORED EXAMPLE" : result.status === "general_guidance" ? "LIVE · GENERAL GUIDANCE" : result.mode === "screening" ? "LOCAL SCREENING · NO AI CALL" : "LIVE · SOURCE-BACKED CHECK";
     $("result-status").dataset.status = result.status;
     const statusIcon = result.status === "accepted" ? "check" : result.status === "not_accepted" ? "close" : result.status === "refused" ? "shield" : "question";
     $("status-icon-use").setAttribute("href", `#icon-${statusIcon}`);
-    $("result-eyebrow").textContent = sampleMode ? "ILLUSTRATIVE RESULT" : "DECISION";
+    $("result-eyebrow").textContent = sampleMode ? "ILLUSTRATIVE RESULT" : result.status === "general_guidance" ? "GENERAL GUIDANCE" : "DECISION";
     $("decision-heading").textContent = statusLabels[result.status];
     $("sample-result-notice").hidden = !sampleMode;
     $("result-reason").textContent = result.reason || "No explanation was provided.";
     $("clarification-box").hidden = !result.clarification;
     $("clarification-text").textContent = result.clarification || "";
-    $("result-facility").textContent = result.facility || "No facility recommendation";
+    $("result-facility").textContent = result.facility || (result.status === "general_guidance" ? "No facility-specific recommendation" : "No facility recommendation");
     const preparation = Array.isArray(result.preparation) ? result.preparation : [];
     $("preparation-section").hidden = !preparation.length;
     $("preparation-section").querySelector("h3").textContent = sampleMode ? "Preparation in this example" : "Before you drop it off";

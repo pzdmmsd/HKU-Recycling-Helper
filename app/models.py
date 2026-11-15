@@ -5,7 +5,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 
-Status = Literal["accepted", "not_accepted", "cannot_determine", "refused"]
+Status = Literal["accepted", "not_accepted", "cannot_determine", "refused", "general_guidance"]
 
 
 class StrictModel(BaseModel):
@@ -61,3 +61,14 @@ class InputNormalization(StrictModel):
 
     normalized_english: str = Field(min_length=1, max_length=1000)
     detected_language: str = Field(min_length=2, max_length=40)
+
+class GeneralGuidance(StrictModel):
+    """General category guidance when no facility-specific rule applies."""
+
+    stream: Literal["recycling", "food_waste", "general_waste", "special_collection", "reuse", "hazardous", "unknown"]
+    item: str = Field(min_length=1, max_length=150)
+    summary: str = Field(min_length=1, max_length=1200)
+    preparation: list[str] = Field(max_length=10)
+    clarification: str | None
+    source_ids: list[str] = Field(max_length=8)
+    confidence: Literal["high", "medium", "low"]

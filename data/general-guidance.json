@@ -1,0 +1,33 @@
+{
+  "version": "2026-11-15.general.1",
+  "sources": [
+    {
+      "id": "epd-food-waste-recycling",
+      "title": "EPD Food Waste Recycling Schemes",
+      "url": "https://www.wastereduction.gov.hk/en-hk/waste-reduction-programme/food-waste-recycling-schemes",
+      "locator": "Overview; Food Waste Recycling Points at Public Refuse Collection Points; Food Waste Recycling Spots; Food Waste Smart Recycling Points",
+      "verified_on": "2026-11-15",
+      "verification_note": "Official EPD page inspected for general food-waste guidance. This does not establish acceptance at the HKU re Kiosk.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Used only as a general official reference for this private course prototype at the project team's explicit instruction on 2026-11-15; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    },
+    {
+      "id": "epd-waste-reduction-tips",
+      "title": "EPD Waste Reduction and Recycling Tips",
+      "url": "https://www.wastereduction.gov.hk/en-hk/waste-reduction-and-recycling-tips",
+      "locator": "General waste reduction and recycling guidance",
+      "verified_on": "2026-11-15",
+      "verification_note": "Official EPD page inspected for general guidance. It is not evidence that the HKU re Kiosk accepts a specific item.",
+      "permission": {
+        "status": "team_override",
+        "basis": "Used only as a general official reference for this private course prototype at the project team's explicit instruction on 2026-11-15; this does not claim source-owner endorsement.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      }
+    }
+  ]
+}

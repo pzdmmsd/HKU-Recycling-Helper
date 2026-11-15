@@ -4,11 +4,11 @@ Implementation checkpoint: 15 November 2026. The proposal was read in full. The 
 
 Current verification on Windows with Python 3.12:
 
-- 86 automated tests passed, including multilingual and typo-normalization cases.
+- 88 automated tests passed, including multilingual, typo-normalization, general-guidance and serial-queue cases.
 - All six ambiguous/unsafe draft cases passed through the real HTTP handlers; no provider calls were made for the safety-only paths.
 - Browser checks passed for all four samples, the 18-entry source library, native dialogs/Escape, simulated request failure, private-file 404s, and desktop/mobile layouts without horizontal overflow.
 - Live `qwen3.8-flash` checks passed for an accepted pizza box, explicitly rejected baking paper and an accepted coffee cup with preparation. Each returned the expected canonical rule and two HKU citations.
-- Selected live smoke checks accepted Chinese, English-typo and French pizza-box inputs; a Chinese lithium-battery request was refused before provider transmission.
+- Selected live smoke checks accepted Chinese, English-typo and French pizza-box inputs; a Chinese lithium-battery request was refused before provider transmission; Chinese banana peel received food-waste general guidance.
 - A full-key scan found zero matches in tracked or unignored files; `.env` is ignored and absent from Git. A macOS verification checkpoint previously passed 80 tests with owner-only `.env` permissions; the current Windows checkout uses the normal local file permissions.
 
 Screenshots and the transport-check metadata are under ignored `artifacts/`. The current Starlette test client emits an httpx deprecation warning; all tests pass with the pinned dependency snapshot. The multilingual checks validate routing and safety on selected examples, not language-wide accuracy.
@@ -18,10 +18,11 @@ Screenshots and the transport-check metadata are under ignored `artifacts/`. The
 | Versioned live source corpus | 14 project-written records, source register, explicit team override and source filtering | Independent factual/source review before final reporting. |
 | Text browser app with local Python backend | Responsive local interface, sample/live controls, FastAPI handlers, multilingual normalization | Two novice walkthroughs and final usability measurement. |
 | Retrieval + actual SKILL integration | Team-included record retrieval, system prompt reads SKILL.md, strict structured validation; three baseline live cases and multilingual smoke checks passed | Full 20-case live evaluation. |
-| Three decisions with evidence | Accepted, not accepted, cannot determine; separate safety refusal; canonical citations | Full 20-case evaluation and manual evidence review. |
+| Facility decisions with evidence | Accepted, not accepted, cannot determine; separate safety refusal; canonical citations | Full 20-case evaluation and manual evidence review. |
+| General guidance fallback | Clearly labelled recycling, food-waste, general-waste, special-collection, reuse or unknown category; never claims re Kiosk acceptance | Broader category quality and multilingual evaluation. |
 | API failure behaviour | Non-2xx errors, no guessed/cached fallback, mocked failure tests | Provider outage can be simulated, not claimed to have occurred during live use. |
 | Sponsored provider | qwen3.8-flash / course endpoint; connectivity, baseline, typed and multilingual smoke checks succeeded | Course quota/expiry monitoring by team. |
-| Evaluation | 20-case English draft, freeze/checksum tool, sequential runner, separate semantic evidence review | Two-person labels, final freeze, all 20 live cases, manual evidence review. Multilingual accuracy is not claimed. |
+| Evaluation | 20-case English facility draft, freeze/checksum tool, sequential runner, separate semantic evidence review | Two-person labels, final freeze, all 20 live cases, manual evidence review. General-guidance and multilingual accuracy are not claimed. |
 | First-use handoff | requirements, example config, Windows/macOS/Linux launchers, README, walkthrough sheet | Two actual novice walkthroughs; target not yet measured. |
 | Private distribution | Private GitHub course repository updated; secret excluded; no public hosting | Confirm teaching-team access and complete source distribution review. |
 

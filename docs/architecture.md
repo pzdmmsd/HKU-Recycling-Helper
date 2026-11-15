@@ -8,6 +8,9 @@ flowchart LR
     Normalize --> Screen2[Re-screen normalized text]
     Screen2 --> Retrieve[Approved local rule retrieval]
     Screen -->|Recognized wording| Retrieve
+    Retrieve -->|No applicable facility rule| General[General guidance classification]
+    General --> ValidateGeneral[Validate allowed sources and label]
+    ValidateGeneral --> Browser
     Sources[Permission-filtered sources and rules] --> Retrieve
     Retrieve --> Prompt[SKILL.md + retrieved records]
     Prompt --> Provider[Alibaba Cloud Bailian]
@@ -38,6 +41,6 @@ The sample route accepts only a known sample ID and its unchanged authored descr
 | `GET /api/corpus` | Approved context and separately labelled reference metadata. Pending references are not model evidence. |
 | `POST /api/check` | `{mode, description, sample_id?}`; output follows `schemas/answer.schema.json`. |
 
-`status` is `accepted`, `not_accepted`, `cannot_determine` or a separate `refused` safety outcome. `mode` is `sample`, `screening` or `live`. Operational errors use a non-2xx status and `{error: {code, message}}`; they never masquerade as a recycling decision. Request validation errors do not echo rejected inputs or secrets.
+`status` is `accepted`, `not_accepted`, `cannot_determine`, `general_guidance` or a separate `refused` safety outcome. `mode` is `sample`, `screening` or `live`. Operational errors use a non-2xx status and `{error: {code, message}}`; they never masquerade as a recycling decision. Request validation errors do not echo rejected inputs or secrets.
 
 Bind to loopback only and keep one worker. This app is a local course handoff, not a multi-user hosted service. Do not expose it through a public tunnel without addressing account access, rate limiting and deployment requirements.

@@ -101,6 +101,7 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             "corpus_verified_on": corpus.verified_on,
             "approved_rule_count": len(corpus.rules),
             "live_rule_count": len(corpus.rules),
+            "general_source_count": len(corpus.general_sources),
             "prompt_version": PROMPT_VERSION,
             "facility": corpus.facility,
             "settings": {"temperature": settings.temperature, "max_tokens": settings.max_tokens, "timeout_seconds": settings.timeout_seconds, "concurrency": 1, "retries": 0},
@@ -140,7 +141,7 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
 
         # If local retrieval cannot handle the wording, ask the model to translate
         # or correct spelling only. The normalized text then goes through the same
-        # deterministic safety, retrieval and evidence checks.
+        # deterministic safety and retrieval checks.
         if (screening or not rules) and settings.api_key and corpus.rules and needs_language_normalization(description, normalization_vocabulary):
             normalized = await provider.normalize_input(description)
             decision_description = normalized.normalized_english
@@ -150,24 +151,50 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
                 return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live")
             rules = corpus.retrieve(decision_description)
             screening = screen(decision_description, known_item=bool(rules), require_condition=not any(not rule["conditions"] and not rule.get("condition_codes") for rule in rules))
-            if screening:
-                return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live")
-        elif screening:
-            return uncertain(description, screening.reason, screening.clarification, screening.status)
 
-        if not rules:
-            return uncertain(decision_description, "No cited, facility-specific live rule supports a decision for this item. Missing evidence does not mean the item is not accepted. Check the official facility guidance or ask campus staff.", mode="live" if used_normalizer else "screening")
+        # Missing material or condition detail can be handled by the general
+        # classifier, which must not claim facility-specific acceptance.
+        general_fallback_allowed = screening is None or (
+            screening.status == "cannot_determine"
+            and (
+                screening.reason.startswith("The description does not identify a supported material")
+                or screening.reason.startswith("The item's condition is missing")
+            )
+        )
+        if screening and not general_fallback_allowed:
+            return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live" if used_normalizer else "screening")
+
         applicable = [rule for rule in rules if corpus.conditions_met(rule, decision_description)]
-        if not applicable:
-            return uncertain(decision_description, "The description does not confirm the conditions required by the matching rule.", "Please confirm the item's exact type and all relevant conditions: " + "; ".join(dict.fromkeys(condition for rule in rules for condition in rule["conditions"])) + ".", mode="live" if used_normalizer else "screening")
-        if len({rule["decision"] for rule in applicable}) > 1:
-            return uncertain(decision_description, "The matching live rules conflict for the stated conditions. Ask campus staff before deciding.", mode="live" if used_normalizer else "screening")
-        retrieved = applicable[:6]
-        decision = await provider.decide(decision_description, corpus, retrieved)
-        if decision.status == "cannot_determine":
-            return CheckResponse(**metadata("live"), status="cannot_determine", item=decision_description[:150], facility=None, preparation=[], reason="The model could not establish a supported decision from the retrieved rules. Check the official facility guidance or ask campus staff.", clarification="Please confirm the exact item type, material and condition.", evidence=[])
-        rule = next(rule for rule in retrieved if rule["id"] == decision.rule_ids[0])
-        return CheckResponse(**metadata("live"), status=decision.status, item=decision_description[:150], facility=corpus.facility, preparation=rule["preparation"], reason=rule["reason"], clarification=None, evidence=corpus.evidence(rule))
+        if applicable:
+            if len({rule["decision"] for rule in applicable}) > 1:
+                return uncertain(decision_description, "The matching live rules conflict for the stated conditions. Ask campus staff before deciding.", mode="live" if used_normalizer else "screening")
+            retrieved = applicable[:6]
+            decision = await provider.decide(decision_description, corpus, retrieved)
+            if decision.status == "cannot_determine":
+                return CheckResponse(**metadata("live"), status="cannot_determine", item=decision_description[:150], facility=None, preparation=[], reason="The model could not establish a supported decision from the retrieved rules. Check the official facility guidance or ask campus staff.", clarification="Please confirm the exact item type, material and condition.", evidence=[])
+            rule = next(rule for rule in retrieved if rule["id"] == decision.rule_ids[0])
+            return CheckResponse(**metadata("live"), status=decision.status, item=decision_description[:150], facility=corpus.facility, preparation=rule["preparation"], reason=rule["reason"], clarification=None, evidence=corpus.evidence(rule))
+
+        if not settings.api_key or not corpus.general_sources:
+            reason = "No cited, facility-specific live rule supports a decision for this item. Missing evidence does not mean the item is not accepted. Check the official facility guidance or ask campus staff."
+            if screening and screening.clarification:
+                reason = screening.reason
+            return uncertain(decision_description, reason, screening.clarification if screening else None, mode="live" if used_normalizer else "screening")
+
+        guidance = await provider.general_guidance(decision_description, corpus)
+        evidence = corpus.general_evidence(guidance.source_ids)
+        if len(evidence) != len(guidance.source_ids):
+            raise ServiceError("unsupported_model_output", "The general-guidance response cited an unknown source. No category was produced.")
+        return CheckResponse(
+            **metadata("live"),
+            status="general_guidance",
+            item=decision_description[:150],
+            facility=None,
+            preparation=guidance.preparation,
+            reason=guidance.summary,
+            clarification=guidance.clarification,
+            evidence=evidence,
+        )
 
     @application.get("/")
     async def index():

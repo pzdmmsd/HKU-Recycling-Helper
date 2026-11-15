@@ -10,6 +10,7 @@ The links below were inspected on 25 October 2026. This date records an online s
 - `data/sources.json`: attribution, locators, verification dates and team-override status.
 - `data/research-candidates.json`: preserved pre-override research snapshot; the application does not load it. No website paragraphs, photographs, posters, or extracted images are bundled.
 - `data/samples.json`: independently written, pre-authored interface examples about an **imaginary sample facility**. They demonstrate output states, are not official recycling guidance, and must never count toward live model accuracy.
+- `data/general-guidance.json`: official general references used only by the clearly labelled non-facility fallback. These records cannot establish acceptance at the re Kiosk.
 
 ## Official references inspected
 
