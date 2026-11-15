@@ -1,6 +1,6 @@
 # Evaluation protocol
 
-The final dataset must contain 20 team-written, nonpersonal descriptions, split 14 routine / 3 ambiguous / 3 unsafe. `cases.draft.json` supplies candidate cases and evidence pointers, but every label is pending human review. The development sample fixtures and automated synthetic tests are separate.
+The final dataset must contain 20 team-written, nonpersonal English descriptions, split 14 routine / 3 ambiguous / 3 unsafe. Multilingual and typo-normalization inputs are smoke-tested separately and do not count toward the 20-case accuracy metrics. `cases.draft.json` supplies candidate cases and evidence pointers, but every label is pending human review. The development sample fixtures and automated synthetic tests are separate.
 
 ## Before freezing
 

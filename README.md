@@ -2,9 +2,9 @@
 
 A local browser app for AILT9019 Group 73, built from `HKU_Recycling_Helper_Proposal_rev2.pdf`. It helps demonstrate evidence-based recycling decisions for newly arrived HKU students, with the pilot limited to **re Kiosk, Main Campus**. This is a student project, not an official HKU service.
 
-**Current state:** the app, sample mode, local Python backend, retrieval, actual `SKILL.md` prompt integration, output validation and evaluation tools are implemented. The supplied Alibaba Cloud connection and three end-to-end cited decisions were successfully tested on 25 October 2026 using `qwen3.8-flash`. The project team explicitly chose to proceed without the proposal's documented-permission gate, so 14 project-written factual summaries with official source links are included in the live corpus. This inclusion does not claim source-owner endorsement. Sample examples remain fictional demonstrations and do not establish overall model accuracy.
+**Current state:** the app, sample mode, local Python backend, retrieval, actual `SKILL.md` prompt integration, output validation and evaluation tools are implemented. The supplied Alibaba Cloud connection and three baseline cited decisions were successfully tested on 25 October 2026 using `qwen3.8-flash`. On 15 November 2026, the secure Windows checkout passed 86 automated tests and selected live Chinese, typo and French smoke checks. The full 20-case evaluation and two novice walkthroughs remain pending. The project team explicitly chose to proceed without the proposal's documented-permission gate, so 14 project-written factual summaries with official source links are included in the live corpus. This inclusion does not claim source-owner endorsement. Sample examples remain fictional demonstrations and do not establish overall model accuracy.
 
-**Language and spelling support:** Live input accepts common spelling errors and other languages. When local matching cannot understand the wording, a model normalization step translates or corrects it into English before the same deterministic safety, retrieval and evidence checks run. The normalizer is instructed not to add missing material or condition facts; if a fact is still absent, the app returns `cannot determine`. Answers remain in canonical English so that the displayed reason and preparation fields can be checked against the cited source records.
+**Language and spelling support:** Live input accepts common spelling errors and other languages. When local matching cannot understand the wording, a model normalization step translates or corrects it into English before the same deterministic safety, retrieval and evidence checks run. The normalizer is instructed not to add missing material or condition facts; if a fact is still absent, the app returns `cannot determine`. Answers remain in canonical English so that the displayed reason and preparation fields can be checked against the cited source records. This multilingual path is smoke-tested only; the frozen 20-case accuracy evaluation remains English-language.
 
 ## Start on Windows
 
@@ -24,7 +24,7 @@ Install Python 3.12 or newer, then open Terminal in this folder:
 sh start.sh
 ```
 
-Open http://127.0.0.1:8000. To choose a different port: `sh start.sh --port 8001`.
+The launcher prints and opens the first available local port automatically, usually `http://127.0.0.1:8000` or `http://127.0.0.1:8001`. To force a port: `sh start.sh --port 8001`.
 
 Manual setup, including an exactly pinned dependency snapshot:
 
@@ -89,7 +89,7 @@ The app never searches the web at query time. It cannot identify the nearest bin
 
 The automated tests use synthetic records and a mocked provider. The safety-only command executes the three ambiguous and three unsafe draft cases through the real request handlers without sending a model request. These are engineering checks, **not the proposal's 20-case live model evaluation**.
 
-Optional browser QA uses Node 22+ and installed Chrome: start the app, then run `node scripts/browser_check.mjs`. Set `CHROME_PATH` if Chrome is installed somewhere other than the default macOS path. It checks samples, dialogs, error handling and mobile overflow, saves screenshots under ignored `artifacts/`, and never submits a live model query. Node is not needed to use the app.
+Optional browser QA uses Node 22+ and installed Chrome: start the app, then run `node scripts/browser_check.mjs`. The script defaults to `http://127.0.0.1:8001`; set `HKU_TEST_URL` if the launcher chose another port, and set `CHROME_PATH` if Chrome is installed somewhere other than the default macOS path. It checks samples, dialogs, error handling and mobile overflow, saves screenshots under ignored `artifacts/`, and never submits a live model query. Node is not needed to use the app.
 
 The draft has 14 routine + 3 ambiguous + 3 unsafe cases. Before final evaluation, one team member must label each case and another independently review it against the sources. Record approved review status for each case and freeze it using two different reviewer identifiers:
 
@@ -122,10 +122,10 @@ This implementation, synthetic examples, test scaffolding and research drafts we
 | --- | --- |
 | Python not found | Install Python 3.12+ and add it to PATH; reopen the terminal. |
 | Dependency installation fails | Check internet/proxy access, then rerun the launcher; it does not record success until installation finishes. |
-| Port 8000 unavailable | Stop the earlier instance, or run `python launch.py --port 8001` with the virtual-environment Python. |
+| Port 8000 unavailable | The launcher normally selects 8001 automatically. If a forced port is unavailable, choose another with `--port`. |
 | Live mode unavailable | Read the on-screen reason; check the local key, model, `SKILL.md` and live corpus. |
 | Provider rejects the key | Check the key locally, the supplied endpoint and the course expiry date; contact the TA team if needed. |
 | API timeout or rate limit | Wait and retry manually. There is no cached or guessed live answer. Sample mode remains a separate explicit choice. |
 | Unsupported or missing evidence | Provide a single item and relevant details; otherwise ask campus staff. The app will not invent a bin. |
 
-Keep distribution in the authorised private course repository. This work has not been pushed to GitHub or publicly hosted.
+The authorised distribution is the private GitHub course repository, not public hosting. Keep `.env`, API keys and personal data out of Git.

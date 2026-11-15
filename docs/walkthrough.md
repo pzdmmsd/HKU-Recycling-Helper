@@ -23,6 +23,6 @@ Tasks:
 4. Recognise that the fictional sample is not official HKU guidance.
 5. Open the source guide, follow an official reference, and distinguish team inclusion from source-owner endorsement and verification date.
 6. Open the other decision/refusal samples. Use Tab/Enter/Escape to operate the controls and dialogs.
-7. Enter a synthetic live description, check its provider/model identity, and open its specific evidence links.
+7. Enter one synthetic live description in English, then repeat with a simple typo or another language. Check that the canonical English result still maps to the correct source evidence and that missing facts are not invented.
 
 Record failed steps and improve the README/interface before retrying. Automated browser checks do not substitute for these novice walkthroughs.

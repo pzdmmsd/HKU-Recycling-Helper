@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import assert from 'node:assert/strict';
 
-const base = process.env.HKU_TEST_URL || 'http://127.0.0.1:8000';
+const base = process.env.HKU_TEST_URL || 'http://127.0.0.1:8001';
 const executable = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const artifacts = resolve('artifacts');
 const profile = await mkdtemp(join(tmpdir(), 'hku-browser-'));
