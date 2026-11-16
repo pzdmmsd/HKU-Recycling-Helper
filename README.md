@@ -1,6 +1,6 @@
 # HKU Recycling Helper
 
-A local browser application for AILT9019 Group 73, built from `HKU_Recycling_Helper_Proposal_rev2.pdf`. It provides evidence-based recycling guidance for newly arrived HKU students, with the pilot focused on **re Kiosk, Main Campus**. This is an independent student course project, not an official HKU service.
+A local browser application for AILT9019 Group 73, built from `HKU_Recycling_Helper_Proposal_rev2.pdf`. It provides evidence-based recycling guidance for HKU students, covering **re Kiosk, Main Campus**.
 
 The proposal PDF is retained as the historical course submission. Current implementation details, provider configuration, language support and scope boundaries are documented in this README and `docs/`.
 
@@ -16,7 +16,7 @@ The proposal PDF is retained as the historical course submission. Current implem
 2. Extract the repository folder, keeping `app`, `data`, `static`, `SKILL.md` and the launchers together.
 3. Double-click **`start.bat`**. First launch installs dependencies into `.venv` and creates `.env` from `.env.example`.
 4. The launcher opens the first available local port automatically, typically **http://127.0.0.1:8000** or **http://127.0.0.1:8001**. Keep the launcher window open while using the app.
-5. Choose a sample item and press **Check item** to preview an offline demo result and its evidence structure. No API key is needed for sample mode.
+5. Choose a sample item and press **Check item** to view a built-in example result and its evidence structure. No API key is needed for sample mode.
 
 Press **Ctrl+C** in the launcher window to stop.
 
@@ -73,7 +73,7 @@ The course uses **Alibaba Cloud Bailian Token Plan Team Edition** (`qwen3.8-flas
 - `data/rules.json`: versioned live collection of 14 curated re Kiosk records.
 - `data/sources.json`: official reference links, section locators and verification dates.
 - `data/general-guidance.json`: official EPD references used only by the non-facility general fallback.
-- `data/samples.json`: built-in offline demo examples for the four output states.
+- `data/samples.json`: built-in examples for the four output states.
 
 See [docs/source-review.md](docs/source-review.md) for source notes. Every live record retains required conditions, facility evidence, source locators and verification dates.
 

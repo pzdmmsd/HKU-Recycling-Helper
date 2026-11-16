@@ -10,7 +10,7 @@
       "verification_note": "Official EPD reference for general food-waste guidance.",
       "permission": {
         "status": "team_override",
-        "basis": "Official public reference cited for course prototype use.",
+        "basis": "Cited official public reference.",
         "allow_api_processing": true,
         "allow_distribution": true
       }
@@ -24,7 +24,7 @@
       "verification_note": "Official EPD reference for general waste-reduction and recycling guidance.",
       "permission": {
         "status": "team_override",
-        "basis": "Official public reference cited for course prototype use.",
+        "basis": "Cited official public reference.",
         "allow_api_processing": true,
         "allow_distribution": true
       }

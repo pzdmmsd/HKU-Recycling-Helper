@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import assert from 'node:assert/strict';
 
 const base = process.env.HKU_TEST_URL || 'http://127.0.0.1:8001';
-const executable = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const executable = process.env.CHROME_PATH || (process.platform === 'win32' ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
 const artifacts = resolve('artifacts');
 const profile = await mkdtemp(join(tmpdir(), 'hku-browser-'));
 await mkdir(artifacts, { recursive: true });
@@ -92,6 +92,11 @@ try {
   await click('#check-button');
   await waitFor('!document.querySelector("#result-content").hidden && !document.querySelector("#check-button").disabled');
   await screenshot('desktop-result.png');
+  await click('#lang-zh');
+  assert.equal(await evaluate('document.documentElement.lang'), 'zh-HK');
+  assert.equal(await evaluate('document.querySelector("#decision-heading").textContent'), '此回收點接收');
+  await click('#lang-en');
+  assert.equal(await evaluate('document.documentElement.lang'), 'en');
   await click('#open-sources');
   await waitFor('document.querySelectorAll(".library-source").length === 18');
   assert(await evaluate('document.querySelector(".library-source").textContent.includes("Included in live corpus")'));

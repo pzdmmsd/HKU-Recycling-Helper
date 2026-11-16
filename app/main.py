@@ -192,7 +192,7 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
         if guidance.stream == "hazardous":
             return uncertain(
                 decision_description,
-                "Hazardous, laboratory and commercial waste are outside this student pilot. Do not use this helper to decide disposal; ask campus staff for the appropriate procedure.",
+                "Hazardous, laboratory and commercial waste are outside the scope of this helper. Do not use this helper to decide disposal; ask campus staff for the appropriate procedure.",
                 None,
                 status="refused",
                 mode="live",

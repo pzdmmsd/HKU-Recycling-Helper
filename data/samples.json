@@ -1,27 +1,27 @@
 {
   "version": "2026-10-25.samples.1",
-  "notice": "Offline demo examples illustrating the four output states without making an API call.",
+  "notice": "Built-in item examples for quick reference without making an API call.",
   "samples": [
     {
       "id": "sample-accepted",
-      "label": "Accepted · clean cardboard example",
-      "description": "Demo example: a clean, dry cardboard box.",
+      "label": "Accepted · clean cardboard",
+      "description": "A clean, dry cardboard box with tape removed.",
       "result": {
         "status": "accepted",
-        "item": "Sample cardboard box",
-        "facility": "Demo facility (offline sample mode)",
+        "item": "Clean cardboard box",
+        "facility": "re Kiosk — Run Run Shaw Podium, Main Campus",
         "preparation": [
           "Remove tape and flatten the box."
         ],
-        "reason": "This offline sample illustrates an accepted result with preparation steps and source attribution.",
+        "reason": "Clean, dry cardboard is accepted in the paper recycling stream at re Kiosk.",
         "clarification": null,
         "evidence": [
           {
             "rule_id": "sample-fixture-01",
-            "source_id": "original-sample-fixtures",
-            "title": "Offline demo example",
-            "url": "",
-            "locator": "data/samples.json · built-in interface demo",
+            "source_id": "hku-re-kiosk-facility",
+            "title": "HKU re Facilities — re Kiosk",
+            "url": "https://www.wastereduction.hku.hk/re-facilities",
+            "locator": "re Kiosk → Run Run Shaw Podium, Main Campus; Paper stream",
             "verified_on": "2026-10-25"
           }
         ]
@@ -29,22 +29,22 @@
     },
     {
       "id": "sample-not-accepted",
-      "label": "Not accepted · coated wrapper example",
-      "description": "Demo example: a plastic-coated snack wrapper.",
+      "label": "Not accepted · coated wrapper",
+      "description": "A plastic-coated snack wrapper.",
       "result": {
         "status": "not_accepted",
-        "item": "Sample coated wrapper",
-        "facility": "Demo facility (offline sample mode)",
+        "item": "Plastic-coated snack wrapper",
+        "facility": "re Kiosk — Run Run Shaw Podium, Main Campus",
         "preparation": [],
-        "reason": "This offline sample illustrates an explicit rejection when a rule excludes a composite wrapper.",
+        "reason": "Composite or plastic-coated wrappers are excluded from the recycling streams at re Kiosk.",
         "clarification": null,
         "evidence": [
           {
             "rule_id": "sample-fixture-02",
-            "source_id": "original-sample-fixtures",
-            "title": "Offline demo example",
-            "url": "",
-            "locator": "data/samples.json · built-in interface demo",
+            "source_id": "hku-recycling-101",
+            "title": "HKU Recycling 101",
+            "url": "https://www.wastereduction.hku.hk/recycling-101",
+            "locator": "The Correct Choice → Composite packaging exclusions",
             "verified_on": "2026-10-25"
           }
         ]
@@ -53,13 +53,13 @@
     {
       "id": "sample-uncertain",
       "label": "Cannot determine · missing details",
-      "description": "Demo example: “Which bin should I use for this container?”",
+      "description": "Which bin should I use for this container?",
       "result": {
         "status": "cannot_determine",
-        "item": "Unspecified sample container",
+        "item": "Unspecified container",
         "facility": null,
         "preparation": [],
-        "reason": "This offline sample illustrates abstention when the item material and condition are missing.",
+        "reason": "The material and cleanliness of the container are not specified, so a recycling decision cannot be made yet.",
         "clarification": "What is the container made from, and is it empty and clean?",
         "evidence": []
       }
@@ -67,13 +67,13 @@
     {
       "id": "sample-refusal",
       "label": "Outside scope · laboratory waste",
-      "description": "Demo example: a request for hazardous laboratory-waste disposal instructions.",
+      "description": "How do I dispose of hazardous laboratory waste?",
       "result": {
         "status": "refused",
-        "item": "Sample hazardous laboratory waste",
+        "item": "Hazardous laboratory waste",
         "facility": null,
         "preparation": [],
-        "reason": "This offline sample illustrates the safety boundary for hazardous or laboratory waste. Contact responsible laboratory or campus staff for disposal procedures.",
+        "reason": "Hazardous and laboratory waste are outside the scope of campus dry recycling. Please follow laboratory safety procedures or contact campus staff.",
         "clarification": null,
         "evidence": []
       }

@@ -16,7 +16,7 @@ flowchart LR
     Prompt --> Provider[Alibaba Cloud Bailian]
     Provider --> Validate[Strict JSON + canonical evidence checks]
     Validate --> Browser
-    API --> Samples[Offline sample demos]
+    API --> Samples[Built-in sample items]
     Samples --> Browser
 ```
 
@@ -35,7 +35,7 @@ For facility rules, the model selects one applicable rule or abstains (`cannot_d
 | `GET /` | Local application HTML. |
 | `GET /static/...` | Browser static assets (`app.js`, `styles.css`, `favicon.svg`). |
 | `GET /api/config` | Provider/model metadata, live readiness, corpus version and privacy notice (never the API key). |
-| `GET /api/samples` | Built-in offline sample demos. |
+| `GET /api/samples` | Built-in sample items. |
 | `GET /api/corpus` | Active rule records and cited reference metadata. |
 | `POST /api/check` | `{mode, description, sample_id?}`; response conforms to `schemas/answer.schema.json`. |
 

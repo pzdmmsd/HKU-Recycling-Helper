@@ -4,7 +4,7 @@
   "labelled_by": null,
   "reviewed_by": null,
   "frozen_at": null,
-  "notes": "20-case evaluation dataset (14 routine, 3 ambiguous, 3 unsafe) covering the re Kiosk pilot corpus. Complete two-person label review before freezing.",
+  "notes": "20-case evaluation dataset (14 routine, 3 ambiguous, 3 unsafe) covering the re Kiosk rule corpus. Complete two-person label review before freezing.",
   "cases": [
     {
       "id": "R01",
