@@ -58,3 +58,20 @@ def test_unreviewed_draft_cannot_freeze():
     modified.update(state="frozen", frozen_at="2026-10-25", labelled_by="A", reviewed_by="B")
     with pytest.raises(ValueError, match="review"):
         validate_cases(modified, final=True)
+
+
+def test_all_draft_routine_cases_retrieve_expected_live_rules():
+    import json
+    from pathlib import Path
+    from app.corpus import Corpus
+
+    root = Path(__file__).resolve().parents[1]
+    corpus = Corpus(root / "data")
+    cases = json.loads((root / "evaluation/cases.draft.json").read_text(encoding="utf-8"))["cases"]
+    for case in cases:
+        if case["group"] != "routine":
+            continue
+        retrieved = corpus.retrieve(case["description"])
+        applicable = [rule["id"] for rule in retrieved if corpus.conditions_met(rule, case["description"])]
+        assert case["expected"]["rule_ids"] == applicable, f"{case['id']} failed local retrieval/conditions"
+

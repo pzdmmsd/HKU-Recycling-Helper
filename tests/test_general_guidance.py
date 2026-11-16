@@ -79,3 +79,49 @@ def test_hazardous_item_still_refuses_before_general_guidance(fixture_data):
     result = client_for(fixture_data, no_call).post("/api/check", json={"description": "一颗锂电池", "mode": "live"})
     assert result.status_code == 200
     assert result.json()["status"] == "refused"
+
+
+@pytest.mark.parametrize("description", [
+    "Which bin should I use for this container?",
+    "Can my unidentified mixed-material composite packet go to re Kiosk?",
+    "A plastic bottle",
+    "One clean plastic bottle",
+])
+def test_ambiguous_and_missing_condition_abstain_even_with_general_sources(fixture_data, description):
+    add_general_sources(fixture_data)
+
+    def no_call(request):
+        pytest.fail("Ambiguous or missing-condition query must abstain before general guidance")
+
+    result = client_for(fixture_data, no_call).post("/api/check", json={"description": description, "mode": "live"})
+    assert result.status_code == 200
+    body = result.json()
+    assert body["status"] == "cannot_determine"
+    assert body["evidence"] == []
+    assert body["preparation"] == []
+
+
+def test_general_guidance_hazardous_stream_converts_to_refused(fixture_data):
+    add_general_sources(fixture_data)
+
+    def handler(request):
+        payload = json.loads(request.content)
+        if "NORMALIZATION CONTRACT" in payload["messages"][0]["content"]:
+            return model_response({"normalized_english": "used button cell", "detected_language": "English"})
+        return model_response({
+            "stream": "hazardous",
+            "item": "button cell",
+            "summary": "Button cells require hazardous collection.",
+            "preparation": ["Should be stripped on refusal."],
+            "clarification": None,
+            "source_ids": ["general-test-source"],
+            "confidence": "high",
+        })
+
+    result = client_for(fixture_data, handler).post("/api/check", json={"description": "used button cell", "mode": "live"})
+    assert result.status_code == 200
+    body = result.json()
+    assert body["status"] == "refused"
+    assert body["preparation"] == []
+    assert body["evidence"] == []
+

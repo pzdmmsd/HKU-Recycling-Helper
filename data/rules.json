@@ -256,10 +256,15 @@
       "id": "candidate-contact-lens-foil-lid",
       "material": "mixed",
       "item_types": [
-        "contact lens foil lid"
+        "contact lens foil lid",
+        "foil lid of contact lens",
+        "foil lid from contact lens"
       ],
       "keywords": [
-        "contact lens foil lid"
+        "contact lens foil lid",
+        "foil lid of contact lens",
+        "foil lid from contact lens",
+        "contact lens lid"
       ],
       "conditions": [],
       "condition_codes": [],
@@ -284,10 +289,17 @@
       "id": "candidate-noodle-lid",
       "material": "mixed",
       "item_types": [
-        "instant noodle lid"
+        "instant noodle lid",
+        "instant noodle container lid",
+        "instant noodle cup lid",
+        "noodle container lid"
       ],
       "keywords": [
-        "instant noodle lid"
+        "instant noodle lid",
+        "instant noodle container lid",
+        "instant noodle cup lid",
+        "noodle container lid",
+        "noodle cup lid"
       ],
       "conditions": [],
       "condition_codes": [],
@@ -340,10 +352,17 @@
       "id": "candidate-labelled-cling-film",
       "material": "plastic",
       "item_types": [
-        "cling film with food label"
+        "cling film with food label",
+        "cling film with its food label",
+        "labelled cling film",
+        "cling film"
       ],
       "keywords": [
-        "cling film with food label"
+        "cling film with food label",
+        "cling film with its food label",
+        "labelled cling film",
+        "cling film",
+        "cling wrap"
       ],
       "conditions": [],
       "condition_codes": [],

@@ -150,10 +150,13 @@ class Corpus:
             return False
         if rule["conditions"] and not required:
             return False
-        condition_codes = {"clean", "empty", "dry", "rinsed", "flattened", "cap_removed", "lid_removed", "dirty", "food_contaminated", "drink_carton", "glass_bottle"}
+        condition_codes = {"clean", "empty", "dry", "rinsed", "flattened", "cap_removed", "lid_removed", "dirty", "food_contaminated", "no_food_residue", "drink_carton", "glass_bottle"}
         for requirement in required:
             requirement = normalize(requirement)
-            if requirement in condition_codes:
+            if requirement == "no food residue":
+                if "no_food_residue" not in stated and (not has_phrase(text, requirement) or has_phrase(text, "not " + requirement)):
+                    return False
+            elif requirement in condition_codes:
                 if requirement not in stated:
                     return False
             elif not has_phrase(text, requirement) or has_phrase(text, "not " + requirement):

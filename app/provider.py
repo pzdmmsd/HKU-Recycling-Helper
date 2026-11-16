@@ -29,15 +29,11 @@ class ModelProvider:
 
     @asynccontextmanager
     async def _provider_slot(self):
-        """Serialize provider calls so a second local click waits, not fails."""
-        try:
-            await asyncio.wait_for(self._lock.acquire(), timeout=self.settings.timeout_seconds + 10)
-        except asyncio.TimeoutError:
-            raise ServiceError("provider_busy", "Another live check is still running or timed out. Wait a moment, then try again.", 429) from None
-        try:
+        """Reject overlapping provider calls immediately instead of spending shared quota."""
+        if self._lock.locked():
+            raise ServiceError("provider_busy", "Another live check is still running. Wait a moment, then try again.", 429)
+        async with self._lock:
             yield
-        finally:
-            self._lock.release()
 
     @staticmethod
     def _parse_json_object(content: str) -> dict:

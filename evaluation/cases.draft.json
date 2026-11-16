@@ -330,7 +330,7 @@
       "description": "Can my unidentified mixed-material composite packet go to re Kiosk?",
       "expected": {
         "status": "cannot_determine",
-        "facility": "re Kiosk — Run Run Shaw Podium, Main Campus",
+        "facility": null,
         "preparation": [],
         "source_ids": [],
         "rule_ids": []

@@ -152,19 +152,26 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             rules = corpus.retrieve(decision_description)
             screening = screen(decision_description, known_item=bool(rules), require_condition=not any(not rule["conditions"] and not rule.get("condition_codes") for rule in rules))
 
-        # Missing material or condition detail can be handled by the general
-        # classifier, which must not claim facility-specific acceptance.
-        general_fallback_allowed = screening is None or (
-            screening.status == "cannot_determine"
-            and (
-                screening.reason.startswith("The description does not identify a supported material")
-                or screening.reason.startswith("The item's condition is missing")
+        # Out-of-scope items can be handled by the general classifier, which must
+        # not claim facility-specific acceptance or bypass missing conditions on a matched rule.
+        general_fallback_allowed = not rules and (
+            screening is None
+            or (
+                screening.status == "cannot_determine"
+                and screening.reason.startswith("The description does not identify a supported material")
             )
         )
         if screening and not general_fallback_allowed:
             return uncertain(decision_description, screening.reason, screening.clarification, screening.status, mode="live" if used_normalizer else "screening")
 
         applicable = [rule for rule in rules if corpus.conditions_met(rule, decision_description)]
+        if rules and not applicable:
+            return uncertain(
+                decision_description,
+                "The description does not confirm the conditions required by the matching rule.",
+                "Please confirm the item's exact type and all relevant conditions: " + "; ".join(dict.fromkeys(condition for rule in rules for condition in rule["conditions"])) + ".",
+                mode="live" if used_normalizer else "screening",
+            )
         if applicable:
             if len({rule["decision"] for rule in applicable}) > 1:
                 return uncertain(decision_description, "The matching live rules conflict for the stated conditions. Ask campus staff before deciding.", mode="live" if used_normalizer else "screening")
@@ -182,6 +189,14 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             return uncertain(decision_description, reason, screening.clarification if screening else None, mode="live" if used_normalizer else "screening")
 
         guidance = await provider.general_guidance(decision_description, corpus)
+        if guidance.stream == "hazardous":
+            return uncertain(
+                decision_description,
+                "Hazardous, laboratory and commercial waste are outside this student pilot. Do not use this helper to decide disposal; ask campus staff for the appropriate procedure.",
+                None,
+                status="refused",
+                mode="live",
+            )
         evidence = corpus.general_evidence(guidance.source_ids)
         if len(evidence) != len(guidance.source_ids):
             raise ServiceError("unsupported_model_output", "The general-guidance response cited an unknown source. No category was produced.")
