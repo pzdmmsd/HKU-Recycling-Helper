@@ -23,5 +23,5 @@ Run this walkthrough with two classmates to verify that a new user can start the
 4. Open **Source library** in the sidebar and click an official reference link.
 5. Test keyboard navigation (`Tab`, `Enter`, `Escape`) on the mode switch, sample chips and dialogs.
 6. Switch to **Live AI** mode, enter an English item description (e.g. a clean pizza box), and check the cited HKU sources.
-7. Repeat with a typo or non-English description (e.g. `一个干净的披萨盒` or `one cleen pizza box`) and verify the result.
-8. Enter an out-of-scope everyday item (e.g. `banana peel` or `香蕉皮`) and verify that it returns **General guidance** (`food_waste`) without claiming acceptance at re Kiosk.
+7. Repeat with a typo (e.g. `one cleen pizza box`) or a non-English translation of the same description and verify the result.
+8. Enter an out-of-scope everyday item (e.g. `banana peel`, or its translation into another language) and verify that it returns **General guidance** (`food_waste`) without claiming acceptance at re Kiosk.
