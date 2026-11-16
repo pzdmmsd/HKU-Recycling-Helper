@@ -7,17 +7,13 @@ This project uses Python FastAPI to serve both the web interface and `/api/*` en
 - Production: <https://hku-recycling-helper.vercel.app>.
 - Alternative production URL: <https://hku-recycling-helper-zyk4.vercel.app>.
 - Project settings: <https://vercel.com/zyk4/hku-recycling-helper/settings>.
-- Deployment changes: [PR #1](https://github.com/pzdmmsd/HKU-Recycling-Helper/pull/1), branch `codex/vercel-deployment`. The deployed application source is commit `78af297e0e00f64c5c1126264b416d016c2ee36e`; subsequent documentation changes do not change the application code.
+- Deployment changes were merged in [PR #1](https://github.com/pzdmmsd/HKU-Recycling-Helper/pull/1). The deployed application source is commit `78af297e0e00f64c5c1126264b416d016c2ee36e`; subsequent documentation changes do not change the application code.
 - Production is publicly accessible with the owner's approval. Preview deployments retain Vercel Authentication.
 - Local `.env` files and credentials were excluded from the uploaded source. The production key is configured separately in Vercel's secret store.
 - Initial validation: 101 automated tests and six offline safety checks passed. A fresh browser session verified public access, language switching, all four sample outcomes, source dialogs, and desktop/mobile layouts.
 - Live verification on 2026-11-16: after the Production secret was saved, a new deployment made `live_available` true. Submitting `One empty clean plastic bottle.` through the production browser form returned HTTP 200, `mode: live`, `status: accepted`, and two evidence entries. The browser rendered the result successfully.
 
-The initial deployment uploaded a committed source snapshot from the GitHub working copy. **Automatic deployment on Git pushes is not connected yet** because the Vercel account did not have a GitHub Login Connection when import was attempted. To connect automatic deployments:
-
-1. Connect the GitHub account that owns the repository in [Vercel Account Authentication](https://vercel.com/account/settings/authentication). Grant the Vercel GitHub App access to this private repository.
-2. Review and merge PR #1 so `main` contains the deployment changes.
-3. In the existing Vercel project, open **Settings > Git > Connect Git Repository** and connect `pzdmmsd/HKU-Recycling-Helper`, using `main` as the production branch. Reuse the existing project.
+The initial deployment uploaded a committed source snapshot from the GitHub working copy. The project is now connected to `pzdmmsd/HKU-Recycling-Helper` through Vercel's GitHub integration, and PR #1 has been merged. Manage the repository connection and production branch under **Settings > Git** in the existing project.
 
 ## Import and deploy from GitHub
 
