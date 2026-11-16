@@ -77,7 +77,8 @@ try {
   await tab('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1040, deviceScaleFactor: 1, mobile: false });
   await tab('Page.navigate', { url: base });
   await waitFor('document.querySelectorAll("#sample-chips button").length === 4');
-  assert(!(await evaluate('document.querySelector("#mode-live").disabled')));
+  const liveAvailable = await evaluate('fetch("/api/config").then(response => response.json()).then(config => config.live_available)');
+  assert.equal(await evaluate('document.querySelector("#mode-live").disabled'), !liveAvailable);
   assert(await evaluate('document.querySelector("#description").readOnly'));
   assert(await evaluate('document.querySelector("#global-error").hidden'));
   await screenshot('desktop.png');
@@ -109,12 +110,16 @@ try {
   await click('[data-open-dialog="how-dialog"]');
   assert(await evaluate('document.querySelector("#how-dialog").open'));
   await click('#how-dialog [data-close-dialog]');
-  for (const path of ['/.env', '/static/../.env', '/data/rules.json']) assert.equal((await fetch(base + path)).status, 404);
-  await click('#mode-live');
-  await evaluate(`document.querySelector('#description').value='One empty clean plastic bottle.'; document.querySelector('#description').dispatchEvent(new Event('input',{bubbles:true})); window.fetch = async () => new Response(JSON.stringify({error:{code:'test_failure',message:'Synthetic service failure: no decision generated.'}}),{status:503,headers:{'Content-Type':'application/json'}})`);
-  await click('#check-button');
-  await waitFor('!document.querySelector("#check-error").hidden');
-  assert(await evaluate('document.querySelector("#result-content").hidden'));
+  for (const path of ['/.env', '/static/../.env', '/data/rules.json']) {
+    assert.equal(await evaluate(`fetch(${JSON.stringify(path)}).then(response => response.status)`), 404);
+  }
+  if (liveAvailable) {
+    await click('#mode-live');
+    await evaluate(`document.querySelector('#description').value='One empty clean plastic bottle.'; document.querySelector('#description').dispatchEvent(new Event('input',{bubbles:true})); window.fetch = async () => new Response(JSON.stringify({error:{code:'test_failure',message:'Synthetic service failure: no decision generated.'}}),{status:503,headers:{'Content-Type':'application/json'}})`);
+    await click('#check-button');
+    await waitFor('!document.querySelector("#check-error").hidden');
+    assert(await evaluate('document.querySelector("#result-content").hidden'));
+  }
   await tab('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: false });
   await tab('Page.reload', { ignoreCache: true });
   await waitFor('document.querySelectorAll("#sample-chips button").length === 4');
@@ -127,7 +132,7 @@ try {
   await click('#dismiss-walkthrough');
   assert(await evaluate('document.querySelector("#walkthrough").hidden'));
   assert.deepEqual(errors, []);
-  console.log('Browser QA passed: four sample outcomes, source drawer, dialogs/Escape, error handling, private paths, desktop and mobile layout. No live AI calls.');
+  console.log(`Browser QA passed: four sample outcomes, source drawer, dialogs/Escape, private paths, desktop and mobile layout. Live error handling ${liveAvailable ? 'verified with a mock' : 'skipped (no server key)'}. No live AI calls.`);
   await call('Browser.close');
 } finally {
   if (ws && ws.readyState === WebSocket.OPEN) ws.close();

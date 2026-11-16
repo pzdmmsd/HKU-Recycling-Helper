@@ -75,6 +75,21 @@ Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.
 
 ---
 
+## Deploy on Vercel
+
+Vercel runs the existing `app/main.py` FastAPI app, including the web interface and `/api/*` endpoints. See [the deployment and secret-storage guide](docs/deployment.md) for the complete Chinese walkthrough.
+
+1. In [Vercel New Project](https://vercel.com/new), import `pzdmmsd/HKU-Recycling-Helper` and select the `main` branch.
+2. Keep Root Directory at the repository root, choose **FastAPI**, and leave build/output overrides empty. The repository selects Python 3.14 and a 180-second function timeout.
+3. Set `BAILIAN_API_KEY` in the project's **Settings → Environment Variables** for **Production**, then deploy. Without a key, the website still offers Sample mode.
+4. After changing environment variables, redeploy. The key is read by Python on the server and never sent to the browser.
+
+The deployment automatically permits its own Vercel deployment, branch and production hostnames. Add any custom hostname to `ALLOWED_HOSTS` (comma-separated, without `https://` or paths). Keep Vercel's **Automatically expose System Environment Variables** enabled.
+
+`.env` is for local development only and is excluded from both Git and Vercel uploads. Never put a key in `static/`, `vercel.json`, or a `NEXT_PUBLIC_*` / `VITE_*` variable.
+
+---
+
 ## Project Structure
 
 | Path | Description |

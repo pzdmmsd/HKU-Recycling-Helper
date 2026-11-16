@@ -1,4 +1,4 @@
-"""Local browser application. Run with: python -m uvicorn app.main:app."""
+"""Browser application for local use and Vercel. Run: python -m uvicorn app.main:app."""
 
 from pathlib import Path
 import re
@@ -49,14 +49,14 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
         return CheckResponse(**metadata(mode), status=status, item=description[:150] or "Unspecified item", facility=None, preparation=[], reason=reason, clarification=clarification, evidence=[])
 
     @application.middleware("http")
-    async def local_request_protection(request: Request, call_next):
-        if request.url.hostname not in {"localhost", "127.0.0.1", "::1", "testserver"}:
-            return JSONResponse({"error": {"code": "host_not_allowed", "message": "Open the app at its local localhost address."}}, status_code=400)
+    async def request_protection(request: Request, call_next):
+        if request.url.hostname not in settings.allowed_hosts:
+            return JSONResponse({"error": {"code": "host_not_allowed", "message": "Open the app at its configured website address."}}, status_code=400)
         origin = request.headers.get("origin")
         if request.method not in {"GET", "HEAD", "OPTIONS"} and origin:
             parsed = urlparse(origin)
             if parsed.scheme not in {"http", "https"} or parsed.netloc != request.headers.get("host"):
-                return JSONResponse({"error": {"code": "origin_not_allowed", "message": "Open the app at its local address before checking an item."}}, status_code=403)
+                return JSONResponse({"error": {"code": "origin_not_allowed", "message": "Open the app at its configured website address before checking an item."}}, status_code=403)
         content_length = request.headers.get("content-length", "0")
         if not content_length.isdigit() or int(content_length) > 16_384:
             return JSONResponse({"error": {"code": "request_too_large", "message": "Use a short text description of one item."}}, status_code=413)

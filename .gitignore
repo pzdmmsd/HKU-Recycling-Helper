@@ -15,4 +15,5 @@ evaluation/runs/
 *.log
 .coverage
 htmlcov/
+.vercel/
 
