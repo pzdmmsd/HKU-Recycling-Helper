@@ -101,7 +101,7 @@ try {
   await click('[data-open-dialog="how-dialog"]');
   assert(await evaluate('document.querySelector("#how-dialog").open'));
   await click('#how-dialog [data-close-dialog]');
-  for (const path of ['/.env', '/static/../.env', '/data/research-candidates.json']) assert.equal((await fetch(base + path)).status, 404);
+  for (const path of ['/.env', '/static/../.env', '/data/rules.json']) assert.equal((await fetch(base + path)).status, 404);
   await click('#mode-live');
   await evaluate(`document.querySelector('#description').value='One empty clean plastic bottle.'; document.querySelector('#description').dispatchEvent(new Event('input',{bubbles:true})); window.fetch = async () => new Response(JSON.stringify({error:{code:'test_failure',message:'Synthetic service failure: no decision generated.'}}),{status:503,headers:{'Content-Type':'application/json'}})`);
   await click('#check-button');

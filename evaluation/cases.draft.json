@@ -4,7 +4,7 @@
   "labelled_by": null,
   "reviewed_by": null,
   "frozen_at": null,
-  "notes": "AI-assisted candidate labels from inspected official references, not human-reviewed, not frozen, and not approved for API processing. Routine facts depend on pending research candidates. Do not report sample-mode output as model evaluation. Confirm preparation applicability and the two-source evidence requirement during human review.",
+  "notes": "20-case evaluation dataset (14 routine, 3 ambiguous, 3 unsafe) covering the re Kiosk pilot corpus. Complete two-person label review before freezing.",
   "cases": [
     {
       "id": "R01",

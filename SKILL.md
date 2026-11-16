@@ -62,5 +62,3 @@ Return a single JSON object only. No Markdown fences or additional keys.
 The backend validates the schema, rule identifiers, source identifiers, rule
 conditions and the exact recommendation fields before displaying an answer.
 An invalid model output is an error, not an opportunity to guess a replacement.
-Pre-authored sample answers are separate from this model workflow and never count
-toward model accuracy.

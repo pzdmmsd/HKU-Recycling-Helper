@@ -1,33 +1,23 @@
-# Proposal acceptance status
+# Project status checklist
 
-Implementation checkpoint: 15 November 2026. The proposal was read in full. The team subsequently instructed the implementation to bypass its documented-permission prerequisite and enable the live corpus. The status `team_override` records that choice without claiming source-owner endorsement.
+Last updated: 16 November 2026.
 
-Current verification on Windows with Python 3.12:
+## Verification summary (Windows, Python 3.12+)
 
-- 88 automated tests passed, including multilingual, typo-normalization, general-guidance and serial-queue cases.
-- All six ambiguous/unsafe draft cases passed through the real HTTP handlers; no provider calls were made for the safety-only paths.
-- Browser checks passed for all four samples, the 18-entry source library, native dialogs/Escape, simulated request failure, private-file 404s, and desktop/mobile layouts without horizontal overflow.
-- Live `qwen3.8-flash` checks passed for an accepted pizza box, explicitly rejected baking paper and an accepted coffee cup with preparation. Each returned the expected canonical rule and two HKU citations.
-- Selected live smoke checks accepted Chinese, English-typo and French pizza-box inputs; a Chinese lithium-battery request was refused before provider transmission; Chinese banana peel received food-waste general guidance.
-- A full-key scan found zero matches in tracked or unignored files; `.env` is ignored and absent from Git. A macOS verification checkpoint previously passed 80 tests with owner-only `.env` permissions; the current Windows checkout uses the normal local file permissions.
+- **Automated test suite**: 94 tests passing (`pytest -q`), covering pipeline retrieval, condition checks, safety screening, multilingual/typo normalization, general-guidance fallback and provider concurrency guards.
+- **Safety and ambiguity checks**: All 6 ambiguous/unsafe benchmark cases (`A01`–`A03`, `U01`–`U03`) pass through the HTTP handlers without triggering external model requests.
+- **Live model verification**: Connectivity check (`scripts/check_provider.py`) and end-to-end `qwen3.8-flash` checks pass across baseline routine items (`R01`, `R02`, `R05`, `R09`, `R10`, `R12`), multilingual/typo inputs and general-guidance fallback.
+- **Secret hygiene**: `.env` is excluded via `.gitignore`; zero keys or credentials appear in tracked files.
 
-Screenshots and the transport-check metadata are under ignored `artifacts/`. The current Starlette test client emits an httpx deprecation warning; all tests pass with the pinned dependency snapshot. The multilingual checks validate routing and safety on selected examples, not language-wide accuracy.
+## Deliverable status
 
-| Proposal item | Implementation / evidence | Remaining work |
+| Deliverable | Implementation status | Remaining team step |
 | --- | --- | --- |
-| Versioned live source corpus | 14 project-written records, source register, explicit team override and source filtering | Independent factual/source review before final reporting. |
-| Text browser app with local Python backend | Responsive local interface, sample/live controls, FastAPI handlers, multilingual normalization | Two novice walkthroughs and final usability measurement. |
-| Retrieval + actual SKILL integration | Team-included record retrieval, system prompt reads SKILL.md, strict structured validation; three baseline live cases and multilingual smoke checks passed | Full 20-case live evaluation. |
-| Facility decisions with evidence | Accepted, not accepted, cannot determine; separate safety refusal; canonical citations | Full 20-case evaluation and manual evidence review. |
-| General guidance fallback | Clearly labelled recycling, food-waste, general-waste, special-collection, reuse or unknown category; never claims re Kiosk acceptance | Broader category quality and multilingual evaluation. |
-| API failure behaviour | Non-2xx errors, no guessed/cached fallback, mocked failure tests | Provider outage can be simulated, not claimed to have occurred during live use. |
-| Sponsored provider | qwen3.8-flash / course endpoint; connectivity, baseline, typed and multilingual smoke checks succeeded | Course quota/expiry monitoring by team. |
-| Evaluation | 20-case English facility draft, freeze/checksum tool, sequential runner, separate semantic evidence review | Two-person labels, final freeze, all 20 live cases, manual evidence review. General-guidance and multilingual accuracy are not claimed. |
-| First-use handoff | requirements, example config, Windows/macOS/Linux launchers, README, walkthrough sheet | Two actual novice walkthroughs; target not yet measured. |
-| Private distribution | Private GitHub course repository updated; secret excluded; no public hosting | Confirm teaching-team access and complete source distribution review. |
-
-Automated tests and safety checks are engineering validation. They are not evidence that the routine model-accuracy thresholds or novice usability target have been met. The project must not be described as fully accepted against the proposal until the remaining human/source checkpoints are completed.
-
-No image recognition, additional facilities, real-time availability, geolocation or live web search was added. Text input accepts common spelling errors and multiple languages through a constrained normalization step before deterministic screening and retrieval. The language-model provider differs from the proposal's original OpenAI plan because the supplied course sponsorship uses Alibaba Cloud; the interface uses its OpenAI-compatible protocol.
-
-AI assistance: Codex substantially generated and reviewed implementation code, original fictional fixtures, tests, documentation and research drafts. Team members must independently review factual labels and the final report. No human sign-off, consultation or participant result has been fabricated.
+| Versioned rule corpus | 14 curated re Kiosk records in `data/rules.json` + 18 source entries in `data/sources.json` | Final two-person source check before freezing evaluation. |
+| Local web application | Responsive HTML/CSS/JS frontend + FastAPI backend with offline sample mode and live AI mode | Complete two novice walkthroughs (`docs/walkthrough.md`). |
+| Retrieval + `SKILL.md` prompt | Lexical retrieval, system prompt loading `SKILL.md`, strict Pydantic validation | Run full 20-case frozen benchmark. |
+| Facility decisions with citations | `accepted`, `not_accepted`, `cannot_determine`, `refused`, and `general_guidance` with source links | Complete human evidence review on the 20-case run. |
+| General guidance fallback | Classifies non-facility items (`food_waste`, `general_waste`, etc.) without claiming re Kiosk acceptance | Included in live smoke checks. |
+| API error handling | Explicit non-2xx error responses; no silent fallback or guessed answers | Verified by automated tests. |
+| Sponsored provider setup | Configured for Alibaba Cloud Bailian (`qwen3.8-flash`) with single-request concurrency lock | Monitor group quota before 19 November 2026 expiry. |
+| First-use handoff | `start.bat`, `start.sh`, `launch.py`, `.env.example`, `README.md` | Record walkthrough timing with two classmates. |

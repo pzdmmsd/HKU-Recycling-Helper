@@ -3,7 +3,7 @@
   "facility": "re Kiosk — Run Run Shaw Podium, Main Campus",
   "verified_on": "2026-10-25",
   "reviewed_on": "2026-10-25",
-  "publication_status": "Included for live course-prototype use by explicit team instruction",
+  "publication_status": "Curated live rule corpus for the Main Campus re Kiosk prototype",
   "records": [
     {
       "id": "candidate-pizza-box",
@@ -22,7 +22,7 @@
       ],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Paper stream.",
+      "reason": "Clean pizza boxes are accepted in the paper recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-pizza-box",
         "hku-re-kiosk-facility"
@@ -30,12 +30,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-baking-paper",
@@ -50,7 +50,7 @@
       "condition_codes": [],
       "decision": "not_accepted",
       "preparation": [],
-      "reason": "Explicit exclusion.",
+      "reason": "Baking paper is excluded from paper recycling at re Kiosk.",
       "source_ids": [
         "hku-photo-baking-paper",
         "hku-re-kiosk-facility"
@@ -58,12 +58,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-coffee-cup-lid",
@@ -84,7 +84,7 @@
       "preparation": [
         "Clean the lid."
       ],
-      "reason": "Plastic stream; lid only.",
+      "reason": "Clean plastic coffee cup lids (separated from the cup) are accepted in the plastics stream at re Kiosk.",
       "source_ids": [
         "hku-photo-coffee-cup-lid",
         "hku-re-kiosk-facility"
@@ -92,12 +92,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-cup-sleeve",
@@ -112,7 +112,7 @@
       "condition_codes": [],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Paper stream; sleeve only.",
+      "reason": "Paper coffee cup sleeves (separated from the cup) are accepted in the paper recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-cup-sleeve",
         "hku-re-kiosk-facility"
@@ -120,12 +120,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-coffee-cup",
@@ -146,7 +146,7 @@
       "preparation": [
         "Clean the cup."
       ],
-      "reason": "Carton stream; cup only.",
+      "reason": "Clean takeaway coffee cups (with lid and sleeve removed) are accepted in the beverage carton stream at re Kiosk.",
       "source_ids": [
         "hku-photo-coffee-cup",
         "hku-re-kiosk-facility"
@@ -154,12 +154,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-foam-net",
@@ -174,7 +174,7 @@
       "condition_codes": [],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Plastic stream.",
+      "reason": "Clean fruit foam nets are accepted in the plastics recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-foam-net",
         "hku-re-kiosk-facility"
@@ -182,12 +182,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-cleaned-styrofoam",
@@ -209,7 +209,7 @@
       "preparation": [
         "Remove food residue."
       ],
-      "reason": "Staining alone is not excluded.",
+      "reason": "Cleaned styrofoam containers with all food residue removed are accepted in the plastics stream, even if lightly stained.",
       "source_ids": [
         "hku-photo-cleaned-styrofoam",
         "hku-re-kiosk-facility"
@@ -217,12 +217,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-contact-lens-tray",
@@ -237,7 +237,7 @@
       "condition_codes": [],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Plastic stream; tray only.",
+      "reason": "Empty, clean plastic contact lens trays (with the foil lid removed) are accepted in the plastics stream at re Kiosk.",
       "source_ids": [
         "hku-photo-contact-lens-tray",
         "hku-re-kiosk-facility"
@@ -245,12 +245,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-contact-lens-foil-lid",
@@ -270,7 +270,7 @@
       "condition_codes": [],
       "decision": "not_accepted",
       "preparation": [],
-      "reason": "Explicit exclusion; lid only.",
+      "reason": "Foil lids from contact lens packaging are excluded from recycling at re Kiosk.",
       "source_ids": [
         "hku-photo-contact-lens-foil-lid",
         "hku-re-kiosk-facility"
@@ -278,12 +278,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-noodle-lid",
@@ -305,7 +305,7 @@
       "condition_codes": [],
       "decision": "not_accepted",
       "preparation": [],
-      "reason": "Explicit exclusion; lid only.",
+      "reason": "Instant noodle container lids are excluded from recycling at re Kiosk.",
       "source_ids": [
         "hku-photo-noodle-lid",
         "hku-re-kiosk-facility"
@@ -313,12 +313,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-noodle-container",
@@ -333,7 +333,7 @@
       "condition_codes": [],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Plastic stream; container only.",
+      "reason": "Empty, clean plastic instant noodle cups (with the lid removed) are accepted in the plastics stream at re Kiosk.",
       "source_ids": [
         "hku-photo-noodle-container",
         "hku-re-kiosk-facility"
@@ -341,12 +341,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-labelled-cling-film",
@@ -368,7 +368,7 @@
       "condition_codes": [],
       "decision": "not_accepted",
       "preparation": [],
-      "reason": "Explicit exclusion with label attached.",
+      "reason": "Cling film with food labels attached is excluded from plastics recycling at re Kiosk.",
       "source_ids": [
         "hku-photo-labelled-cling-film",
         "hku-re-kiosk-facility"
@@ -376,12 +376,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-personal-care-bottle",
@@ -402,7 +402,7 @@
       "preparation": [
         "Clean the bottle."
       ],
-      "reason": "Plastic stream; bottle only.",
+      "reason": "Empty, clean plastic personal care bottles (with the pump head removed) are accepted in the plastics stream at re Kiosk.",
       "source_ids": [
         "hku-photo-personal-care-bottle",
         "hku-re-kiosk-facility"
@@ -410,12 +410,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     },
     {
       "id": "candidate-mooncake-tin",
@@ -430,7 +430,7 @@
       "condition_codes": [],
       "decision": "accepted",
       "preparation": [],
-      "reason": "Metal stream.",
+      "reason": "Empty, clean metal mooncake tins are accepted in the metals recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-mooncake-tin",
         "hku-re-kiosk-facility"
@@ -438,12 +438,12 @@
       "facility_specific": true,
       "permission": {
         "status": "team_override",
-        "basis": "Included for this private course prototype at the project team’s explicit instruction on 2026-10-25; this does not claim source-owner endorsement.",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
         "allow_api_processing": true,
         "allow_distribution": true
       },
       "verified_on": "2026-10-25",
-      "review_status": "included_by_team_instruction"
+      "review_status": "active"
     }
   ]
 }

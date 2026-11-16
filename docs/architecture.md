@@ -6,41 +6,37 @@ flowchart LR
     API --> Screen[Scope and ambiguity screening]
     Screen -->|Unrecognized wording| Normalize[Translate / correct spelling]
     Normalize --> Screen2[Re-screen normalized text]
-    Screen2 --> Retrieve[Approved local rule retrieval]
+    Screen2 --> Retrieve[Local rule retrieval]
     Screen -->|Recognized wording| Retrieve
-    Retrieve -->|No applicable facility rule| General[General guidance classification]
+    Retrieve -->|No matching facility rule| General[General guidance classification]
     General --> ValidateGeneral[Validate allowed sources and label]
     ValidateGeneral --> Browser
-    Sources[Permission-filtered sources and rules] --> Retrieve
+    Sources[Curated sources and rules] --> Retrieve
     Retrieve --> Prompt[SKILL.md + retrieved records]
     Prompt --> Provider[Alibaba Cloud Bailian]
     Provider --> Validate[Strict JSON + canonical evidence checks]
     Validate --> Browser
-    API --> Samples[Pre-authored fictional sample fixtures]
+    API --> Samples[Offline sample demos]
     Samples --> Browser
 ```
 
-The server loads versioned JSON records on startup and selects rules explicitly included by the project team with valid official references. It accepts either a documented `approved` status or the explicit `team_override` chosen for this course prototype. Research candidates are in a separate file that the application never reads. `SKILL.md` is read and incorporated into the system instruction for actual provider requests. The transport requests JSON, bounds tokens/time, disables retries and redirects, and permits one request at a time. The course API key never enters frontend configuration.
+The server loads versioned JSON records on startup from `data/rules.json`, `data/sources.json` and `data/general-guidance.json`. `SKILL.md` is incorporated into the system instruction for live model decisions. The transport requests JSON output, bounds tokens and timeouts, disables automatic retries and redirects, and enforces one active provider request at a time. The API key remains on the server and is never exposed to the browser.
 
-Retrieval is lexical and inspectable, using item phrases, material and conditions. It is retrieval-augmented generation without embeddings: suitable for a small approved pilot collection, with no hidden vector index or embedding charges. All matching rules must be considered for conflict before narrowing the provider context. General background sources cannot establish facility acceptance.
+Retrieval is lexical and deterministic, matching item phrases, materials and required conditions without requiring a vector database or embedding calls. All matching rules are checked for conflict before calling the model. General background sources cannot establish HKU facility acceptance.
 
-When deterministic matching cannot understand a typo or non-English description, a separate provider request translates or corrects the text into English. That normalization output is schema-checked and then passed back through the deterministic safety screen and rule retrieval. The prompt forbids adding material, cleanliness, emptiness, food-residue state or preparation facts. If the normalized text is still missing required information or evidence, the app abstains; the model does not make a recycling decision during normalization.
+When local matching does not recognize a typo or non-English description, a constrained normalization call translates or corrects the input into English. The normalized text is schema-validated and passed back through the same deterministic safety screen and rule retrieval. The normalizer is instructed not to add missing material, cleanliness or preparation facts.
 
-The model selects a single approved rule or abstains. A supported answer must match that rule's decision, facility, preparation, reason and source identifiers. The server assembles evidence from trusted records and displays the canonical fields. This intentionally constrains the model's freedom: it tests record selection and faithful use of evidence, not free-form recycling expertise. Unknown source IDs, invented recommendations and truncated/invalid outputs are errors. The server supplies a safe fixed explanation for model abstention rather than displaying uncontrolled disposal advice.
-
-The sample route accepts only a known sample ID and its unchanged authored description. It cannot classify arbitrary input, and every sample response identifies its mode. The acceptance/rejection fixtures concern an imaginary facility, not HKU. Deterministic screening responses identify themselves separately from model-generated results.
+For facility rules, the model selects one applicable rule or abstains (`cannot_determine`). A supported answer must match that rule's canonical decision, facility, preparation steps, reason and source identifiers. The backend validates these fields against the trusted local record before returning the response.
 
 ## HTTP endpoints
 
 | Method/path | Contract |
 | --- | --- |
 | `GET /` | Local application HTML. |
-| `GET /static/...` | Only the browser asset directory. Source data and `.env` are not static assets. |
-| `GET /api/config` | Public provider/model identity, live readiness, corpus metadata and privacy notice; never the key. |
-| `GET /api/samples` | Supplied authored examples. |
-| `GET /api/corpus` | Approved context and separately labelled reference metadata. Pending references are not model evidence. |
-| `POST /api/check` | `{mode, description, sample_id?}`; output follows `schemas/answer.schema.json`. |
+| `GET /static/...` | Browser static assets (`app.js`, `styles.css`, `favicon.svg`). |
+| `GET /api/config` | Provider/model metadata, live readiness, corpus version and privacy notice (never the API key). |
+| `GET /api/samples` | Built-in offline sample demos. |
+| `GET /api/corpus` | Active rule records and cited reference metadata. |
+| `POST /api/check` | `{mode, description, sample_id?}`; response conforms to `schemas/answer.schema.json`. |
 
-`status` is `accepted`, `not_accepted`, `cannot_determine`, `general_guidance` or a separate `refused` safety outcome. `mode` is `sample`, `screening` or `live`. Operational errors use a non-2xx status and `{error: {code, message}}`; they never masquerade as a recycling decision. Request validation errors do not echo rejected inputs or secrets.
-
-Bind to loopback only and keep one worker. This app is a local course handoff, not a multi-user hosted service. Do not expose it through a public tunnel without addressing account access, rate limiting and deployment requirements.
+`status` is `accepted`, `not_accepted`, `cannot_determine`, `general_guidance` or `refused`. `mode` is `sample`, `screening` or `live`. Operational errors return a non-2xx HTTP status with `{error: {code, message}}`.

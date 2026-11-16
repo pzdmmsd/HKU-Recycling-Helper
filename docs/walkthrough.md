@@ -1,29 +1,27 @@
 # First-use walkthrough sheet
 
-Run this independently with two classmates with little coding experience. Do not complete the sheet on their behalf. The target is a successful first query within ten minutes **after Python, internet access and any required API account are ready**. Sample-mode success should be recorded separately from a live query.
+Run this walkthrough with two classmates to verify that a new user can start the app and complete a check within 10 minutes.
 
-| Field | Reviewer A | Reviewer B |
+| Field | Participant A | Participant B |
 | --- | --- | --- |
-| Reviewer identifier (no name/UID needed) | Pending | Pending |
+| Participant identifier (anonymous) | Pending | Pending |
 | Date and OS | Pending | Pending |
-| Prerequisites already ready | Pending | Pending |
+| Prerequisites ready (Python 3.12+) | Pending | Pending |
 | Setup start time | Pending | Pending |
-| First successful sample result time | Pending | Pending |
+| First sample check completed | Pending | Pending |
 | Minutes to first result | Pending | Pending |
-| Live test available and completed | Pending participant run | Pending participant run |
-| Needed help / confusing step | Pending | Pending |
-| Keyboard-only check | Pending | Pending |
-| Source link successfully opened | Pending | Pending |
+| Live check completed | Pending | Pending |
+| Any confusing step / feedback | Pending | Pending |
+| Keyboard navigation (`Tab` / `Enter` / `Escape`) | Pending | Pending |
+| Source link opened | Pending | Pending |
 
-Tasks:
+## Walkthrough tasks
 
-1. Follow only README to install and start the app.
-2. Select an illustrative sample and press **Check item**.
-3. Explain the displayed decision, facility and preparation in your own words.
-4. Recognise that the fictional sample is not official HKU guidance.
-5. Open the source guide, follow an official reference, and distinguish team inclusion from source-owner endorsement and verification date.
-6. Open the other decision/refusal samples. Use Tab/Enter/Escape to operate the controls and dialogs.
-7. Enter one synthetic live description in English, then repeat with a simple typo or another language. Check that the canonical English result still maps to the correct source evidence and that missing facts are not invented.
-8. Enter `banana peel` or `香蕉皮` and verify that the result is labelled general guidance, classified as food waste, cites only allowed general references, and does not claim acceptance at the re Kiosk.
-
-Record failed steps and improve the README/interface before retrying. Automated browser checks do not substitute for these novice walkthroughs.
+1. Follow `README.md` to start the app locally (`start.bat` on Windows or `sh start.sh` on macOS/Linux).
+2. In **Sample mode**, select a sample chip and press **Check item**.
+3. Read the displayed decision, facility, preparation steps and source section.
+4. Open **Source library** in the sidebar and click an official reference link.
+5. Test keyboard navigation (`Tab`, `Enter`, `Escape`) on the mode switch, sample chips and dialogs.
+6. Switch to **Live AI** mode, enter an English item description (e.g. a clean pizza box), and check the cited HKU sources.
+7. Repeat with a typo or non-English description (e.g. `一个干净的披萨盒` or `one cleen pizza box`) and verify the result.
+8. Enter an out-of-scope everyday item (e.g. `banana peel` or `香蕉皮`) and verify that it returns **General guidance** (`food_waste`) without claiming acceptance at re Kiosk.

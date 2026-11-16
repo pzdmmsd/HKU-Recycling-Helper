@@ -149,11 +149,11 @@
     $("description").placeholder = sampleMode ? "Choose a sample above to get started." : "For example: 一个干净的披萨盒 / one cleen pizza box / un carton de pizza propre.";
     $("input-kind").textContent = sampleMode ? "SAMPLE DESCRIPTION" : "ANY-LANGUAGE INPUT · ONE ITEM";
     $("input-help").textContent = sampleMode ? "Sample descriptions are fixed. Use Live AI for your own item." : "Typos and other languages are accepted. Answers use canonical English evidence with source links.";
-    $("mode-description").textContent = sampleMode ? "Explore a pre-authored example. No AI call is made." : "Check your item against the cited live rule collection.";
+    $("mode-description").textContent = sampleMode ? "Try a built-in demo example. No AI call is made." : "Check your item against the cited live rule collection.";
     $("privacy-mode").textContent = sampleMode ? "Sample mode makes no AI call." : "Live sends your description and permitted records to Alibaba Cloud Bailian. The app does not save query logs.";
     $("character-count").hidden = sampleMode;
     $("character-count").textContent = "0 / 1000";
-    $("form-footnote-text").textContent = sampleMode ? "Sample examples use an imaginary facility, not HKU." : "Checks apply to the re Kiosk on Main Campus only.";
+    $("form-footnote-text").textContent = sampleMode ? "Sample mode shows offline demo examples." : "Checks apply to the re Kiosk on Main Campus only.";
     clearResult();
     updateSubmit();
     if (!sampleMode) $("description").focus();
@@ -223,9 +223,9 @@
     const metadata = $("result-metadata");
     metadata.replaceChildren();
     const entries = [
-      ["Answer type", sampleMode ? "Pre-authored sample (not a live AI result)" : result.status === "general_guidance" ? "General AI guidance (not facility-specific)" : result.mode === "screening" ? "Local scope / evidence screening (no model call)" : "Live AI response"],
+      ["Answer type", sampleMode ? "Offline sample demo" : result.status === "general_guidance" ? "General AI guidance (not facility-specific)" : result.mode === "screening" ? "Local scope / evidence screening (no model call)" : "Live AI response"],
       ["Provider", sampleMode ? "None — no API call" : result.provider || "Local screening"],
-      ["Model", sampleMode ? "None — authored example" : result.model || "No model call"],
+      ["Model", sampleMode ? "None — offline sample" : result.model || "No model call"],
       ["Corpus", result.corpus_version || state.config?.corpus_version || "Not available"],
       ["Corpus verified", formatDate(result.corpus_verified_on || state.config?.corpus_verified_on)],
       ["Prompt version", result.prompt_version || state.config?.prompt_version || "Not available"],
@@ -241,7 +241,7 @@
     $("result-loading").hidden = true;
     $("result-content").hidden = false;
     $("result-card").setAttribute("aria-labelledby", "decision-heading");
-    $("result-label").textContent = sampleMode ? "SAMPLE · AUTHORED EXAMPLE" : result.status === "general_guidance" ? "LIVE · GENERAL GUIDANCE" : result.mode === "screening" ? "LOCAL SCREENING · NO AI CALL" : "LIVE · SOURCE-BACKED CHECK";
+    $("result-label").textContent = sampleMode ? "SAMPLE · OFFLINE DEMO" : result.status === "general_guidance" ? "LIVE · GENERAL GUIDANCE" : result.mode === "screening" ? "LOCAL SCREENING · NO AI CALL" : "LIVE · SOURCE-BACKED CHECK";
     $("result-status").dataset.status = result.status;
     const statusIcon = result.status === "accepted" ? "check" : result.status === "not_accepted" ? "close" : result.status === "refused" ? "shield" : "question";
     $("status-icon-use").setAttribute("href", `#icon-${statusIcon}`);
@@ -318,11 +318,10 @@
       if (url) { title.href = url; title.target = "_blank"; title.rel = "noopener noreferrer"; title.append(icon("external")); title.setAttribute("aria-label", `${source.title || "Reference"} (opens in a new tab)`); }
       card.append(title);
       if (source.locator) card.append(el("p", null, source.locator));
-      if (source.verified_on) card.append(el("p", null, `Reference checked ${formatDate(source.verified_on)}. This date does not establish permission or facility availability.`));
+      if (source.verified_on) card.append(el("p", null, `Verified ${formatDate(source.verified_on)}`));
       const permission = source.permission || {};
       const approved = approvedIds.has(source.id) || (["approved", "team_override"].includes(permission.status) && permission.allow_api_processing === true && permission.allow_distribution === true);
       card.append(el("span", "source-state", approved ? "Included in live corpus · cited official reference" : "Reference only · not used for live answers"));
-      if (permission.basis || source.permission_basis) card.append(el("p", null, permission.basis || source.permission_basis));
       container.append(card);
     }
   }

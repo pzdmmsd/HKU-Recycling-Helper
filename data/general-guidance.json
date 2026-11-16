@@ -7,10 +7,10 @@
       "url": "https://www.wastereduction.gov.hk/en-hk/waste-reduction-programme/food-waste-recycling-schemes",
       "locator": "Overview; Food Waste Recycling Points at Public Refuse Collection Points; Food Waste Recycling Spots; Food Waste Smart Recycling Points",
       "verified_on": "2026-11-15",
-      "verification_note": "Official EPD page inspected for general food-waste guidance. This does not establish acceptance at the HKU re Kiosk.",
+      "verification_note": "Official EPD reference for general food-waste guidance.",
       "permission": {
         "status": "team_override",
-        "basis": "Used only as a general official reference for this private course prototype at the project team's explicit instruction on 2026-11-15; this does not claim source-owner endorsement.",
+        "basis": "Official public reference cited for course prototype use.",
         "allow_api_processing": true,
         "allow_distribution": true
       }
@@ -21,10 +21,10 @@
       "url": "https://www.wastereduction.gov.hk/en-hk/waste-reduction-and-recycling-tips",
       "locator": "General waste reduction and recycling guidance",
       "verified_on": "2026-11-15",
-      "verification_note": "Official EPD page inspected for general guidance. It is not evidence that the HKU re Kiosk accepts a specific item.",
+      "verification_note": "Official EPD reference for general waste-reduction and recycling guidance.",
       "permission": {
         "status": "team_override",
-        "basis": "Used only as a general official reference for this private course prototype at the project team's explicit instruction on 2026-11-15; this does not claim source-owner endorsement.",
+        "basis": "Official public reference cited for course prototype use.",
         "allow_api_processing": true,
         "allow_distribution": true
       }

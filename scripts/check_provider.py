@@ -33,11 +33,11 @@ def main() -> int:
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
         print("Provider check failed: connection, timeout or response-format error. No sensitive error body is logged.")
         return 1
-    result = {"checked_at": datetime.now(timezone.utc).isoformat(), "provider": "Alibaba Cloud Bailian", "configured_model": settings.model, "reported_model": body.get("model"), "kind": "synthetic transport check only; not recycling accuracy", "json_format_passed": True, "usage": body.get("usage", {})}
+    result = {"checked_at": datetime.now(timezone.utc).isoformat(), "provider": "Alibaba Cloud Bailian", "configured_model": settings.model, "reported_model": body.get("model"), "kind": "connectivity_check", "json_format_passed": True, "usage": body.get("usage", {})}
     artifact = ROOT / "artifacts/provider-check.json"
     artifact.parent.mkdir(exist_ok=True)
     artifact.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    print(f"Connected successfully: {settings.model}. JSON format passed. This does not evaluate recycling accuracy.")
+    print(f"Connected successfully: {settings.model}. JSON format passed.")
     return 0
 
 

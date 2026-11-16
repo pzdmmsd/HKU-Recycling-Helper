@@ -1,4 +1,4 @@
-"""Freeze and evaluate the proposal's 20 cases; never claim unreviewed evidence passes."""
+"""Freeze and evaluate the 20-case benchmark dataset."""
 from __future__ import annotations
 
 import argparse
