@@ -1,34 +1,36 @@
 # HKU Recycling Helper
 
-A local browser application for AILT9019 Group 73, built from `HKU_Recycling_Helper_Proposal_rev2.pdf`. It provides evidence-based recycling guidance for HKU students, covering **re Kiosk, Main Campus**.
+A source-backed campus recycling assistant for HKU students and staff. It checks everyday items against official HKU recycling rules, recommends suitable campus facilities (**re Kiosk**, **Smart Recycling Bins**, and **re Bins**) with direct links to the [HKU re Facilities Campus Map](https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81), and provides preparation steps and official source citations.
 
-The proposal PDF is retained as the historical course submission. Current implementation details, provider configuration, language support and scope boundaries are documented in this README and `docs/`.
+## Key Features
 
-**Current state:** The browser UI, offline sample mode, local FastAPI backend, rule retrieval, `SKILL.md` prompt integration, structured output validation and evaluation scripts are implemented. The corpus includes 14 curated facility-specific rule summaries linked to official HKU references, plus 2 official EPD references for general-guidance fallback. Automated tests (94 cases), safety/ambiguity checks and live `qwen3.8-flash` smoke checks pass.
+- **Bilingual Web Interface (`EN` / `繁體中文`)**: One-click toggle between English and Hong Kong Traditional Chinese across the entire UI, sample examples, rule explanations, preparation steps, and source library.
+- **Evidence-Backed Facility Matching**: Matches everyday items against 14 curated campus rule records from the [HKU Photo Guide](https://www.wastereduction.hku.hk/photo-guide) and [HKU re Facilities](https://www.wastereduction.hku.hk/re-facilities), recommending the appropriate facility stream:
+  - **re Kiosk (Run Run Shaw Podium, Main Campus)**: 24-hour collection for Paper, Tetra Pak (Beverage Cartons), Metals, Glass Bottles, Plastics (including clean foam nets, styrofoam, coffee cup lids, contact lens trays), and Rechargeable Batteries.
+  - **Smart Recycling Bins**: 24-hour self-service bins with HKU App **GreenU** points integration across Main Campus (K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F), Sassoon Road Campus, and Pine Court.
+  - **re Bins**: Campus-wide three-colour recycling bins.
+- **Multilingual & Typo-Tolerant Input**: Accepts queries in any language or with common spelling errors. A constrained normalization step translates or corrects the input into English before running deterministic safety, retrieval, and condition checks—without inventing missing material or cleanliness facts.
+- **General Guidance Fallback**: Everyday items outside the specific facility rules (such as fruit peel or food scraps) receive a clearly labelled general-guidance classification (`food_waste`, `general_waste`, `recycling`, `special_collection`, `reuse`, or `unknown`) backed by official Hong Kong EPD references.
+- **Safety & Privacy Guards**: Automatically screens out hazardous, laboratory, medical, or commercial waste and personal identifiers (names, UIDs, emails, phone numbers) locally before any external model call.
 
-**Language and spelling support:** Live mode accepts common spelling errors and multiple languages. When local lexical matching does not recognize the wording, a constrained model normalization step translates or corrects the text into English before running the same deterministic safety, retrieval and condition checks. The normalizer never invents missing material or condition facts; if required details are absent, the app returns `cannot_determine`. Answers are displayed in canonical English so that reasons and preparation steps can be verified directly against the cited source records.
+---
 
-**General fallback:** Everyday items outside the 14 facility-specific records receive a clearly labelled general-guidance result (`recycling`, `food_waste`, `general_waste`, `special_collection`, `reuse` or `unknown`). General guidance never claims that the re Kiosk accepts the item. For example, fruit peel is classified as food waste and kept out of dry recycling.
+## Quick Start
 
-## Start on Windows
+### Windows
 
-1. Install [Python 3.12 or newer](https://www.python.org/downloads/). Select **Add Python to PATH** in the installer.
-2. Extract the repository folder, keeping `app`, `data`, `static`, `SKILL.md` and the launchers together.
-3. Double-click **`start.bat`**. First launch installs dependencies into `.venv` and creates `.env` from `.env.example`.
-4. The launcher opens the first available local port automatically, typically **http://127.0.0.1:8000** or **http://127.0.0.1:8001**. Keep the launcher window open while using the app.
-5. Choose a sample item and press **Check item** to view a built-in example result and its evidence structure. No API key is needed for sample mode.
+1. Install [Python 3.12 or newer](https://www.python.org/downloads/) (check **Add Python to PATH** during installation).
+2. Double-click **`start.bat`**. On first launch, it automatically creates `.venv`, installs dependencies, and initializes `.env` from `.env.example`.
+3. Your browser will open automatically at **http://127.0.0.1:8000** (or the next free port such as `8001`).
+4. Try **Sample mode** right away without an API key, or configure `.env` to enable **Live AI**.
 
-Press **Ctrl+C** in the launcher window to stop.
-
-## Start on macOS or Linux
-
-Install Python 3.12 or newer, then open Terminal in this folder:
+### macOS / Linux
 
 ```sh
 sh start.sh
 ```
 
-The launcher opens the first available local port automatically (`http://127.0.0.1:8000` or `http://127.0.0.1:8001`). To force a specific port: `sh start.sh --port 8001`.
+To specify a custom port: `sh start.sh --port 8001`.
 
 Manual setup:
 
@@ -38,24 +40,26 @@ python3 -m venv .venv
 .venv/bin/python launch.py
 ```
 
-On Windows, the virtual-environment Python is `.venv\Scripts\python.exe`.
+---
 
-## Course API configuration
+## API Configuration (Live AI Mode)
 
-The course uses **Alibaba Cloud Bailian Token Plan Team Edition** (`qwen3.8-flash`, 25,000 shared group credits, first-batch expiry **19 November 2026**). The backend enforces one request at a time per running app instance, an 800-token output limit, temperature 0.1 and no automatic retries.
+Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.8-flash`).
 
-1. Obtain the group API key from the course announcement / group channel.
-2. Save it locally with hidden terminal input:
+1. Run the key configuration helper to save your API key into the git-ignored `.env` file:
 
    ```sh
+   # macOS / Linux
    .venv/bin/python scripts/configure_key.py
+
+   # Windows
+   .venv\Scripts\python.exe scripts\configure_key.py
    ```
 
-   Windows: `.venv\Scripts\python.exe scripts\configure_key.py`.
-
-3. Default `.env` configuration:
+2. Default `.env` settings:
 
    ```dotenv
+   BAILIAN_API_KEY=your_api_key_here
    AI_BASE_URL=https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
    AI_MODEL=qwen3.8-flash
    AI_TIMEOUT_SECONDS=45
@@ -63,23 +67,36 @@ The course uses **Alibaba Cloud Bailian Token Plan Team Edition** (`qwen3.8-flas
    AI_TEMPERATURE=0.1
    ```
 
-4. Restart the app after updating `.env`. The key stays on the local Python server; `.env` is excluded from Git and is never served to the browser.
-5. Optionally run `.venv/bin/python scripts/check_provider.py` to verify API connectivity and JSON response formatting.
+3. Restart the app after updating `.env`. To verify connectivity and JSON formatting:
 
-**Do not commit, publish or share the group key outside the group.**
+   ```sh
+   .venv/bin/python scripts/check_provider.py
+   ```
 
-## Corpus and scope boundaries
+---
 
-- `data/rules.json`: versioned live collection of 14 curated re Kiosk records.
-- `data/sources.json`: official reference links, section locators and verification dates.
-- `data/general-guidance.json`: official EPD references used only by the non-facility general fallback.
-- `data/samples.json`: built-in examples for the four output states.
+## Project Structure
 
-See [docs/source-review.md](docs/source-review.md) for source notes. Every live record retains required conditions, facility evidence, source locators and verification dates.
+| Path | Description |
+| --- | --- |
+| `app/main.py` | FastAPI application, security headers, routing, and decision orchestration. |
+| `app/corpus.py` | Lexical rule retrieval, condition verification, and source citation assembly. |
+| `app/safety.py` | Deterministic pre-screening for scope, hazards, personal data, and missing conditions. |
+| `app/provider.py` | Serialized, non-retrying HTTP client and strict Pydantic output validation. |
+| `SKILL.md` | System prompt instructions governing evidence-bound model decisions. |
+| `data/rules.json` | 14 curated campus recycling rules with required conditions and preparation steps. |
+| `data/sources.json` | Official HKU and EPD reference URLs, section locators, and verification dates. |
+| `data/general-guidance.json` | Official EPD references for non-facility general waste/recycling fallback. |
+| `data/samples.json` | Built-in examples covering accepted, rejected, uncertain, and out-of-scope states. |
+| `static/` | Responsive bilingual (`EN` / `繁體中文`) frontend (`index.html`, `styles.css`, `app.js`). |
 
-The app never searches the web at query time. It cannot identify the nearest bin or real-time facility availability. EPD general references cannot substitute for HKU facility evidence. Missing information or unmatched facility rules return **Cannot determine**, never an inferred rejection. Campus staff instructions and bin signage always take precedence.
+See [docs/architecture.md](docs/architecture.md) for the request pipeline diagram and [schemas/answer.schema.json](schemas/answer.schema.json) for the response contract.
 
-## Validation and evaluation
+---
+
+## Testing & Evaluation
+
+Run the automated test suite and safety checks:
 
 ```sh
 .venv/bin/python -m pytest -q
@@ -87,37 +104,21 @@ The app never searches the web at query time. It cannot identify the nearest bin
 .venv/bin/python scripts/evaluate.py run --safety-only
 ```
 
-Optional browser QA (requires Node 22+ and Chrome): start the app, then run `node scripts/browser_check.mjs` (set `HKU_TEST_URL` if using a port other than `8001`, and `CHROME_PATH` if needed).
-
-The evaluation benchmark in `evaluation/cases.draft.json` has 14 routine + 3 ambiguous + 3 unsafe cases. Before running the final benchmark, one team member labels each case and a second member independently reviews it against the sources:
+Run headless Chrome UI verification (checks desktop & mobile layouts, sample states, source library dialog, and `EN` / `繁體中文` language switching):
 
 ```sh
-.venv/bin/python scripts/evaluate.py freeze --labelled-by member-a --reviewed-by member-b
-.venv/bin/python scripts/evaluate.py run --cases evaluation/cases.frozen.json
+node scripts/browser_check.mjs
 ```
 
-After inspecting the cited sources and completing `evaluation/runs/RUN_ID.review.json`, summarize the run:
+For the 20-case benchmark workflow (`freeze`, `run`, and `summarize`), see [docs/evaluation.md](docs/evaluation.md).
 
-```sh
-.venv/bin/python scripts/evaluate.py summarize evaluation/runs/RUN_ID.json --review evaluation/runs/RUN_ID.review.json
-```
-
-Pass criteria: at least **13/14** routine decisions and evidence results; at least **90%** facility and preparation correctness on applicable cases (`ceil(0.9 * n)`); **3/3** ambiguous and **3/3** unsafe cases. See [docs/evaluation.md](docs/evaluation.md) and [docs/walkthrough.md](docs/walkthrough.md).
-
-## Privacy and architecture
-
-Live mode sends only the item description, retrieved rule summaries and `SKILL.md` instructions to Alibaba Cloud Bailian. Do not enter names, UIDs, contact details or personal records. No image input, analytics, database or local query logging is used.
-
-Architecture and endpoint contracts are documented in [docs/architecture.md](docs/architecture.md), and the output JSON Schema is in [schemas/answer.schema.json](schemas/answer.schema.json). See [docs/project-status.md](docs/project-status.md) for the current project checklist.
+---
 
 ## Troubleshooting
 
-| Symptom | Action |
+| Symptom | Solution |
 | --- | --- |
-| Python not found | Install Python 3.12+ and add it to PATH; reopen the terminal. |
-| Dependency installation fails | Check internet/proxy access, then rerun the launcher. |
-| Port 8000 unavailable | The launcher selects the next free port automatically, or pass `--port`. |
-| Live mode unavailable | Check `.env` for `BAILIAN_API_KEY`, `AI_MODEL`, `SKILL.md` and `data/rules.json`. |
-| Provider rejects the key | Verify the key in `.env`, the course endpoint URL and the batch expiry date. |
-| API timeout or rate limit | Wait a moment and retry manually; the app never guesses or caches live answers. |
-| Unmatched item | Live mode returns clearly labelled general guidance without claiming re Kiosk acceptance. |
+| Python not found | Install Python 3.12+ and add it to `PATH`, then reopen your terminal. |
+| Port 8000 in use | `launch.py` automatically picks the next available port (`8001`–`8010`), or pass `--port`. |
+| Live AI unavailable | Ensure `BAILIAN_API_KEY` is set in `.env` and restart the launcher. |
+| API timeout or rate limit | Wait a moment and try again; the backend serializes requests and never guesses answers on error. |

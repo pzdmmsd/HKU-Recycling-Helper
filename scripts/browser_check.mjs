@@ -92,9 +92,12 @@ try {
   await click('#check-button');
   await waitFor('!document.querySelector("#result-content").hidden && !document.querySelector("#check-button").disabled');
   await screenshot('desktop-result.png');
+  assert(await evaluate('document.querySelector(".kicker-text").getBoundingClientRect().width > 100'));
+  assert(await evaluate('document.querySelector("#facility-map-link").href.includes("wastereduction.hku.hk/re-facilities")'));
   await click('#lang-zh');
   assert.equal(await evaluate('document.documentElement.lang'), 'zh-HK');
   assert.equal(await evaluate('document.querySelector("#decision-heading").textContent'), '此回收點接收');
+  assert(await evaluate('document.querySelector(".kicker-text").getBoundingClientRect().width > 80'));
   await click('#lang-en');
   assert.equal(await evaluate('document.documentElement.lang'), 'en');
   await click('#open-sources');

@@ -3,6 +3,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const state = { config: null, samples: [], selectedSample: null, mode: "sample", busy: false, corpus: null, lang: "en", lastResult: null };
+  const MAP_URL = "https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81";
 
   const UI_STRINGS = {
     en: {
@@ -16,15 +17,15 @@
       card_eyebrow: "CAMPUS COVERAGE",
       card_title: "Clear rules. Everyday items.",
       card_desc: "Source-backed guidance for sorting and preparing your recyclables on campus.",
-      card_location: "re Kiosk · Main Campus",
+      card_location: "re Facilities Map · HKU",
       footer_badge: "Source-backed guidance",
-      sidebar_footer_text: "Covering the re Kiosk at<br>Run Run Shaw Podium.",
+      sidebar_footer_text: "Covering re Kiosk, Smart Bins<br>&amp; campus re Facilities.",
       about_btn: "About this helper",
       topbar_eyebrow: "HKU RECYCLING HELPER",
-      topbar_location: "re Kiosk · Main Campus",
+      topbar_location: "Campus Facilities Map",
       hero_kicker: "A SMALL STEP TOWARDS LESS WASTE",
       hero_heading: "A little clarity.<br>A cleaner <em>campus.</em>",
-      hero_sub: "Know what belongs, how to prepare it, and where to go.<br class=\"desktop-break\">Start with one everyday item.",
+      hero_sub: "Know what belongs, how to prepare it, and which campus facility to use.<br class=\"desktop-break\">Start with one everyday item.",
       hero_art_caption: "ONE ITEM AT A TIME",
       walk_title: "New here? Try a quick check.",
       walk_1: "Choose a sample",
@@ -39,7 +40,7 @@
       mode_live: "Live AI",
       samples_label: "Common examples",
       samples_select_one: "SELECT ONE",
-      privacy_base: "Keep it about the item. Don’t enter names, student UIDs, contact details, or personal records.",
+      privacy_base: "Keep it about the item. Do not enter names, student UIDs, contact details, or personal records.",
       your_item_label: "Your item",
       sec_02: "02 / THE NEXT STEP",
       empty_heading: "A good habit starts<br>with one item.",
@@ -48,7 +49,8 @@
       empty_feat_2: "Visible evidence",
       sample_result_notice: "Built-in example — switch to Live AI to check your own item description.",
       clarification_label: "A LITTLE MORE DETAIL",
-      facility_label: "COVERED FACILITY",
+      facility_label: "SUITABLE FACILITIES",
+      view_facility_map: "View campus recycling map on HKU re Facilities",
       prep_heading: "Before you drop it off",
       prep_heading_sample: "Preparation steps",
       evidence_heading: "Where this comes from",
@@ -61,13 +63,13 @@
       footer_right: "RE KIOSK · MAIN CAMPUS",
       how_eyebrow: "HOW IT WORKS",
       how_title: "Clarity, with the sources<br>to back it up.",
-      how_intro: "Describe one everyday item in any language, including its material and whether it is empty, clean, or stained. Typos are normalized automatically before checking the rules for the re Kiosk on Main Campus.",
+      how_intro: "Describe one everyday item in any language, including its material and whether it is empty, clean, or stained. Typos are normalized automatically before checking the rules for HKU re Facilities.",
       how_s1_title: "Check the scope",
       how_s1_desc: "Hazardous, laboratory, and commercial waste requests are excluded. Campus staff and on-site bin signage always take priority.",
       how_s2_title: "Match cited evidence",
-      how_s2_desc: "Live mode retrieves matching records from the local rule collection and verifies all required conditions.",
+      how_s2_desc: "Live mode retrieves matching records from the local rule collection and recommends suitable campus facilities (re Kiosk, Smart Recycling Bins, or re Bins).",
       how_s3_title: "Clear decision states",
-      how_s3_desc: "Results show Accepted, Not accepted, Cannot determine, or General guidance when an item is outside the re Kiosk rule set.",
+      how_s3_desc: "Results show Accepted, Not accepted, Cannot determine, or General guidance when an item is outside the campus rule set.",
       how_note: "Sample mode provides built-in examples for common items so you can preview how decisions and citations are presented.",
       how_close_btn: "Let’s check an item",
       sources_eyebrow: "THE SOURCE LIBRARY",
@@ -76,7 +78,7 @@
       sources_note: "General Hong Kong recycling guidance provides background context only and does not establish acceptance at an HKU facility. Always follow current campus signage.",
       about_eyebrow: "ABOUT THIS HELPER",
       about_title: "A campus habit,<br>one item at a time.",
-      about_p1: "HKU Recycling Helper provides source-backed recycling guidance for the re Kiosk at Run Run Shaw Podium, Main Campus.",
+      about_p1: "HKU Recycling Helper provides source-backed recycling guidance for the re Kiosk (Run Run Shaw Podium, Main Campus), Smart Recycling Bins, and campus re Bins.",
       about_h_privacy: "Privacy",
       about_p_privacy: "Keep descriptions focused on the item and free of personal information. The app does not store query logs or conversation history.",
       about_h_scope: "Coverage",
@@ -96,8 +98,8 @@
       mode_desc_live: "Check your item against the cited live rule collection.",
       privacy_mode_sample: "Sample mode makes no external request.",
       privacy_mode_live: "Live mode processes your item description and matched rules via Alibaba Cloud Bailian without saving query logs.",
-      footnote_sample: "Covers the re Kiosk at Run Run Shaw Podium, Main Campus.",
-      footnote_live: "Applies to the re Kiosk at Run Run Shaw Podium, Main Campus.",
+      footnote_sample: "Covers HKU re Kiosk, Smart Recycling Bins, and campus re Bins.",
+      footnote_live: "Matches items to HKU re Kiosk, Smart Recycling Bins, and campus re Bins.",
       loading_sample: "Reading the selected example…",
       loading_live: "Retrieving matching rules and verifying evidence…",
       no_evidence_sample: "No specific source citation applies to this example.",
@@ -117,15 +119,15 @@
       card_eyebrow: "覆蓋範圍",
       card_title: "清晰指引 · 日常回收",
       card_desc: "根據官方公開指引，為校園日常物品提供分類與清潔準備建議。",
-      card_location: "re Kiosk · 本部校園",
+      card_location: "校園回收設施地圖 · HKU",
       footer_badge: "官方來源支持",
-      sidebar_footer_text: "涵蓋本部校園邵逸夫平台<br>re Kiosk 回收點。",
+      sidebar_footer_text: "涵蓋 re Kiosk、智能回收箱<br>及校園各處 re Facilities。",
       about_btn: "關於此助手",
       topbar_eyebrow: "港大回收助手 · HKU RECYCLING HELPER",
-      topbar_location: "re Kiosk · 本部校園",
+      topbar_location: "校園回收設施地圖",
       hero_kicker: "源頭減廢 · 由日常小步開始",
       hero_heading: "清晰分類，<br>共建更整潔的<em>校園。</em>",
-      hero_sub: "了解哪些物品可回收、投放前的清潔步驟及回收位置。<br class=\"desktop-break\">由查詢一件日常物品開始。",
+      hero_sub: "了解哪些物品可回收、投放前的清潔步驟及適用回收設施。<br class=\"desktop-break\">由查詢一件日常物品開始。",
       hero_art_caption: "每次查詢一件物品",
       walk_title: "初次使用？試試快速查詢。",
       walk_1: "選擇常見範例",
@@ -150,6 +152,7 @@
       sample_result_notice: "內置常見範例 — 切換至「即時 AI 查詢」即可輸入並檢查你自己的物品。",
       clarification_label: "需要補充資料",
       facility_label: "適用回收設施",
+      view_facility_map: "前往 HKU re Facilities 查看校園回收設施地圖",
       prep_heading: "投放前準備步驟",
       prep_heading_sample: "投放前準備步驟",
       evidence_heading: "資料來源依據",
@@ -159,16 +162,16 @@
       ground_desc: "請時刻遵守校園職員指示及回收設施現場的最新告示。",
       ground_btn: "使用說明",
       footer_motto: "減少猜測 · 養成良好習慣",
-      footer_right: "RE KIOSK · 本部校園",
+      footer_right: "RE FACILITIES · 港大校園",
       how_eyebrow: "使用說明",
       how_title: "清晰分類，<br>有據可依。",
-      how_intro: "可用任何語言描述一件日常物品（包含材質，以及是否已清空、洗淨或沾有污漬）。系統會自動修正拼寫並核對本部校園 re Kiosk 的回收規則。",
+      how_intro: "可用任何語言描述一件日常物品（包含材質，以及是否已清空、洗淨或沾有污漬）。系統會自動修正拼寫並核對港大 re Facilities 的回收規則。",
       how_s1_title: "確認適用範圍",
       how_s1_desc: "危險品、實驗室廢物及商業廢物不在本助手範圍內。現場職員指示及回收桶標示永遠優先。",
-      how_s2_title: "核對官方來源",
-      how_s2_desc: "即時 AI 模式會從本地規則庫檢索匹配記錄，並嚴格核對所有清潔及拆解條件。",
+      how_s2_title: "匹配官方來源與設施",
+      how_s2_desc: "即時 AI 模式會從本地規則庫檢索匹配記錄，並根據物品材質推薦合適的校園設施（re Kiosk、智能回收箱或 re Bin）。",
       how_s3_title: "明確標示不確定性",
-      how_s3_desc: "結果分為「此回收點接收」、「此回收點不接收」、「無法確定」或「一般回收指引」（適用於 re Kiosk 規則以外的日常物品）。",
+      how_s3_desc: "結果分為「此回收點接收」、「此回收點不接收」、「無法確定」或「一般回收指引」（適用於特定規則以外的日常物品）。",
       how_note: "「常見範例」模式提供內置示例，方便快速預覽不同分類結果與來源格式。",
       how_close_btn: "開始查詢物品",
       sources_eyebrow: "資料來源庫",
@@ -177,11 +180,11 @@
       sources_note: "香港環保署（EPD）的一般減廢及回收指引僅供背景參考，不代表港大特定設施接收該物品。請以現場標示為準。",
       about_eyebrow: "關於此助手",
       about_title: "校園回收習慣，<br>由每次一件物品開始。",
-      about_p1: "港大回收助手（HKU Recycling Helper）為香港大學本部校園邵逸夫平台 re Kiosk 提供有據可依的回收分類指引。",
+      about_p1: "港大回收助手（HKU Recycling Helper）根據港大官方指引，為 re Kiosk（本部校園邵逸夫平台）、智能回收箱（Smart Recycling Bins）及校園各處 re Bin 提供回收分類建議。",
       about_h_privacy: "私隱保障",
       about_p_privacy: "請僅輸入物品描述，切勿包含個人資料。本應用程式不會儲存查詢紀錄或對話歷史。",
       about_h_scope: "覆蓋範圍",
-      about_p_scope: "支援多語言輸入，每次查詢一件日常物品，並附有港大及環保署官方參考連結。請時刻遵守現場回收桶標示及校園職員指示。",
+      about_p_scope: "支援多語言輸入，每次查詢一件日常物品，並附有港大及環保署官方參考連結與設施地圖跳轉。請時刻遵守現場回收桶標示及校園職員指示。",
       about_close_btn: "返回回收助手",
       ready_when_you_are: "準備就緒",
       checking_your_item: "正在查詢物品",
@@ -197,8 +200,8 @@
       mode_desc_live: "根據已引用的規則庫檢查你的物品。",
       privacy_mode_sample: "常見範例模式不會發送外部請求。",
       privacy_mode_live: "即時模式會透過阿里雲百煉處理物品描述與匹配規則，本程式不會保存查詢日誌。",
-      footnote_sample: "涵蓋本部校園邵逸夫平台 re Kiosk 回收點。",
-      footnote_live: "適用於本部校園邵逸夫平台 re Kiosk 回收點。",
+      footnote_sample: "涵蓋港大 re Kiosk、智能回收箱及校園 re Bin。",
+      footnote_live: "根據物品類別匹配港大 re Kiosk、智能回收箱及校園 re Bin。",
       loading_sample: "正在讀取所選範例…",
       loading_live: "正在檢索匹配規則並核實來源依據…",
       no_evidence_sample: "此範例無需引用特定設施規則。",
@@ -258,32 +261,32 @@
     "Remove food residue.": "清除所有食物殘渣。",
     "Clean the bottle.": "清潔樽身。",
     "Keep it out of paper, plastic and metal recycling.": "請勿放入廢紙、塑膠或金屬回收桶。",
-    "Clean, dry cardboard is accepted in the paper recycling stream at re Kiosk.": "乾淨且乾燥的紙皮／紙箱可放入 re Kiosk 的廢紙回收箱。",
-    "Composite or plastic-coated wrappers are excluded from the recycling streams at re Kiosk.": "複合材質或帶有塑膠塗層的包裝紙不獲 re Kiosk 回收。",
+    "Clean, dry cardboard is accepted in the paper recycling stream at re Kiosk.": "乾淨且乾燥的紙皮／紙箱可放入廢紙回收流向。",
+    "Composite or plastic-coated wrappers are excluded from the recycling streams at re Kiosk.": "複合材質或帶有塑膠塗層的包裝紙不獲校園回收設施接收。",
     "The material and cleanliness of the container are not specified, so a recycling decision cannot be made yet.": "由於未註明容器的材質及是否已清空洗淨，暫時無法作出回收決定。",
     "What is the container made from, and is it empty and clean?": "請問這個容器是什麼材質？是否已經清空並清洗乾淨？",
     "Hazardous and laboratory waste are outside the scope of campus dry recycling. Please follow laboratory safety procedures or contact campus staff.": "危險品及實驗室廢物不屬於校園一般回收範圍。請遵循實驗室安全程序或聯絡校園職員處理。",
-    "Clean pizza boxes are accepted in the paper recycling stream at re Kiosk.": "乾淨的薄餅盒可放入 re Kiosk 的廢紙回收箱。",
-    "Baking paper is excluded from paper recycling at re Kiosk.": "牛油紙／烘焙紙（Baking paper）不獲 re Kiosk 廢紙回收。",
-    "Clean plastic coffee cup lids (separated from the cup) are accepted in the plastics stream at re Kiosk.": "已與杯身分離並清洗乾淨的塑膠咖啡杯蓋，可放入 re Kiosk 的塑膠回收箱。",
-    "Paper coffee cup sleeves (separated from the cup) are accepted in the paper recycling stream at re Kiosk.": "已與杯身分離的紙製咖啡杯隔熱套，可放入 re Kiosk 的廢紙回收箱。",
-    "Clean takeaway coffee cups (with lid and sleeve removed) are accepted in the beverage carton stream at re Kiosk.": "已移除杯蓋及隔熱套並清洗乾淨的外賣咖啡杯，可放入 re Kiosk 的飲品紙包盒回收箱。",
-    "Clean fruit foam nets are accepted in the plastics recycling stream at re Kiosk.": "乾淨的生果網套（發泡膠網）可放入 re Kiosk 的塑膠回收箱。",
+    "Clean pizza boxes are accepted in the paper recycling stream at re Kiosk.": "乾淨的薄餅盒可放入廢紙回收箱。",
+    "Baking paper is excluded from paper recycling at re Kiosk.": "牛油紙／烘焙紙（Baking paper）不獲廢紙回收。",
+    "Clean plastic coffee cup lids (separated from the cup) are accepted in the plastics stream at re Kiosk.": "已與杯身分離並清洗乾淨的塑膠咖啡杯蓋，可放入塑膠回收箱。",
+    "Paper coffee cup sleeves (separated from the cup) are accepted in the paper recycling stream at re Kiosk.": "已與杯身分離的紙製咖啡杯隔熱套，可放入廢紙回收箱。",
+    "Clean takeaway coffee cups (with lid and sleeve removed) are accepted in the beverage carton stream at re Kiosk.": "已移除杯蓋及隔熱套並清洗乾淨的外賣咖啡杯，可放入 re Kiosk 的飲品紙包盒（Tetra Pak）回收箱。",
+    "Clean fruit foam nets are accepted in the plastics recycling stream at re Kiosk.": "乾淨的生果網套（發泡膠網）可放入塑膠回收箱。",
     "Cleaned styrofoam containers with all food residue removed are accepted in the plastics stream, even if lightly stained.": "已清除所有食物殘渣並清洗乾淨的發泡膠盒，即使有少許色素染色，仍可放入塑膠回收箱。",
-    "Empty, clean plastic contact lens trays (with the foil lid removed) are accepted in the plastics stream at re Kiosk.": "已完全撕除鋁箔蓋、清空並洗淨的隱形眼鏡塑膠盒托，可放入 re Kiosk 的塑膠回收箱。",
-    "Foil lids from contact lens packaging are excluded from recycling at re Kiosk.": "隱形眼鏡包裝的鋁箔蓋不獲 re Kiosk 回收。",
-    "Instant noodle container lids are excluded from recycling at re Kiosk.": "杯麵／碗麵的封口蓋不獲 re Kiosk 回收。",
-    "Empty, clean plastic instant noodle cups (with the lid removed) are accepted in the plastics stream at re Kiosk.": "已撕除封口蓋、清空並洗淨的塑膠杯麵碗，可放入 re Kiosk 的塑膠回收箱。",
-    "Cling film with food labels attached is excluded from plastics recycling at re Kiosk.": "附有食品標籤貼紙的保鮮紙不獲 re Kiosk 塑膠回收。",
-    "Empty, clean plastic personal care bottles (with the pump head removed) are accepted in the plastics stream at re Kiosk.": "已拆走泵頭、清空並洗淨的個人護理塑膠樽，可放入 re Kiosk 的塑膠回收箱。",
-    "Empty, clean metal mooncake tins are accepted in the metals recycling stream at re Kiosk.": "清空並乾淨的金屬月餅罐可放入 re Kiosk 的金屬回收箱。",
+    "Empty, clean plastic contact lens trays (with the foil lid removed) are accepted in the plastics stream at re Kiosk.": "已完全撕除鋁箔蓋、清空並洗淨的隱形眼鏡塑膠盒托，可放入塑膠回收箱。",
+    "Foil lids from contact lens packaging are excluded from recycling at re Kiosk.": "隱形眼鏡包裝的鋁箔蓋不獲回收。",
+    "Instant noodle container lids are excluded from recycling at re Kiosk.": "杯麵／碗麵的封口蓋不獲回收。",
+    "Empty, clean plastic instant noodle cups (with the lid removed) are accepted in the plastics stream at re Kiosk.": "已撕除封口蓋、清空並洗淨的塑膠杯麵碗，可放入塑膠回收箱。",
+    "Cling film with food labels attached is excluded from plastics recycling at re Kiosk.": "附有食品標籤貼紙的保鮮紙不獲塑膠回收。",
+    "Empty, clean plastic personal care bottles (with the pump head removed) are accepted in the plastics stream at re Kiosk.": "已拆走泵頭、清空並洗淨的個人護理塑膠樽，可放入塑膠回收箱。",
+    "Empty, clean metal mooncake tins are accepted in the metals recycling stream at re Kiosk.": "清空並乾淨的金屬月餅罐可放入金屬回收箱。",
     "An item description is needed before checking the recycling rules.": "請先輸入物品描述以核對回收規則。",
     "What is the item, what material is it made from, and is it empty and clean?": "請問這是什麼物品、由什麼材質製成，以及是否已清空並清洗乾淨？",
     "Hazardous, laboratory and commercial waste are outside the scope of this helper. Do not use this helper to decide disposal; ask campus staff for the appropriate procedure.": "危險品、實驗室廢物及商業垃圾不在本助手的服務範圍內。請勿使用本工具決定其處置方式，請向校園職員查詢正確程序。",
     "Follow campus staff instructions and bin signage. This helper cannot override them; ask campus staff if the guidance is unclear.": "請遵守校園職員指示及回收桶現場標示。本助手不能取代現場指示；如有疑問請向校園職員查詢。",
     "I can only check an ordinary item against the cited recycling rules. I cannot follow instructions to bypass those rules. Ask campus staff for disposal questions outside this scope.": "本助手僅能根據已引用的回收規則檢查日常物品，無法執行繞過規則的指令。超出範圍的棄置問題請向校園職員查詢。",
-    "This helper only covers the re Kiosk on Main Campus and does not locate bins or confirm other facilities.": "本助手目前僅涵蓋本部校園的 re Kiosk，不提供尋找最近回收桶或確認其他設施的功能。",
-    "Are you asking about the re Kiosk on Main Campus?": "請問你是否想查詢本部校園的 re Kiosk？",
+    "This helper only covers the re Kiosk on Main Campus and does not locate bins or confirm other facilities.": "本助手目前主要核對本部校園 re Kiosk 的規則，請點擊下方地圖連結查看全校回收設施位置。",
+    "Are you asking about the re Kiosk on Main Campus?": "請問你是否想查詢本部校園的回收設施？",
     "This helper does not have real-time facility availability. Check current signage or contact campus staff.": "本助手無法提供設施的即時開放狀態，請查看現場告示或聯絡校園職員。",
     "Please remove names, student identifiers and contact details before using live mode.": "使用即時查詢前，請先移除姓名、學生編號及聯絡資料。",
     "Can you describe only the item, material and condition?": "請只描述物品名稱、材質及清潔狀態。",
@@ -339,6 +342,68 @@
       return `請確認物品的具體類型及所需條件：${rest}`;
     }
     return text;
+  }
+
+  function resolveFacilityRecommendation(result) {
+    const zh = state.lang === "zh-HK";
+    if (!result || !result.facility || result.status === "cannot_determine" || result.status === "refused" || result.status === "general_guidance") {
+      return {
+        primary: zh
+          ? (result?.status === "general_guidance" ? "無特定港大回收設施建議（請參閱下方一般指引或校園地圖）" : "無特定回收設施建議")
+          : (result?.status === "general_guidance" ? "No facility-specific recommendation (see campus map below)" : "No facility recommendation"),
+        detail: "",
+      };
+    }
+    const ruleIds = (result.evidence || []).map((e) => e.rule_id || "");
+    const text = `${result.item || ""} ${result.reason || ""} ${ruleIds.join(" ")}`.toLowerCase();
+    if (result.status === "not_accepted") {
+      return {
+        primary: zh
+          ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱 · 校園 re Bin（均不接收此物品）"
+          : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins · re Bins (Not accepted)",
+        detail: zh
+          ? "此物品不屬於校園回收設施的接收範圍，請作一般垃圾處理。"
+          : "This item is excluded from campus recycling streams; dispose of as general waste.",
+      };
+    }
+    if (text.includes("coffee-cup") && !text.includes("lid") && !text.includes("sleeve") || text.includes("beverage carton") || text.includes("tetra pak")) {
+      return {
+        primary: zh
+          ? "re Kiosk — 本部校園邵逸夫平台（24 小時開放 · 設飲品紙包盒專用回收箱）"
+          : "re Kiosk — Run Run Shaw Podium, Main Campus (24-hr · Tetra Pak / Beverage Carton stream)",
+        detail: zh
+          ? "註：智能回收箱（Smart Recycling Bins）及一般三色桶不設紙包飲品盒回收，請前往邵逸夫平台 re Kiosk 投放。"
+          : "Note: Smart Recycling Bins and standard re Bins do not collect beverage cartons; use the re Kiosk at Run Run Shaw Podium.",
+      };
+    }
+    if (text.includes("glass")) {
+      return {
+        primary: zh
+          ? "re Kiosk（邵逸夫平台）· 指定智能回收箱（百周年校園中央平台 G/F 及松蔭園）"
+          : "re Kiosk (Run Run Shaw Podium) · Selected Smart Recycling Bins (Central Podium G/F & Pine Court)",
+        detail: zh
+          ? "24 小時開放；玻璃樽僅於 re Kiosk 及指定智能回收箱接收。"
+          : "24-hour access; glass bottles are collected at re Kiosk and designated Smart Recycling Bins.",
+      };
+    }
+    if (text.includes("styrofoam") || text.includes("foam-net") || text.includes("foam net") || text.includes("contact-lens") || text.includes("noodle-container") || text.includes("coffee-cup-lid")) {
+      return {
+        primary: zh
+          ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱（Smart Recycling Bins · 其他塑膠類別）"
+          : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins (Other Plastics stream)",
+        detail: zh
+          ? "re Kiosk 接收各類乾淨回收塑膠；智能回收箱設於梁銶琚樓 LG2/F、明華綜合大樓 1/F、許愛周科學館 G/F、百周年校園中央平台 G/F 及沙宣道校園。"
+          : "re Kiosk collects diverse clean plastics; Smart Recycling Bins are located at K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F, and Sassoon Road Campus.",
+      };
+    }
+    return {
+      primary: zh
+        ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱（Smart Recycling Bins）· 校園各處 re Bin"
+        : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins · Campus re Bins",
+      detail: zh
+        ? "re Kiosk 及智能回收箱均為 24 小時開放；使用 HKU App 內 GreenU 功能於智能回收箱回收更可賺取積分。"
+        : "re Kiosk and Smart Recycling Bins operate 24 hours; use the GreenU function in the HKU App at Smart Recycling Bins to earn points.",
+    };
   }
 
   function el(tag, className, text) {
@@ -636,8 +701,14 @@
     $("result-reason").textContent = reasonText;
     $("clarification-box").hidden = !result.clarification;
     $("clarification-text").textContent = trText(result.clarification) || "";
-    const rawFacility = result.facility || (result.status === "general_guidance" ? "No facility-specific recommendation" : "No facility recommendation");
-    $("result-facility").textContent = trText(rawFacility);
+
+    const facilityInfo = resolveFacilityRecommendation(result);
+    $("result-facility").textContent = facilityInfo.primary;
+    $("result-facility-detail").textContent = facilityInfo.detail;
+    $("result-facility-detail").hidden = !facilityInfo.detail;
+    $("facility-map-link").href = MAP_URL;
+    $("facility-map-text").textContent = t("view_facility_map");
+
     const preparation = Array.isArray(result.preparation) ? result.preparation : [];
     $("preparation-section").hidden = !preparation.length;
     $("preparation-heading").textContent = sampleMode ? t("prep_heading_sample") : t("prep_heading");
