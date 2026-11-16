@@ -2,6 +2,22 @@
 
 本项目使用 Python FastAPI，同时提供网页和 `/api/*` 接口。优先部署整个仓库到 Vercel，浏览器向同一网站的 `/api/check` 发请求，服务器再调用阿里云百炼。
 
+## 本次部署（2026-11-16）
+
+- 生产地址：<https://hku-recycling-helper.vercel.app>。
+- 备用生产地址：<https://hku-recycling-helper-zyk4.vercel.app>。
+- 项目设置：<https://vercel.com/zyk4/hku-recycling-helper/settings>。
+- 代码修改：[PR #1](https://github.com/pzdmmsd/HKU-Recycling-Helper/pull/1)，分支 `codex/vercel-deployment`；应用源码提交为 `78af297e0e00f64c5c1126264b416d016c2ee36e`。
+- 已获得公开生产网页的授权；生产网页公开，预览部署保留 Vercel 登录保护。
+- 云端未上传本地 `.env` 或 API Key；默认提供 Sample mode，Live AI 需按下文添加密钥。
+- 验证结果：101 项测试、6 项离线安全检查通过；生产部署状态 Ready，使用全新浏览器会话验证了公开访问、中英文切换、四类示例、来源弹窗和桌面/手机布局。未调用真实 AI。
+
+本次使用 GitHub 工作副本中已提交的源码快照上传部署。Vercel 账户尚未关联 GitHub Login Connection，因此 **Git 推送自动部署尚未接通**。要接通后续自动部署：
+
+1. 在 [Vercel 账户 Authentication](https://vercel.com/account/settings/authentication) 中连接拥有该仓库的 GitHub 账户，并允许 Vercel GitHub App 访问该私有仓库。
+2. 审查并合并 PR #1，使 `main` 包含部署修复。
+3. 打开已有 Vercel 项目的 **Settings → Git → Connect Git Repository**，连接 `pzdmmsd/HKU-Recycling-Helper`，生产分支使用 `main`。使用已有项目即可，无需创建第二个项目。
+
 ## 连接 GitHub 并部署
 
 1. 登录 <https://vercel.com/new>，使用 GitHub 导入 `pzdmmsd/HKU-Recycling-Helper`。这是私有仓库；若列表中没有，需要给 Vercel GitHub App 授予该仓库访问权限。
