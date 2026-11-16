@@ -16,6 +16,7 @@ class CheckRequest(StrictModel):
     description: str = Field(default="", max_length=1000)
     mode: Literal["live", "sample"] = "live"
     sample_id: str | None = Field(default=None, max_length=80)
+    lang: Literal["en", "zh-HK"] = "en"
 
 
 class Evidence(StrictModel):

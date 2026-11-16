@@ -191,7 +191,7 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
                 reason = screening.reason
             return uncertain(decision_description, reason, screening.clarification if screening else None, mode="live" if used_normalizer else "screening")
 
-        guidance = await provider.general_guidance(decision_description, corpus)
+        guidance = await provider.general_guidance(decision_description, corpus, lang=payload.lang)
         if guidance.stream == "hazardous":
             return uncertain(
                 decision_description,

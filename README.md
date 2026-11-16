@@ -138,5 +138,3 @@ For the 20-case benchmark workflow (`freeze`, `run`, and `summarize`), see [docs
 | Live AI unavailable locally | Set `BAILIAN_API_KEY` in `.env` and restart the launcher. |
 | Live AI unavailable on Vercel after saving the key | Set `BAILIAN_API_KEY` for Production in the correct project, redeploy, wait for Ready, and reload the website. |
 | API timeout or rate limit | Wait a moment and try again; the backend serializes requests and never guesses answers on error. |
-
-All repository documentation and GitHub pull request descriptions are maintained in English. The web interface remains bilingual.

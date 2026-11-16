@@ -4,16 +4,10 @@ This project uses Python FastAPI to serve both the web interface and `/api/*` en
 
 ## Current deployment
 
-- Production: <https://hku-recycling-helper.vercel.app>.
-- Alternative production URL: <https://hku-recycling-helper-zyk4.vercel.app>.
-- Project settings: <https://vercel.com/zyk4/hku-recycling-helper/settings>.
-- Deployment changes were merged in [PR #1](https://github.com/pzdmmsd/HKU-Recycling-Helper/pull/1). The deployed application source is commit `78af297e0e00f64c5c1126264b416d016c2ee36e`; subsequent documentation changes do not change the application code.
-- Production is publicly accessible with the owner's approval. Preview deployments retain Vercel Authentication.
-- Local `.env` files and credentials were excluded from the uploaded source. The production key is configured separately in Vercel's secret store.
-- Initial validation: 101 automated tests and six offline safety checks passed. A fresh browser session verified public access, language switching, all four sample outcomes, source dialogs, and desktop/mobile layouts.
-- Live verification on 2026-11-16: after the Production secret was saved, a new deployment made `live_available` true. Submitting `One empty clean plastic bottle.` through the production browser form returned HTTP 200, `mode: live`, `status: accepted`, and two evidence entries. The browser rendered the result successfully.
-
-The initial deployment uploaded a committed source snapshot from the GitHub working copy. The project is now connected to `pzdmmsd/HKU-Recycling-Helper` through Vercel's GitHub integration, and PR #1 has been merged. Manage the repository connection and production branch under **Settings > Git** in the existing project.
+- Production URL: <https://hku-recycling-helper.vercel.app> (alias: <https://hku-recycling-helper-zyk4.vercel.app>)
+- Project settings: <https://vercel.com/zyk4/hku-recycling-helper/settings>
+- Connected repository: `pzdmmsd/HKU-Recycling-Helper` (`main` branch)
+- Local `.env` files and credentials are excluded from Git and Vercel uploads via `.gitignore` and `.vercelignore`; the production key is stored in Vercel Environment Variables.
 
 ## Import and deploy from GitHub
 

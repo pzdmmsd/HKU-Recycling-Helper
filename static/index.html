@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5ee">
-  <meta name="description" content="Source-backed recycling guidance for HKU campus re Facilities.">
-  <title>HKU Recycling Helper · One item at a time</title>
+  <meta name="description" content="Campus recycling guide for HKU re Kiosk, Smart Recycling Bins, and re Bins.">
+  <title>HKU Recycling Helper · Campus Recycling Guide</title>
   <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
   <link rel="stylesheet" href="./static/styles.css">
   <script defer src="./static/app.js"></script>
@@ -35,24 +35,24 @@
       <span>re<span class="brand-dot">.</span><span class="brand-subtitle" data-i18n="brand_subtitle">HKU RECYCLING HELPER</span></span>
     </a>
     <div class="sidebar-body">
-      <p class="nav-caption" data-i18n="nav_caption">A LITTLE HELP GOES A LONG WAY</p>
+      <p class="nav-caption" data-i18n="nav_caption">CAMPUS RECYCLING GUIDE</p>
       <nav class="navigation">
         <a class="nav-item active" href="#main" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg><span data-i18n="nav_check">Check an item</span><span class="nav-arrow">↗</span></a>
         <button class="nav-item" type="button" data-open-dialog="how-dialog"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"/></svg><span data-i18n="nav_how">How it works</span></button>
-        <button class="nav-item" id="open-sources" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg><span data-i18n="nav_sources">Source library</span></button>
+        <button class="nav-item" id="open-sources" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg><span data-i18n="nav_sources">Reference sources</span></button>
       </nav>
 
       <div class="pilot-card">
-        <span class="eyebrow" data-i18n="card_eyebrow">CAMPUS COVERAGE</span>
+        <span class="eyebrow" data-i18n="card_eyebrow">CAMPUS FACILITIES</span>
         <div class="kiosk-illustration" aria-hidden="true"><svg viewBox="0 0 180 108" fill="none"><path d="M18 93h145" stroke="#c6cec0"/><path d="M41 93V37h98v56" fill="#e6eadc" stroke="#899b7e"/><path d="M37 31h106v9H37z" fill="#43634b"/><path d="M47 24h86v8H47z" fill="#f7f8ef" stroke="#899b7e"/><path d="M52 48h21v45H52zm28 0h21v45H80zm28 0h21v45h-21z" fill="#f7f8ef" stroke="#a1ae94"/><path d="M57 55h11m17 0h11m17 0h11" stroke="#43634b" stroke-width="4" stroke-linecap="round"/><circle cx="63" cy="73" r="4" fill="#b8c4a4"/><circle cx="91" cy="73" r="4" fill="#c2c9b0"/><circle cx="119" cy="73" r="4" fill="#d9b78e"/><path d="M26 93V70m0 10c-13-1-13-12-13-12 13-1 13 12 13 12Zm0-4c11-1 11-13 11-13-11 0-11 13-11 13Z" stroke="#7b926c" fill="#ccd7ba"/><path d="M151 93V79m0 6c-9 0-9-9-9-9 9 0 9 9 9 9Zm0-3c8 0 8-10 8-10-8 0-8 10-8 10Z" stroke="#7b926c" fill="#ccd7ba"/></svg></div>
-        <h2 data-i18n="card_title">Clear rules. Everyday items.</h2>
-        <p data-i18n="card_desc">Source-backed guidance for sorting and preparing your recyclables on campus.</p>
+        <h2 data-i18n="card_title">Sort right on campus.</h2>
+        <p data-i18n="card_desc">Find out whether your item can be recycled, how to clean it, and where to drop it off.</p>
         <a class="pilot-location" href="https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg><span data-i18n="card_location">re Facilities Map · HKU</span><svg class="icon external-mini" aria-hidden="true"><use href="#icon-external"/></svg></a>
       </div>
     </div>
     <div class="sidebar-footer">
-      <span class="student-label"><span class="small-dot"></span><span data-i18n="footer_badge">Source-backed guidance</span></span>
-      <p data-i18n-html="sidebar_footer_text">Covering re Kiosk, Smart Bins<br>&amp; campus re Facilities.</p>
+      <span class="student-label"><span class="small-dot"></span><span data-i18n="footer_badge">Based on HKU guidelines</span></span>
+      <p data-i18n-html="sidebar_footer_text">Covers re Kiosk, Smart Recycling<br>Bins &amp; campus re Bins.</p>
       <button class="text-button" type="button" data-open-dialog="about-dialog"><span data-i18n="about_btn">About this helper</span> <span aria-hidden="true">↗</span></button>
     </div>
   </aside>
@@ -61,7 +61,7 @@
     <header class="page-topbar">
       <span class="eyebrow" data-i18n="topbar_eyebrow">HKU RECYCLING HELPER</span>
       <div class="topbar-right">
-        <a class="campus-label" href="https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg><span data-i18n="topbar_location">Campus Facilities Map</span><svg class="icon external-mini" aria-hidden="true"><use href="#icon-external"/></svg></a>
+        <a class="campus-label" href="https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg><span data-i18n="topbar_location">Campus Recycling Map</span><svg class="icon external-mini" aria-hidden="true"><use href="#icon-external"/></svg></a>
         <div class="lang-switch" role="group" aria-label="Language / 語言">
           <button type="button" id="lang-en" class="lang-button selected" data-lang="en" aria-pressed="true">EN</button>
           <button type="button" id="lang-zh" class="lang-button" data-lang="zh-HK" aria-pressed="false">繁體中文</button>
@@ -70,37 +70,37 @@
     </header>
     <section class="hero" aria-labelledby="page-heading">
       <div>
-        <div class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span><span class="kicker-text" data-i18n="hero_kicker">A SMALL STEP TOWARDS LESS WASTE</span></div>
-        <h1 id="page-heading" data-i18n-html="hero_heading">A little clarity.<br>A cleaner <em>campus.</em></h1>
-        <p data-i18n-html="hero_sub">Know what belongs, how to prepare it, and which campus facility to use.<br class="desktop-break">Start with one everyday item.</p>
+        <div class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span><span class="kicker-text" data-i18n="hero_kicker">HKU CAMPUS WASTE REDUCTION &amp; RECYCLING</span></div>
+        <h1 id="page-heading" data-i18n-html="hero_heading">Sort with clarity.<br>Recycle <em>right.</em></h1>
+        <p data-i18n-html="hero_sub">Check whether an everyday item can be recycled, how to clean it before drop-off,<br class="desktop-break">and which HKU facility accepts it.</p>
       </div>
       <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 210 180" fill="none"><circle cx="105" cy="93" r="67" fill="#e9eddd"/><path d="M45 47c17-19 45-28 68-21m-2-11 6 13-14 5M166 58c14 24 12 49-4 71m13 1-16 3-4-14M131 157c-29 9-57-3-72-23m-6 13 2-16 15 2" stroke="#849777" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><g transform="rotate(-15 81 93)"><path d="M69 52h20v16l8 13v58H61V81l8-13Z" fill="#cfddbd" stroke="#52764c" stroke-width="2"/><path d="M69 52h20v8H69z" fill="#6c8b61"/><path d="M61 88h36v31H61z" fill="#f7f7e9" stroke="#52764c" stroke-width="2"/><path d="M78 111c-9-3-7-13 4-15 4 9 4 14-4 15Z" fill="#789368"/><path d="m75 114 7-15" stroke="#f7f7e9"/></g><g transform="rotate(13 131 117)"><rect x="112" y="84" width="36" height="61" rx="8" fill="#f0d0ae" stroke="#a37e58" stroke-width="2"/><path d="M114 93h32m-32 43h32m-20-47h9" stroke="#a37e58" stroke-width="2"/><path d="m123 110 7-7 7 7m-7-7v20m-7-7 7 7 7-7" stroke="#a37e58" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g><path d="m38 96 3 5 6 1-5 4v6l-5-4-5 2 2-6-3-4 6-1Z" fill="#c8a776"/></svg><span data-i18n="hero_art_caption">ONE ITEM AT A TIME</span></div>
     </section>
 
     <section class="walkthrough" id="walkthrough" aria-label="Quick start guide">
-      <div class="walkthrough-title"><span class="sparkle" aria-hidden="true">✦</span><span data-i18n="walk_title">New here? Try a quick check.</span></div>
-      <ol><li id="walk-step-1" class="current"><span>1</span><b data-i18n="walk_1">Choose a sample</b></li><li id="walk-step-2"><span>2</span><b data-i18n="walk_2">Check the item</b></li><li id="walk-step-3"><span>3</span><b data-i18n="walk_3">Read the evidence</b></li></ol>
+      <div class="walkthrough-title"><span class="sparkle" aria-hidden="true">✦</span><span data-i18n="walk_title">Quick start</span></div>
+      <ol><li id="walk-step-1" class="current"><span>1</span><b data-i18n="walk_1">Pick an example or enter an item</b></li><li id="walk-step-2"><span>2</span><b data-i18n="walk_2">Check sorting rules</b></li><li id="walk-step-3"><span>3</span><b data-i18n="walk_3">View steps &amp; facility</b></li></ol>
       <button class="icon-button" type="button" id="dismiss-walkthrough" aria-label="Dismiss guide"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button>
     </section>
 
     <div id="global-error" class="notice notice-error" role="alert" hidden></div>
     <div class="workspace">
       <section class="checker-card card" aria-labelledby="checker-heading">
-        <div class="card-heading"><span class="section-number" data-i18n="sec_01">01 / THE ITEM</span><span class="one-item" data-i18n="one_item_tag">One item, please</span></div>
-        <h2 id="checker-heading" data-i18n="checker_heading">Where does it go?</h2>
-        <p class="card-intro" data-i18n="checker_intro">A little detail makes a better decision.</p>
+        <div class="card-heading"><span class="section-number" data-i18n="sec_01">01 / ITEM CHECK</span><span class="one-item" data-i18n="one_item_tag">Single item</span></div>
+        <h2 id="checker-heading" data-i18n="checker_heading">Can this be recycled on campus?</h2>
+        <p class="card-intro" data-i18n="checker_intro">Select a common example below, or switch to Live AI to enter your own item.</p>
         <div class="mode-switch" role="group" aria-label="Choose checking mode">
-          <button type="button" id="mode-sample" class="mode-button selected" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"/></svg><span data-i18n="mode_sample">Sample mode</span><span class="mode-tag" data-i18n="mode_tag_nokey">QUICK EXAMPLES</span></button>
+          <button type="button" id="mode-sample" class="mode-button selected" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"/></svg><span data-i18n="mode_sample">Sample mode</span><span class="mode-tag" data-i18n="mode_tag_nokey">EXAMPLES</span></button>
           <button type="button" id="mode-live" class="mode-button" aria-pressed="false" aria-describedby="live-availability" disabled><span class="live-indicator"></span><span data-i18n="mode_live">Live AI</span></button>
         </div>
-        <p class="mode-description" id="mode-description">Select a common item example, or switch to Live AI to check your own item.</p>
-        <div id="live-availability" class="live-availability">Loading live service availability…</div>
+        <p class="mode-description" id="mode-description">Browse preset examples for common campus items.</p>
+        <div id="live-availability" class="live-availability">Checking service status…</div>
         <form id="check-form">
-          <div id="sample-picker"><label class="field-label" id="samples-label"><b data-i18n="samples_label">Common examples</b> <span data-i18n="samples_select_one">SELECT ONE</span></label><div class="sample-chips" id="sample-chips" role="group" aria-labelledby="samples-label"><span class="loading-label">Loading samples…</span></div></div>
-          <div class="privacy-notice" id="privacy-notice"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg><p><span data-i18n="privacy_base">Keep it about the item. Do not enter names, student UIDs, contact details, or personal records.</span> <span id="privacy-mode">Sample mode makes no external request.</span></p></div>
-          <div class="input-label-row"><label class="field-label" for="description" data-i18n="your_item_label">Your item</label><span id="input-kind">EXAMPLE DESCRIPTION</span></div>
-          <textarea id="description" name="description" rows="4" maxlength="1000" placeholder="Choose an example above to get started." aria-describedby="input-help privacy-notice" readonly required></textarea>
-          <div class="input-help-row"><p id="input-help">Example descriptions are preset. Switch to Live AI to enter your own item.</p><span id="character-count" hidden>0 / 1000</span></div>
+          <div id="sample-picker"><label class="field-label" id="samples-label"><b data-i18n="samples_label">Common examples</b> <span data-i18n="samples_select_one">SELECT ONE</span></label><div class="sample-chips" id="sample-chips" role="group" aria-labelledby="samples-label"><span class="loading-label">Loading examples…</span></div></div>
+          <div class="privacy-notice" id="privacy-notice"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg><p><span data-i18n="privacy_base">Describe only the item, its material, and whether it is empty and clean.</span> <span id="privacy-mode"></span></p></div>
+          <div class="input-label-row"><label class="field-label" for="description" data-i18n="your_item_label">Item description</label><span id="input-kind">PRESET EXAMPLE</span></div>
+          <textarea id="description" name="description" rows="4" maxlength="1000" placeholder="Select an example above to preview." aria-describedby="input-help privacy-notice" readonly required></textarea>
+          <div class="input-help-row"><p id="input-help">Switch to Live AI above to type your own item.</p><span id="character-count" hidden>0 / 1000</span></div>
           <button class="check-button" id="check-button" type="submit" disabled><span id="check-button-label">Check item</span><svg class="icon button-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg><span class="spinner" hidden aria-hidden="true"></span></button>
           <p class="form-footnote"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg><span id="form-footnote-text">Covers HKU re Kiosk, Smart Recycling Bins, and campus re Bins.</span></p>
           <div class="notice notice-error" id="check-error" role="alert" hidden></div>
@@ -108,17 +108,17 @@
       </section>
 
       <section class="result-card card" id="result-card" aria-labelledby="result-heading" aria-busy="false">
-        <div class="card-heading"><span class="section-number" data-i18n="sec_02">02 / THE NEXT STEP</span><span class="result-label" id="result-label">READY WHEN YOU ARE</span></div>
-        <div id="result-empty" class="result-empty"><div class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 180 154" fill="none"><path d="M24 130h132" stroke="#d5dbc9"/><ellipse cx="89" cy="131" rx="49" ry="8" fill="#e7ebdc"/><rect x="45" y="29" width="85" height="99" rx="8" transform="rotate(-6 45 29)" fill="#eff2e6" stroke="#b3c1a1" stroke-width="1.5"/><rect x="54" y="35" width="85" height="99" rx="8" transform="rotate(6 54 35)" fill="#fafbf3" stroke="#9eaf8a" stroke-width="1.5"/><circle cx="92" cy="75" r="17" fill="#e4ebd7"/><path d="m84 75 5 5 11-12" stroke="#6a8659" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m72 104 35 3m-29 7 23 2" stroke="#c3cdb7" stroke-width="3" stroke-linecap="round"/><path d="m139 29 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#c1cead"/><circle cx="33" cy="83" r="3" fill="#d4bd94"/></svg></div><h2 id="result-heading" data-i18n-html="empty_heading">A good habit starts<br>with one item.</h2><p data-i18n="empty_desc">Select an item or enter a description to view the sorting decision, preparation steps, and cited sources.</p><div class="empty-features"><span><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg><b data-i18n="empty_feat_1">Clear decision</b></span><span><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg><b data-i18n="empty_feat_2">Visible evidence</b></span></div></div>
+        <div class="card-heading"><span class="section-number" data-i18n="sec_02">02 / SORTING RESULT</span><span class="result-label" id="result-label">READY</span></div>
+        <div id="result-empty" class="result-empty"><div class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 180 154" fill="none"><path d="M24 130h132" stroke="#d5dbc9"/><ellipse cx="89" cy="131" rx="49" ry="8" fill="#e7ebdc"/><rect x="45" y="29" width="85" height="99" rx="8" transform="rotate(-6 45 29)" fill="#eff2e6" stroke="#b3c1a1" stroke-width="1.5"/><rect x="54" y="35" width="85" height="99" rx="8" transform="rotate(6 54 35)" fill="#fafbf3" stroke="#9eaf8a" stroke-width="1.5"/><circle cx="92" cy="75" r="17" fill="#e4ebd7"/><path d="m84 75 5 5 11-12" stroke="#6a8659" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m72 104 35 3m-29 7 23 2" stroke="#c3cdb7" stroke-width="3" stroke-linecap="round"/><path d="m139 29 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#c1cead"/><circle cx="33" cy="83" r="3" fill="#d4bd94"/></svg></div><h2 id="result-heading" data-i18n-html="empty_heading">Check an item<br>before you toss it.</h2><p data-i18n="empty_desc">Select an example on the left or switch to Live AI to see whether it is accepted, how to clean it, and which campus bin to use.</p><div class="empty-features"><span><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg><b data-i18n="empty_feat_1">Clear sorting rules</b></span><span><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg><b data-i18n="empty_feat_2">Official HKU sources</b></span></div></div>
         <div id="result-content" hidden>
-          <div class="result-status" id="result-status"><span class="status-icon"><svg class="icon" aria-hidden="true"><use id="status-icon-use" href="#icon-check"/></svg></span><div><span class="result-eyebrow" id="result-eyebrow">DECISION</span><h2 id="decision-heading" tabindex="-1"></h2></div></div>
-          <p id="sample-result-notice" class="sample-result-notice" hidden data-i18n="sample_result_notice">Built-in example — switch to Live AI to check your own item description.</p>
+          <div class="result-status" id="result-status"><span class="status-icon"><svg class="icon" aria-hidden="true"><use id="status-icon-use" href="#icon-check"/></svg></span><div><span class="result-eyebrow" id="result-eyebrow">SORTING DECISION</span><h2 id="decision-heading" tabindex="-1"></h2></div></div>
+          <p id="sample-result-notice" class="sample-result-notice" hidden data-i18n="sample_result_notice">Preset example — switch to Live AI to check your own item.</p>
           <p class="result-reason" id="result-reason"></p>
-          <div class="clarification" id="clarification-box" hidden><span class="detail-label" data-i18n="clarification_label">A LITTLE MORE DETAIL</span><p id="clarification-text"></p></div>
+          <div class="clarification" id="clarification-box" hidden><span class="detail-label" data-i18n="clarification_label">MORE DETAILS NEEDED</span><p id="clarification-text"></p></div>
           <div class="result-facility">
             <svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg>
             <div class="facility-body">
-              <span class="detail-label" data-i18n="facility_label">SUITABLE FACILITIES</span>
+              <span class="detail-label" data-i18n="facility_label">RECOMMENDED FACILITY</span>
               <p id="result-facility"></p>
               <p id="result-facility-detail" class="facility-subtext" hidden></p>
               <a id="facility-map-link" class="facility-map-link" href="https://www.wastereduction.hku.hk/re-facilities#comp-m7bndgl81" target="_blank" rel="noopener noreferrer">
@@ -128,21 +128,21 @@
               </a>
             </div>
           </div>
-          <div class="preparation-section" id="preparation-section"><h3 id="preparation-heading" data-i18n="prep_heading">Before you drop it off</h3><ul id="preparation-list"></ul></div>
-          <div class="evidence-section"><div class="evidence-title"><h3 data-i18n="evidence_heading">Where this comes from</h3><span id="evidence-count"></span></div><div id="evidence-list"></div><p id="no-evidence" class="secondary-text" hidden>No cited rule supports a facility decision for this item.</p></div>
-          <details class="result-details"><summary><span data-i18n="details_summary">About this answer</span> <span aria-hidden="true">+</span></summary><dl id="result-metadata"></dl></details>
+          <div class="preparation-section" id="preparation-section"><h3 id="preparation-heading" data-i18n="prep_heading">Preparation before drop-off</h3><ul id="preparation-list"></ul></div>
+          <div class="evidence-section"><div class="evidence-title"><h3 data-i18n="evidence_heading">Official reference sources</h3><span id="evidence-count"></span></div><div id="evidence-list"></div><p id="no-evidence" class="secondary-text" hidden>No specific rule record matched this item.</p></div>
+          <details class="result-details"><summary><span data-i18n="details_summary">Technical details</span> <span aria-hidden="true">+</span></summary><dl id="result-metadata"></dl></details>
         </div>
-        <div id="result-loading" class="result-loading" hidden><span class="large-spinner" aria-hidden="true"></span><h2 data-i18n="loading_heading">Checking the details…</h2><p id="loading-message">Reading the selected example.</p></div>
+        <div id="result-loading" class="result-loading" hidden><span class="large-spinner" aria-hidden="true"></span><h2 data-i18n="loading_heading">Checking sorting rules…</h2><p id="loading-message">Matching campus guidelines…</p></div>
         <p class="sr-only" id="result-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
     </div>
 
-    <section class="ground-rules" aria-label="Important campus guidance"><span class="ground-icon"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"/></svg></span><div><h2 data-i18n="ground_heading">The sign at the bin has the final say.</h2><p data-i18n="ground_desc">Follow campus staff and current on-site signage at all times.</p></div><button class="text-button" data-open-dialog="how-dialog" type="button"><span data-i18n="ground_btn">How it works</span> <span aria-hidden="true">↗</span></button></section>
-    <footer class="page-footer"><span data-i18n="footer_motto">Less guessing. Better habits.</span><span id="corpus-status">Loading corpus status…</span><span data-i18n="footer_right">RE KIOSK · MAIN CAMPUS</span></footer>
+    <section class="ground-rules" aria-label="Important campus guidance"><span class="ground-icon"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"/></svg></span><div><h2 data-i18n="ground_heading">On-site bin signage always comes first.</h2><p data-i18n="ground_desc">If a bin sign or campus staff member gives different instructions on-site, always follow their guidance.</p></div><button class="text-button" data-open-dialog="how-dialog" type="button"><span data-i18n="ground_btn">How it works</span> <span aria-hidden="true">↗</span></button></section>
+    <footer class="page-footer"><span data-i18n="footer_motto">Sort right. Waste less.</span><span id="corpus-status">Loading rule collection…</span><span data-i18n="footer_right">HKU RE FACILITIES</span></footer>
   </main>
 
-  <dialog id="how-dialog" aria-labelledby="how-title"><div class="dialog-top"><span class="eyebrow" data-i18n="how_eyebrow">HOW IT WORKS</span><button class="icon-button" type="button" data-close-dialog aria-label="Close how it works"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="how-title" data-i18n-html="how_title">Clarity, with the sources<br>to back it up.</h2><p data-i18n="how_intro">Describe one everyday item in any language, including its material and whether it is empty, clean, or stained. Typos are normalized automatically before checking the rules for HKU re Facilities.</p><ol class="how-steps"><li><span>01</span><div><h3 data-i18n="how_s1_title">Check the scope</h3><p data-i18n="how_s1_desc">Hazardous, laboratory, and commercial waste requests are excluded. Campus staff and on-site bin signage always take priority.</p></div></li><li><span>02</span><div><h3 data-i18n="how_s2_title">Match cited evidence</h3><p data-i18n="how_s2_desc">Live mode retrieves matching records from the local rule collection and recommends suitable campus facilities (re Kiosk, Smart Recycling Bins, or re Bins).</p></div></li><li><span>03</span><div><h3 data-i18n="how_s3_title">Clear decision states</h3><p data-i18n="how_s3_desc">Results show Accepted, Not accepted, Cannot determine, or General guidance when an item is outside the campus rule set.</p></div></li></ol><div class="dialog-note" data-i18n="how_note">Sample mode provides built-in examples for common items so you can preview how decisions and citations are presented.</div><button class="dialog-primary" type="button" data-close-dialog><span data-i18n="how_close_btn">Let’s check an item</span> <span aria-hidden="true">→</span></button></dialog>
-  <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><span class="eyebrow" data-i18n="sources_eyebrow">THE SOURCE LIBRARY</span><button class="icon-button" type="button" data-close-dialog aria-label="Close source library"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="sources-title" data-i18n-html="sources_title">Good answers need<br>good foundations.</h2><p data-i18n="sources_intro">Official public references cited by the rule collection are listed below with their section locators and verification dates.</p><div class="library-summary" id="library-summary"></div><div class="source-library" id="source-library"></div><p class="dialog-note" data-i18n="sources_note">General Hong Kong recycling guidance provides background context only and does not establish acceptance at an HKU facility. Always follow current campus signage.</p></dialog>
-  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow" data-i18n="about_eyebrow">ABOUT THIS HELPER</span><button class="icon-button" type="button" data-close-dialog aria-label="Close information"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="about-title" data-i18n-html="about_title">A campus habit,<br>one item at a time.</h2><p data-i18n="about_p1">HKU Recycling Helper provides source-backed recycling guidance for the re Kiosk (Run Run Shaw Podium, Main Campus), Smart Recycling Bins, and campus re Bins.</p><h3 data-i18n="about_h_privacy">Privacy</h3><p data-i18n="about_p_privacy">Keep descriptions focused on the item and free of personal information. The app does not store query logs or conversation history.</p><h3 data-i18n="about_h_scope">Coverage</h3><p data-i18n="about_p_scope">Supports multilingual input for one everyday item at a time, backed by cited HKU and EPD references. Always follow on-site bin signage and campus staff instructions.</p><button class="dialog-primary" type="button" data-close-dialog><span data-i18n="about_close_btn">Back to the helper</span> <span aria-hidden="true">→</span></button></dialog>
+  <dialog id="how-dialog" aria-labelledby="how-title"><div class="dialog-top"><span class="eyebrow" data-i18n="how_eyebrow">HOW IT WORKS</span><button class="icon-button" type="button" data-close-dialog aria-label="Close how it works"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="how-title" data-i18n-html="how_title">Clear sorting guidance,<br>backed by official sources.</h2><p data-i18n="how_intro">Enter one everyday item in Chinese or English. The helper checks it against HKU recycling rules and tells you how to prepare it and which campus facility to use.</p><ol class="how-steps"><li><span>01</span><div><h3 data-i18n="how_s1_title">Safety &amp; scope check</h3><p data-i18n="how_s1_desc">Hazardous, laboratory, medical, and commercial waste cannot be placed in campus recycling bins and must follow specialist disposal procedures.</p></div></li><li><span>02</span><div><h3 data-i18n="how_s2_title">Match HKU rules &amp; facilities</h3><p data-i18n="how_s2_desc">Matches your item to the appropriate stream at re Kiosk (Run Run Shaw Podium), Smart Recycling Bins, or campus re Bins.</p></div></li><li><span>03</span><div><h3 data-i18n="how_s3_title">Preparation &amp; citations</h3><p data-i18n="how_s3_desc">Shows required cleaning steps (such as rinsing or removing lids) alongside links to the official HKU Photo Guide and EPD references.</p></div></li></ol><div class="dialog-note" data-i18n="how_note">Sample mode lets you preview common examples right away; switch to Live AI to check any item of your own.</div><button class="dialog-primary" type="button" data-close-dialog><span data-i18n="how_close_btn">Start checking</span> <span aria-hidden="true">→</span></button></dialog>
+  <dialog id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><span class="eyebrow" data-i18n="sources_eyebrow">REFERENCE SOURCES</span><button class="icon-button" type="button" data-close-dialog aria-label="Close source library"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="sources-title" data-i18n-html="sources_title">Official HKU &amp; EPD<br>recycling references.</h2><p data-i18n="sources_intro">All sorting rules in this helper are derived from the official public references listed below.</p><div class="library-summary" id="library-summary"></div><div class="source-library" id="source-library"></div><p class="dialog-note" data-i18n="sources_note">General EPD tips provide background guidance for items not covered by specific HKU rules. Always follow on-site campus bin signage.</p></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow" data-i18n="about_eyebrow">ABOUT THIS HELPER</span><button class="icon-button" type="button" data-close-dialog aria-label="Close information"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><h2 id="about-title" data-i18n-html="about_title">Campus recycling,<br>made simple.</h2><p data-i18n="about_p1">HKU Recycling Helper helps students and staff check whether everyday items can be recycled at the re Kiosk (Run Run Shaw Podium, Main Campus), Smart Recycling Bins, and campus re Bins.</p><h3 data-i18n="about_h_privacy">Privacy</h3><p data-i18n="about_p_privacy">Please enter only item descriptions and avoid personal details. No query logs or conversation histories are saved by this application.</p><h3 data-i18n="about_h_scope">Facilities covered</h3><p data-i18n="about_p_scope">Covers paper, plastics, metals, glass bottles, and beverage cartons (Tetra Pak) across HKU re Facilities, with direct links to the official campus recycling map.</p><button class="dialog-primary" type="button" data-close-dialog><span data-i18n="about_close_btn">Back to the helper</span> <span aria-hidden="true">→</span></button></dialog>
 </body>
 </html>
