@@ -14,14 +14,12 @@
       "keywords": [
         "pizza box"
       ],
-      "conditions": [
-        "clean"
-      ],
-      "condition_codes": [
-        "clean"
-      ],
+      "conditions": [],
+      "condition_codes": [],
       "decision": "accepted",
-      "preparation": [],
+      "preparation": [
+        "Remove any food residue and keep the box clean and dry."
+      ],
       "reason": "Clean pizza boxes are accepted in the paper recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-pizza-box",
@@ -74,12 +72,8 @@
       "keywords": [
         "coffee cup lid"
       ],
-      "conditions": [
-        "clean"
-      ],
-      "condition_codes": [
-        "clean"
-      ],
+      "conditions": [],
+      "condition_codes": [],
       "decision": "accepted",
       "preparation": [
         "Clean the lid."
@@ -131,17 +125,15 @@
       "id": "candidate-coffee-cup",
       "material": "beverage_carton",
       "item_types": [
-        "takeaway coffee cup"
+        "takeaway coffee cup",
+        "coffee cup"
       ],
       "keywords": [
-        "takeaway coffee cup"
+        "takeaway coffee cup",
+        "paper coffee cup"
       ],
-      "conditions": [
-        "clean"
-      ],
-      "condition_codes": [
-        "clean"
-      ],
+      "conditions": [],
+      "condition_codes": [],
       "decision": "accepted",
       "preparation": [
         "Clean the cup."
@@ -193,18 +185,17 @@
       "id": "candidate-cleaned-styrofoam",
       "material": "plastic",
       "item_types": [
-        "styrofoam"
+        "styrofoam",
+        "styrofoam container",
+        "styrofoam box"
       ],
       "keywords": [
-        "styrofoam"
+        "styrofoam",
+        "styrofoam container",
+        "styrofoam box"
       ],
-      "conditions": [
-        "clean",
-        "no food residue"
-      ],
-      "condition_codes": [
-        "clean"
-      ],
+      "conditions": [],
+      "condition_codes": [],
       "decision": "accepted",
       "preparation": [
         "Remove food residue."
@@ -387,17 +378,17 @@
       "id": "candidate-personal-care-bottle",
       "material": "plastic",
       "item_types": [
-        "personal care bottle"
+        "personal care bottle",
+        "shampoo bottle",
+        "body wash bottle"
       ],
       "keywords": [
-        "personal care bottle"
+        "personal care bottle",
+        "shampoo bottle",
+        "body wash bottle"
       ],
-      "conditions": [
-        "clean"
-      ],
-      "condition_codes": [
-        "clean"
-      ],
+      "conditions": [],
+      "condition_codes": [],
       "decision": "accepted",
       "preparation": [
         "Clean the bottle."
@@ -421,10 +412,12 @@
       "id": "candidate-mooncake-tin",
       "material": "metal",
       "item_types": [
-        "mooncake tin"
+        "mooncake tin",
+        "mooncake box"
       ],
       "keywords": [
-        "mooncake tin"
+        "mooncake tin",
+        "mooncake box"
       ],
       "conditions": [],
       "condition_codes": [],
@@ -433,6 +426,320 @@
       "reason": "Empty, clean metal mooncake tins are accepted in the metals recycling stream at re Kiosk.",
       "source_ids": [
         "hku-photo-mooncake-tin",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-plastic-bottle",
+      "material": "plastic",
+      "item_types": [
+        "plastic bottle",
+        "water bottle",
+        "drink bottle",
+        "beverage bottle",
+        "pet bottle",
+        "soda bottle",
+        "plastic water bottle",
+        "plastic drink bottle",
+        "plastic food container"
+      ],
+      "keywords": [
+        "plastic bottle",
+        "water bottle",
+        "drink bottle",
+        "beverage bottle",
+        "pet bottle",
+        "soda bottle",
+        "plastic water bottle",
+        "plastic drink bottle",
+        "plastic food container"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [
+        "Empty all liquid, rinse the bottle, and remove the cap."
+      ],
+      "reason": "Clean, empty plastic bottles and containers are accepted in the plastics recycling stream at HKU re Facilities.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-metal-can",
+      "material": "metal",
+      "item_types": [
+        "metal can",
+        "aluminium can",
+        "aluminum can",
+        "soda can",
+        "drink can",
+        "beverage can",
+        "tin can",
+        "food can",
+        "beer can",
+        "soft drink can"
+      ],
+      "keywords": [
+        "metal can",
+        "aluminium can",
+        "aluminum can",
+        "soda can",
+        "drink can",
+        "beverage can",
+        "tin can",
+        "food can",
+        "beer can",
+        "soft drink can"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [
+        "Empty and rinse the can before recycling."
+      ],
+      "reason": "Empty, clean aluminium and metal cans are accepted in the metals recycling stream at HKU re Facilities.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-paper-cardboard",
+      "material": "paper",
+      "item_types": [
+        "cardboard box",
+        "cardboard",
+        "newspaper",
+        "magazine",
+        "office paper",
+        "a4 paper",
+        "envelope",
+        "paper bag",
+        "carton box",
+        "shipping box",
+        "parcel box",
+        "flyer",
+        "leaflet",
+        "notebook",
+        "printing paper"
+      ],
+      "keywords": [
+        "cardboard box",
+        "cardboard",
+        "newspaper",
+        "magazine",
+        "office paper",
+        "a4 paper",
+        "envelope",
+        "paper bag",
+        "carton box",
+        "shipping box",
+        "parcel box",
+        "flyer",
+        "leaflet",
+        "notebook",
+        "printing paper"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [
+        "Remove tape or non-paper bindings, keep dry, and flatten boxes."
+      ],
+      "reason": "Clean, dry paper, magazines, newspapers, and flattened cardboard boxes are accepted in the paper recycling stream at HKU re Facilities.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-glass-bottle",
+      "material": "glass",
+      "item_types": [
+        "glass bottle",
+        "glass drink bottle",
+        "glass beverage bottle",
+        "glass jar",
+        "jam jar",
+        "sauce bottle",
+        "wine bottle"
+      ],
+      "keywords": [
+        "glass bottle",
+        "glass drink bottle",
+        "glass beverage bottle",
+        "glass jar",
+        "jam jar",
+        "sauce bottle",
+        "wine bottle"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [
+        "Empty, rinse thoroughly, and remove the cap or lid."
+      ],
+      "reason": "Empty, rinsed glass bottles and jars are accepted in the glass bottle stream at re Kiosk and designated Smart Recycling Bins.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-beverage-carton",
+      "material": "beverage_carton",
+      "item_types": [
+        "beverage carton",
+        "drink carton",
+        "milk carton",
+        "juice carton",
+        "soy milk carton",
+        "lemon tea carton",
+        "tetra pak",
+        "tetrapak",
+        "paper drink pack"
+      ],
+      "keywords": [
+        "beverage carton",
+        "drink carton",
+        "milk carton",
+        "juice carton",
+        "soy milk carton",
+        "lemon tea carton",
+        "tetra pak",
+        "tetrapak",
+        "paper drink pack"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "accepted",
+      "preparation": [
+        "Cut open, rinse the inside, and flatten the carton."
+      ],
+      "reason": "Clean, rinsed beverage cartons (Tetra Pak) are accepted in the beverage carton stream at re Kiosk.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-tissue-napkin",
+      "material": "paper",
+      "item_types": [
+        "tissue paper",
+        "facial tissue",
+        "toilet paper",
+        "paper towel",
+        "paper napkin",
+        "wet wipe",
+        "tissue"
+      ],
+      "keywords": [
+        "tissue paper",
+        "facial tissue",
+        "toilet paper",
+        "paper towel",
+        "paper napkin",
+        "wet wipe",
+        "tissue"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Tissues, napkins, and paper towels have short fibres and hygiene concerns, and are excluded from paper recycling.",
+      "source_ids": [
+        "hku-recycling-101",
+        "hku-re-kiosk-facility"
+      ],
+      "facility_specific": true,
+      "permission": {
+        "status": "team_override",
+        "basis": "Curated factual summary referencing public HKU recycling guidance.",
+        "allow_api_processing": true,
+        "allow_distribution": true
+      },
+      "verified_on": "2026-10-25",
+      "review_status": "active"
+    },
+    {
+      "id": "rule-thermal-receipt",
+      "material": "paper",
+      "item_types": [
+        "thermal receipt",
+        "cashier receipt",
+        "shopping receipt",
+        "receipt"
+      ],
+      "keywords": [
+        "thermal receipt",
+        "cashier receipt",
+        "shopping receipt",
+        "receipt"
+      ],
+      "conditions": [],
+      "condition_codes": [],
+      "decision": "not_accepted",
+      "preparation": [],
+      "reason": "Thermal receipts contain chemical coatings and are excluded from paper recycling.",
+      "source_ids": [
+        "hku-recycling-101",
         "hku-re-kiosk-facility"
       ],
       "facility_specific": true,

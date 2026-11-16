@@ -5,7 +5,7 @@ A source-backed campus recycling assistant for HKU students and staff. It checks
 ## Key Features
 
 - **Bilingual Web Interface (`EN` / `繁體中文`)**: One-click toggle between English and Hong Kong Traditional Chinese across the entire UI, sample examples, rule explanations, preparation steps, and source library.
-- **Evidence-Backed Facility Matching**: Matches everyday items against 14 curated campus rule records from the [HKU Photo Guide](https://www.wastereduction.hku.hk/photo-guide) and [HKU re Facilities](https://www.wastereduction.hku.hk/re-facilities), recommending the appropriate facility stream:
+- **Evidence-Backed Facility Matching**: Matches everyday items against 21 curated campus rule records from the [HKU Photo Guide](https://www.wastereduction.hku.hk/photo-guide), [HKU Recycling 101](https://www.wastereduction.hku.hk/recycling-101), and [HKU re Facilities](https://www.wastereduction.hku.hk/re-facilities), recommending the appropriate facility stream:
   - **re Kiosk (Run Run Shaw Podium, Main Campus)**: 24-hour collection for Paper, Tetra Pak (Beverage Cartons), Metals, Glass Bottles, Plastics (including clean foam nets, styrofoam, coffee cup lids, contact lens trays), and Rechargeable Batteries.
   - **Smart Recycling Bins**: 24-hour self-service bins with HKU App **GreenU** points integration across Main Campus (K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F), Sassoon Road Campus, and Pine Court.
   - **re Bins**: Campus-wide three-colour recycling bins.
@@ -84,7 +84,7 @@ Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.
 | `app/safety.py` | Deterministic pre-screening for scope, hazards, personal data, and missing conditions. |
 | `app/provider.py` | Serialized, non-retrying HTTP client and strict Pydantic output validation. |
 | `SKILL.md` | System prompt instructions governing evidence-bound model decisions. |
-| `data/rules.json` | 14 curated campus recycling rules with required conditions and preparation steps. |
+| `data/rules.json` | 21 curated campus recycling rules with required conditions and preparation steps. |
 | `data/sources.json` | Official HKU and EPD reference URLs, section locators, and verification dates. |
 | `data/general-guidance.json` | Official EPD references for non-facility general waste/recycling fallback. |
 | `data/samples.json` | Built-in examples covering accepted, rejected, uncertain, and out-of-scope states. |

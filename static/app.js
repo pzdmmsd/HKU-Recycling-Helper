@@ -256,11 +256,24 @@
     "No facility-specific recommendation": "無特定回收點建議",
     "No facility recommendation": "無回收設施建議",
     "Remove tape and flatten the box.": "撕除膠紙並把紙箱壓平。",
+    "Remove any food residue and keep the box clean and dry.": "清除食物殘渣，並保持紙盒乾淨乾爽。",
+    "Empty all liquid, rinse the bottle, and remove the cap.": "倒空所有液體，沖洗樽身並取下樽蓋。",
+    "Empty and rinse the can before recycling.": "回收前請先倒空並沖洗乾淨。",
+    "Remove tape or non-paper bindings, keep dry, and flatten boxes.": "撕除膠紙或非紙質釘裝物，保持乾爽並將紙箱壓平。",
+    "Empty, rinse thoroughly, and remove the cap or lid.": "倒空內容物、徹底沖洗乾淨，並移除樽蓋。",
+    "Cut open, rinse the inside, and flatten the carton.": "剪開紙包盒、沖洗內壁並壓平。",
     "Clean the lid.": "清潔杯蓋。",
     "Clean the cup.": "清潔紙杯。",
     "Remove food residue.": "清除所有食物殘渣。",
     "Clean the bottle.": "清潔樽身。",
     "Keep it out of paper, plastic and metal recycling.": "請勿放入廢紙、塑膠或金屬回收桶。",
+    "Clean, empty plastic bottles and containers are accepted in the plastics recycling stream at HKU re Facilities.": "清空並洗淨的塑膠水樽及容器，可放入港大回收設施的塑膠回收箱。",
+    "Empty, clean aluminium and metal cans are accepted in the metals recycling stream at HKU re Facilities.": "清空並洗淨的鋁罐及金屬罐，可放入港大回收設施的金屬回收箱。",
+    "Clean, dry paper, magazines, newspapers, and flattened cardboard boxes are accepted in the paper recycling stream at HKU re Facilities.": "乾淨乾爽的廢紙、雜誌、報紙及壓平的紙箱，可放入港大回收設施的廢紙回收箱。",
+    "Empty, rinsed glass bottles and jars are accepted in the glass bottle stream at re Kiosk and designated Smart Recycling Bins.": "清空並沖洗乾淨的玻璃樽及玻璃瓶，可放入 re Kiosk 及指定智能回收箱的玻璃樽回收流向。",
+    "Clean, rinsed beverage cartons (Tetra Pak) are accepted in the beverage carton stream at re Kiosk.": "沖洗乾淨並壓平的紙包飲品盒（Tetra Pak），可放入 re Kiosk 的飲品紙包盒專用回收箱。",
+    "Tissues, napkins, and paper towels have short fibres and hygiene concerns, and are excluded from paper recycling.": "紙巾、餐巾紙及抹手紙因纖維過短及衛生問題，不獲廢紙回收。",
+    "Thermal receipts contain chemical coatings and are excluded from paper recycling.": "感熱紙收據含有化學塗層，不獲廢紙回收。",
     "Clean, dry cardboard is accepted in the paper recycling stream at re Kiosk.": "乾淨且乾燥的紙皮／紙箱可放入廢紙回收流向。",
     "Composite or plastic-coated wrappers are excluded from the recycling streams at re Kiosk.": "複合材質或帶有塑膠塗層的包裝紙不獲校園回收設施接收。",
     "The material and cleanliness of the container are not specified, so a recycling decision cannot be made yet.": "由於未註明容器的材質及是否已清空洗淨，暫時無法作出回收決定。",
@@ -346,27 +359,57 @@
 
   function resolveFacilityRecommendation(result) {
     const zh = state.lang === "zh-HK";
-    if (!result || !result.facility || result.status === "cannot_determine" || result.status === "refused" || result.status === "general_guidance") {
-      return {
-        primary: zh
-          ? (result?.status === "general_guidance" ? "無特定港大回收設施建議（請參閱下方一般指引或校園地圖）" : "無特定回收設施建議")
-          : (result?.status === "general_guidance" ? "No facility-specific recommendation (see campus map below)" : "No facility recommendation"),
-        detail: "",
-      };
+    if (!result) {
+      return { primary: zh ? "re Kiosk（邵逸夫平台）· 智能回收箱 · 校園 re Bin" : "re Kiosk (Run Run Shaw Podium) · Smart Recycling Bins · Campus re Bins", detail: "" };
     }
     const ruleIds = (result.evidence || []).map((e) => e.rule_id || "");
-    const text = `${result.item || ""} ${result.reason || ""} ${ruleIds.join(" ")}`.toLowerCase();
+    const text = `${result.item || ""} ${result.reason || ""} ${result.clarification || ""} ${(result.preparation || []).join(" ")} ${ruleIds.join(" ")}`.toLowerCase();
+
+    if (result.status === "refused") {
+      return {
+        primary: zh
+          ? "不適用於校園一般回收設施（請聯絡實驗室或校園管理人員）"
+          : "Not for campus recycling bins (Contact laboratory or campus staff)",
+        detail: zh
+          ? "危險品、醫療、實驗室或商業廢物請遵循專門安全處置程序，切勿放入 re Kiosk、智能回收箱或 re Bin。"
+          : "Follow specialist campus disposal procedures for hazardous, laboratory, or commercial waste.",
+      };
+    }
+
     if (result.status === "not_accepted") {
       return {
         primary: zh
-          ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱 · 校園 re Bin（均不接收此物品）"
-          : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins · re Bins (Not accepted)",
+          ? "校園一般垃圾桶（re Kiosk、智能回收箱及 re Bin 均不接收此物品）"
+          : "Campus General Waste Bins (Not accepted at re Kiosk, Smart Recycling Bins, or re Bins)",
         detail: zh
-          ? "此物品不屬於校園回收設施的接收範圍，請作一般垃圾處理。"
-          : "This item is excluded from campus recycling streams; dispose of as general waste.",
+          ? "此物品不屬於校園回收流向，請放入一般垃圾桶，以免污染其他可回收物。"
+          : "This item is excluded from campus recycling streams; place it in a general waste bin to avoid contaminating recyclables.",
       };
     }
-    if (text.includes("coffee-cup") && !text.includes("lid") && !text.includes("sleeve") || text.includes("beverage carton") || text.includes("tetra pak")) {
+
+    if (text.includes("food scrap") || text.includes("fruit peel") || text.includes("vegetable peel") || text.includes("food waste") || text.includes("banana peel") || text.includes("廚餘")) {
+      return {
+        primary: zh
+          ? "校園廚餘回收桶或一般垃圾桶（切勿放入 re Kiosk、智能回收箱或三色回收桶）"
+          : "Campus Food Waste Bins or General Waste Bins (Keep out of dry recycling facilities)",
+        detail: zh
+          ? "請使用校園內的廚餘收集點；如附近未設廚餘桶，請作一般垃圾處理。"
+          : "Use a campus food-waste collection point if available, or dispose of as general waste.",
+      };
+    }
+
+    if (text.includes("rechargeable") || text.includes("充電池")) {
+      return {
+        primary: zh
+          ? "re Kiosk — 本部校園邵逸夫平台（24 小時開放 · 設有充電池回收箱）"
+          : "re Kiosk — Run Run Shaw Podium, Main Campus (24-hr · Rechargeable Battery collection)",
+        detail: zh
+          ? "re Kiosk 專門設有充電池回收箱（位於邵逸夫平台 Subway 旁、邵仁枚樓對面）。"
+          : "re Kiosk at Run Run Shaw Podium provides dedicated collection for rechargeable batteries.",
+      };
+    }
+
+    if ((text.includes("coffee-cup") && !text.includes("lid") && !text.includes("sleeve")) || (text.includes("coffee cup") && !text.includes("lid") && !text.includes("sleeve")) || text.includes("beverage carton") || text.includes("drink carton") || text.includes("milk carton") || text.includes("juice carton") || text.includes("tetra pak") || text.includes("tetrapak") || text.includes("carton stream")) {
       return {
         primary: zh
           ? "re Kiosk — 本部校園邵逸夫平台（24 小時開放 · 設飲品紙包盒專用回收箱）"
@@ -376,17 +419,19 @@
           : "Note: Smart Recycling Bins and standard re Bins do not collect beverage cartons; use the re Kiosk at Run Run Shaw Podium.",
       };
     }
-    if (text.includes("glass")) {
+
+    if (text.includes("glass") || text.includes("玻璃")) {
       return {
         primary: zh
-          ? "re Kiosk（邵逸夫平台）· 指定智能回收箱（百周年校園中央平台 G/F 及松蔭園）"
+          ? "re Kiosk（本部校園邵逸夫平台）· 指定智能回收箱（百周年校園中央平台 G/F 及松蔭園）"
           : "re Kiosk (Run Run Shaw Podium) · Selected Smart Recycling Bins (Central Podium G/F & Pine Court)",
         detail: zh
-          ? "24 小時開放；玻璃樽僅於 re Kiosk 及指定智能回收箱接收。"
-          : "24-hour access; glass bottles are collected at re Kiosk and designated Smart Recycling Bins.",
+          ? "24 小時開放；玻璃樽僅於邵逸夫平台 re Kiosk、百周年校園中央平台 G/F 及松蔭園智能回收箱接收。"
+          : "24-hour access; glass bottles are collected at re Kiosk and designated Smart Recycling Bins (Central Podium Levels G/F & Pine Court).",
       };
     }
-    if (text.includes("styrofoam") || text.includes("foam-net") || text.includes("foam net") || text.includes("contact-lens") || text.includes("noodle-container") || text.includes("coffee-cup-lid")) {
+
+    if (text.includes("styrofoam") || text.includes("foam-net") || text.includes("foam net") || text.includes("contact-lens") || text.includes("contact lens") || text.includes("noodle-container") || text.includes("instant noodle cup") || text.includes("coffee-cup-lid") || text.includes("coffee cup lid")) {
       return {
         primary: zh
           ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱（Smart Recycling Bins · 其他塑膠類別）"
@@ -396,13 +441,25 @@
           : "re Kiosk collects diverse clean plastics; Smart Recycling Bins are located at K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F, and Sassoon Road Campus.",
       };
     }
+
+    if (result.status === "accepted" || text.includes("paper") || text.includes("cardboard") || text.includes("plastic") || text.includes("metal") || text.includes("alumin") || text.includes("tin") || text.includes("can") || text.includes("bottle") || text.includes("box")) {
+      return {
+        primary: zh
+          ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱（Smart Recycling Bins）· 校園各處 re Bin"
+          : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins · Campus re Bins",
+        detail: zh
+          ? "re Kiosk 及智能回收箱均為 24 小時開放（梁銶琚樓 LG2/F、明華 1/F、許愛周 G/F、百周年中央平台 G/F、沙宣道校園）；使用 HKU App 內 GreenU 功能於智能回收箱回收可賺取積分。"
+          : "re Kiosk and Smart Recycling Bins operate 24 hours (K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F, Sassoon Rd); use GreenU in the HKU App at Smart Bins to earn points.",
+      };
+    }
+
     return {
       primary: zh
         ? "re Kiosk（本部校園邵逸夫平台）· 智能回收箱（Smart Recycling Bins）· 校園各處 re Bin"
         : "re Kiosk (Run Run Shaw Podium, Main Campus) · Smart Recycling Bins · Campus re Bins",
       detail: zh
-        ? "re Kiosk 及智能回收箱均為 24 小時開放；使用 HKU App 內 GreenU 功能於智能回收箱回收更可賺取積分。"
-        : "re Kiosk and Smart Recycling Bins operate 24 hours; use the GreenU function in the HKU App at Smart Recycling Bins to earn points.",
+        ? "請確認物品屬於廢紙、塑膠、金屬、玻璃樽或飲品紙包盒並已清潔乾淨，或點擊下方按鈕查看全校回收設施地圖。"
+        : "Confirm the item's material and cleanliness to match the right recycling stream, or view the campus recycling map below.",
     };
   }
 

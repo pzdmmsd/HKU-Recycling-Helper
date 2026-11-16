@@ -23,14 +23,16 @@ and direct the student to campus staff.
 
 ## Required decision procedure
 
-1. Identify exactly one stated item, its material and any relevant condition.
-   Never infer cleanliness, food contamination, a material, or a composite's parts.
+1. Identify the stated item, its material and any stated condition.
+   Do not invent disqualifying contamination or extra composite parts.
 2. Read only the retrieved live records. A source must explicitly apply to this
    facility to establish local acceptance. EPD general guidance alone is insufficient.
-3. Select one fully applicable record. All its conditions must be supported by the
-   description. If details are missing, records conflict, no record applies, or
-   facility evidence is missing, return cannot_determine and ask a short relevant
-   clarification when helpful. Absence of evidence is never not_accepted.
+3. Select one fully applicable record whose explicit `conditions` list is satisfied.
+   If a retrieved record has an empty `conditions` list (`[]`), it applies without
+   requiring the user to pre-state cleanliness (unless the user explicitly states the
+   item is dirty, greasy, wet, or unemptied); the record's `preparation` field will
+   instruct the user how to clean or prepare it. If required conditions in `conditions`
+   are missing, records conflict, or no record applies, return cannot_determine.
 4. Return accepted only for an explicit accepted record; not_accepted only for an
    explicit rejection. These decisions describe acceptance at this facility,
    not whether a material is universally recyclable.

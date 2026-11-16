@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+import re
 from urllib.parse import urlparse
 
 from app.safety import conditions_in, has_phrase, materials_in, normalize
@@ -141,6 +142,11 @@ class Corpus:
     def conditions_met(rule: dict, description: str) -> bool:
         text = normalize(description)
         stated = conditions_in(text)
+        if rule.get("decision") == "accepted":
+            if ("dirty" in stated or "food_contaminated" in stated) and "no_food_residue" not in stated:
+                return False
+            if re.search(r"\b(wet|damp|soaked|liquid left|still contains|half.full|full of|unwashed|unrinsed|unclean)\b", text):
+                return False
         codes = rule.get("condition_codes", [])
         if not isinstance(codes, list) or not all(isinstance(value, str) for value in codes):
             return False

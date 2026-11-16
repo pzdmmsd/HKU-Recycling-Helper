@@ -158,7 +158,10 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             screening is None
             or (
                 screening.status == "cannot_determine"
-                and screening.reason.startswith("The description does not identify a supported material")
+                and (
+                    screening.reason.startswith("The description does not identify a supported material")
+                    or screening.reason.startswith("The item's condition is missing")
+                )
             )
         )
         if screening and not general_fallback_allowed:
