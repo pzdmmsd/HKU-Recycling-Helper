@@ -4,7 +4,7 @@ A source-backed campus recycling assistant for HKU students and staff. It checks
 
 ## Key Features
 
-- **Bilingual Web Interface (`EN` / `繁體中文`)**: One-click toggle between English and Hong Kong Traditional Chinese across the entire UI, sample examples, rule explanations, preparation steps, and source library.
+- **Bilingual Web Interface (`EN` / `zh-HK`)**: One-click toggle between English and Hong Kong Traditional Chinese across the entire UI, sample examples, rule explanations, preparation steps, and source library.
 - **Evidence-Backed Facility Matching**: Matches everyday items against 21 curated campus rule records from the [HKU Photo Guide](https://www.wastereduction.hku.hk/photo-guide), [HKU Recycling 101](https://www.wastereduction.hku.hk/recycling-101), and [HKU re Facilities](https://www.wastereduction.hku.hk/re-facilities), recommending the appropriate facility stream:
   - **re Kiosk (Run Run Shaw Podium, Main Campus)**: 24-hour collection for Paper, Tetra Pak (Beverage Cartons), Metals, Glass Bottles, Plastics (including clean foam nets, styrofoam, coffee cup lids, contact lens trays), and Rechargeable Batteries.
   - **Smart Recycling Bins**: 24-hour self-service bins with HKU App **GreenU** points integration across Main Campus (K.K. Leung LG2/F, Meng Wah 1/F, Hui Oi Chow G/F, Central Podium G/F), Sassoon Road Campus, and Pine Court.
@@ -77,12 +77,12 @@ Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.
 
 ## Deploy on Vercel
 
-Vercel runs the existing `app/main.py` FastAPI app, including the web interface and `/api/*` endpoints. See [the deployment and secret-storage guide](docs/deployment.md) for the complete Chinese walkthrough.
+Vercel runs the existing `app/main.py` FastAPI app, including the web interface and `/api/*` endpoints. See [the deployment and secret-storage guide](docs/deployment.md) for the complete walkthrough.
 
 1. In [Vercel New Project](https://vercel.com/new), import `pzdmmsd/HKU-Recycling-Helper` and select the `main` branch.
 2. Keep Root Directory at the repository root, choose **FastAPI**, and leave build/output overrides empty. The repository selects Python 3.14 and a 180-second function timeout.
 3. Set `BAILIAN_API_KEY` in the project's **Settings → Environment Variables** for **Production**, then deploy. Without a key, the website still offers Sample mode.
-4. After changing environment variables, redeploy. The key is read by Python on the server and never sent to the browser.
+4. After saving environment variables, open **Deployments**, select the current production deployment, and choose **Redeploy**. Wait for **Ready**, then reload the website. Existing deployments do not receive newly saved variables. The key is read by Python on the server and never sent to the browser.
 
 The deployment automatically permits its own Vercel deployment, branch and production hostnames. Add any custom hostname to `ALLOWED_HOSTS` (comma-separated, without `https://` or paths). Keep Vercel's **Automatically expose System Environment Variables** enabled.
 
@@ -103,7 +103,7 @@ The deployment automatically permits its own Vercel deployment, branch and produ
 | `data/sources.json` | Official HKU and EPD reference URLs, section locators, and verification dates. |
 | `data/general-guidance.json` | Official EPD references for non-facility general waste/recycling fallback. |
 | `data/samples.json` | Built-in examples covering accepted, rejected, uncertain, and out-of-scope states. |
-| `static/` | Responsive bilingual (`EN` / `繁體中文`) frontend (`index.html`, `styles.css`, `app.js`). |
+| `static/` | Responsive bilingual (`EN` / `zh-HK`) frontend (`index.html`, `styles.css`, `app.js`). |
 
 See [docs/architecture.md](docs/architecture.md) for the request pipeline diagram and [schemas/answer.schema.json](schemas/answer.schema.json) for the response contract.
 
@@ -119,7 +119,7 @@ Run the automated test suite and safety checks:
 .venv/bin/python scripts/evaluate.py run --safety-only
 ```
 
-Run headless Chrome UI verification (checks desktop & mobile layouts, sample states, source library dialog, and `EN` / `繁體中文` language switching):
+Run headless Chrome UI verification (checks desktop & mobile layouts, sample states, source library dialog, and English/Traditional Chinese language switching):
 
 ```sh
 node scripts/browser_check.mjs
@@ -135,5 +135,8 @@ For the 20-case benchmark workflow (`freeze`, `run`, and `summarize`), see [docs
 | --- | --- |
 | Python not found | Install Python 3.12+ and add it to `PATH`, then reopen your terminal. |
 | Port 8000 in use | `launch.py` automatically picks the next available port (`8001`–`8010`), or pass `--port`. |
-| Live AI unavailable | Ensure `BAILIAN_API_KEY` is set in `.env` and restart the launcher. |
+| Live AI unavailable locally | Set `BAILIAN_API_KEY` in `.env` and restart the launcher. |
+| Live AI unavailable on Vercel after saving the key | Set `BAILIAN_API_KEY` for Production in the correct project, redeploy, wait for Ready, and reload the website. |
 | API timeout or rate limit | Wait a moment and try again; the backend serializes requests and never guesses answers on error. |
+
+All repository documentation and GitHub pull request descriptions are maintained in English. The web interface remains bilingual.
