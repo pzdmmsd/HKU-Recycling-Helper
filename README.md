@@ -44,7 +44,11 @@ python3 -m venv .venv
 
 ## API Configuration (Live AI Mode)
 
-Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.8-flash`).
+Live mode uses the OpenAI-compatible **NVIDIA NIM** endpoint (`nvidia/nemotron-3.5-lightning-30b-a3b`).
+
+Nemotron 3.5 Lightning supports structured output and fast text tasks. Requests disable thinking with `chat_template_kwargs.enable_thinking=false` and use JSON mode so the output fits the app's bounded response budget. English and Hong Kong Traditional Chinese inputs are checked through the existing normalization and evidence validation pipeline.
+
+When migrating from Bailian, run the helper below: it replaces the old credential, endpoint and model in the local configuration. Hosted deployments need `NVIDIA_API_KEY` and the NVIDIA endpoint/model shown below; remove old `AI_BASE_URL` and `AI_MODEL` overrides or update them before redeploying.
 
 1. Run the key configuration helper to save your API key into the git-ignored `.env` file:
 
@@ -59,9 +63,9 @@ Live mode uses the OpenAI-compatible **Alibaba Cloud Bailian** endpoint (`qwen3.
 2. Default `.env` settings:
 
    ```dotenv
-   BAILIAN_API_KEY=your_api_key_here
-   AI_BASE_URL=https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1
-   AI_MODEL=qwen3.8-flash
+   NVIDIA_API_KEY=your_api_key_here
+   AI_BASE_URL=https://integrate.api.nvidia.com/v1
+   AI_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b
    AI_TIMEOUT_SECONDS=45
    AI_MAX_TOKENS=800
    AI_TEMPERATURE=0.1
@@ -81,7 +85,7 @@ Vercel runs the existing `app/main.py` FastAPI app, including the web interface 
 
 1. In [Vercel New Project](https://vercel.com/new), import `pzdmmsd/HKU-Recycling-Helper` and select the `main` branch.
 2. Keep Root Directory at the repository root, choose **FastAPI**, and leave build/output overrides empty. The repository selects Python 3.14 and a 180-second function timeout.
-3. Set `BAILIAN_API_KEY` in the project's **Settings → Environment Variables** for **Production**, then deploy. Without a key, the website still offers Sample mode.
+3. Set `NVIDIA_API_KEY` in the project's **Settings → Environment Variables** for **Production**, then deploy. Without a key, the website still offers Sample mode.
 4. After saving environment variables, open **Deployments**, select the current production deployment, and choose **Redeploy**. Wait for **Ready**, then reload the website. Existing deployments do not receive newly saved variables. The key is read by Python on the server and never sent to the browser.
 
 The deployment automatically permits its own Vercel deployment, branch and production hostnames. Add any custom hostname to `ALLOWED_HOSTS` (comma-separated, without `https://` or paths). Keep Vercel's **Automatically expose System Environment Variables** enabled.
@@ -135,6 +139,6 @@ For the 20-case benchmark workflow (`freeze`, `run`, and `summarize`), see [docs
 | --- | --- |
 | Python not found | Install Python 3.12+ and add it to `PATH`, then reopen your terminal. |
 | Port 8000 in use | `launch.py` automatically picks the next available port (`8001`–`8010`), or pass `--port`. |
-| Live AI unavailable locally | Set `BAILIAN_API_KEY` in `.env` and restart the launcher. |
-| Live AI unavailable on Vercel after saving the key | Set `BAILIAN_API_KEY` for Production in the correct project, redeploy, wait for Ready, and reload the website. |
+| Live AI unavailable locally | Set `NVIDIA_API_KEY` in `.env` and restart the launcher. |
+| Live AI unavailable on Vercel after saving the key | Set `NVIDIA_API_KEY` for Production in the correct project, redeploy, wait for Ready, and reload the website. |
 | API timeout or rate limit | Wait a moment and try again; the backend serializes requests and never guesses answers on error. |

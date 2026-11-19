@@ -301,8 +301,15 @@ def test_configuration_never_exposes_secret(fixture_data):
     assert "synthetic-key-never-live" not in repr(fixture_data["settings"])
 
 
-def test_credential_cannot_be_sent_to_another_host(fixture_data):
-    fixture_data["settings"] = replace(fixture_data["settings"], base_url="https://evil.example/v1")
+@pytest.mark.parametrize("base_url", [
+    "https://evil.example/v1",
+    "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+    "http://integrate.api.nvidia.com/v1",
+    "https://integrate.api.nvidia.com/other",
+    "https://integrate.api.nvidia.com/v1?redirect=evil.example",
+])
+def test_credential_cannot_be_sent_to_another_host(fixture_data, base_url):
+    fixture_data["settings"] = replace(fixture_data["settings"], base_url=base_url)
     response = client_for(fixture_data, no_call).post("/api/check", json={"description": DESCRIPTION})
     assert response.status_code == 503
     assert response.json()["error"]["code"] == "invalid_provider_url"

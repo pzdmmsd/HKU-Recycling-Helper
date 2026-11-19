@@ -13,7 +13,7 @@ flowchart LR
     ValidateGeneral --> Browser
     Sources[Curated sources and rules] --> Retrieve
     Retrieve --> Prompt[SKILL.md + retrieved records]
-    Prompt --> Provider[Alibaba Cloud Bailian]
+    Prompt --> Provider[NVIDIA NIM]
     Provider --> Validate[Strict JSON + canonical evidence checks]
     Validate --> Browser
     API --> Samples[Built-in sample items]

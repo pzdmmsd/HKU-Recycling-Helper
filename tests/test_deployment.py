@@ -16,7 +16,8 @@ def hosted_environment(monkeypatch):
     monkeypatch.setenv("VERCEL_PROJECT_PRODUCTION_URL", "helper.vercel.app")
     monkeypatch.setenv("VERCEL_BRANCH_URL", "helper-git-main.vercel.app")
     monkeypatch.setenv("ALLOWED_HOSTS", "recycle.example.edu, RECYCLE.example.edu ")
-    monkeypatch.setenv("BAILIAN_API_KEY", "")
+    monkeypatch.setenv("NVIDIA_API_KEY", "")
+    monkeypatch.setenv("AI_API_KEY", "")
     return Settings.from_env()
 
 
@@ -27,6 +28,18 @@ def test_hosted_environment_does_not_load_local_secrets(hosted_environment, monk
     monkeypatch.setattr("app.config.load_dotenv", forbidden)
     assert Settings.from_env().api_key == ""
     assert hosted_environment.allowed_hosts.count("recycle.example.edu") == 1
+
+
+@pytest.mark.parametrize(("nvidia_key", "generic_key", "expected"), [
+    ("synthetic-nvidia", "synthetic-generic", "synthetic-nvidia"),
+    ("  ", "synthetic-generic", "synthetic-generic"),
+    ("", "", ""),
+])
+def test_nvidia_credentials_ignore_stale_bailian_key(hosted_environment, monkeypatch, nvidia_key, generic_key, expected):
+    monkeypatch.setenv("NVIDIA_API_KEY", nvidia_key)
+    monkeypatch.setenv("AI_API_KEY", generic_key)
+    monkeypatch.setenv("BAILIAN_API_KEY", "stale-synthetic-bailian")
+    assert Settings.from_env().api_key == expected
 
 
 @pytest.mark.parametrize("host", [

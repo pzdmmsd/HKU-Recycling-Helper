@@ -1,6 +1,6 @@
 # Vercel deployment and API secret storage
 
-This project uses Python FastAPI to serve both the web interface and `/api/*` endpoints. Deploy the complete application to Vercel. The browser calls the same website's `/api/check` endpoint; the Python backend calls Alibaba Cloud Bailian using a server-side key.
+This project uses Python FastAPI to serve both the web interface and `/api/*` endpoints. Deploy the complete application to Vercel. The browser calls the same website's `/api/check` endpoint; the Python backend calls NVIDIA NIM using a server-side key.
 
 ## Current deployment
 
@@ -25,9 +25,9 @@ For a new deployment:
 
 | Variable | Value | Purpose |
 | --- | --- | --- |
-| `BAILIAN_API_KEY` | Your Bailian API key | The required secret. Select the Secret type, or the Sensitive option in dashboards that use that label, and target Production. |
-| `AI_BASE_URL` | `https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1` | Default endpoint. The backend only permits this course endpoint. |
-| `AI_MODEL` | `qwen3.8-flash` | Default model. |
+| `NVIDIA_API_KEY` | Your NVIDIA API key | The required secret. Select the Secret type, or the Sensitive option in dashboards that use that label, and target Production. |
+| `AI_BASE_URL` | `https://integrate.api.nvidia.com/v1` | Default endpoint. The backend only permits this NVIDIA endpoint. |
+| `AI_MODEL` | `nvidia/nemotron-3.5-lightning-30b-a3b` | Default model. |
 | `AI_TIMEOUT_SECONDS` | `45` | Default timeout for each upstream call. |
 | `AI_MAX_TOKENS` | `800` | Default output token limit. |
 | `AI_TEMPERATURE` | `0.1` | Default temperature. |
@@ -35,7 +35,7 @@ For a new deployment:
 
 Keep the production secret scoped to Production. Configure a separate suitable Preview key only if preview deployments need Live AI.
 
-**Saving a variable does not update an existing deployment.** After adding or changing `BAILIAN_API_KEY`, open the project's **Deployments** tab, select the current production deployment, choose **Redeploy**, and wait for **Ready**. Reload the production website afterward. A variable saved after the current deployment was created will only be available to a new deployment.
+**Saving a variable does not update an existing deployment.** After adding or changing `NVIDIA_API_KEY`, open the project's **Deployments** tab, select the current production deployment, choose **Redeploy**, and wait for **Ready**. Reload the production website afterward. A variable saved after the current deployment was created will only be available to a new deployment.
 
 For local development, store the key in the repository-root `.env` file. Both `.gitignore` and `.vercelignore` exclude this file, and Vercel deployments do not load it. Keep credentials out of GitHub, frontend JavaScript and HTML, `vercel.json`, and public variables such as `NEXT_PUBLIC_*` or `VITE_*`. Never paste credentials into chat or application logs.
 
@@ -61,10 +61,10 @@ The browser check covers both deployments with a key and Sample-only deployments
 
 | Symptom | Check and resolution |
 | --- | --- |
-| `The server-side course API key is not configured` after saving the key | Confirm the exact variable name `BAILIAN_API_KEY`, the correct project, and the Production target. Redeploy after saving, wait for Ready, and reload the production URL. |
+| `The server-side NVIDIA API key is not configured` after saving the key | Confirm the exact variable name `NVIDIA_API_KEY`, the correct project, and the Production target. Redeploy after saving, wait for Ready, and reload the production URL. |
 | Live mode remains unavailable on an older deployment URL | Open the stable production URL or the latest production deployment. Old deployments retain their original variables. |
 | `host_not_allowed` | Enable system environment variables or add the exact visited hostname to `ALLOWED_HOSTS`, then redeploy. |
-| Provider authentication failure | Check that the configured key is valid for the course endpoint. Replace it directly in Vercel, then redeploy. |
+| Provider authentication failure | Check that the configured key is valid for the NVIDIA endpoint. Replace it directly in Vercel, then redeploy. |
 | Provider timeout | Check Vercel Runtime Logs and upstream connectivity. A timeout must not produce a guessed recycling decision. |
 
 The provider lock limits concurrency within one function instance. It is not a global rate limiter across multiple instances. For public Live AI usage, configure suitable provider quotas and any necessary platform access or rate limits. Same-origin checks do not authenticate visitors.

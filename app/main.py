@@ -87,9 +87,9 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
         if not corpus.rules:
             reasons.append("No cited rules are included in the live corpus.")
         if not settings.api_key:
-            reasons.append("The server-side course API key is not configured.")
+            reasons.append("The server-side NVIDIA API key is not configured.")
         if not settings.model:
-            reasons.append("The course model is not configured.")
+            reasons.append("The NVIDIA model is not configured.")
         if not settings.skill_path.is_file():
             reasons.append("SKILL.md is missing.")
         return {
@@ -105,7 +105,7 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
             "prompt_version": PROMPT_VERSION,
             "facility": corpus.facility,
             "settings": {"temperature": settings.temperature, "max_tokens": settings.max_tokens, "timeout_seconds": settings.timeout_seconds, "concurrency": 1, "retries": 0},
-            "privacy_notice": "Live mode sends your item description, relevant cited rules and task instructions to Alibaba Cloud Bailian. Do not enter names, student IDs, contact details or personal records. This app does not save descriptions or answers. Provider processing and retention are governed by the course arrangement and provider terms; local logging settings do not control them. Sample mode makes no external API call.",
+            "privacy_notice": "Live mode sends your item description, relevant cited rules and task instructions to NVIDIA NIM. Do not enter names, student IDs, contact details or personal records. This app does not save descriptions or answers. Provider processing and retention are governed by the NVIDIA provider terms; local logging settings do not control them. Sample mode makes no external API call.",
         }
 
     @application.get("/api/samples")

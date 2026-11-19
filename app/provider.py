@@ -61,10 +61,10 @@ class ModelProvider:
         """Translate or correct one description without adding recycling facts."""
         settings = self.settings
         if not settings.api_key or not settings.model:
-            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured course model.", 503)
+            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured model.", 503)
         parsed = urlparse(settings.base_url)
-        if parsed.scheme != "https" or parsed.hostname != "token-plan.cn-beijing.maas.aliyuncs.com" or parsed.path.rstrip("/") != "/compatible-mode/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
-            raise ServiceError("invalid_provider_url", "The provider URL must be the sponsored Alibaba Cloud Bailian OpenAI-compatible endpoint.", 503)
+        if parsed.scheme != "https" or parsed.hostname != "integrate.api.nvidia.com" or parsed.path.rstrip("/") != "/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
+            raise ServiceError("invalid_provider_url", "The provider URL must be the NVIDIA NIM OpenAI-compatible endpoint.", 503)
         schema = InputNormalization.model_json_schema()
         instruction = (
             "NORMALIZATION CONTRACT: Translate and correct the user's item description into concise English. "
@@ -87,6 +87,7 @@ class ModelProvider:
             "max_tokens": settings.max_tokens,
             "stream": False,
             "response_format": {"type": "json_object"},
+            "chat_template_kwargs": {"enable_thinking": False},
         }
         async with self._provider_slot():
             try:
@@ -97,9 +98,9 @@ class ModelProvider:
             except httpx.RequestError:
                 raise ServiceError("provider_unreachable", "The language-normalization service could not be reached.") from None
         if response.status_code == 429:
-            raise ServiceError("provider_rate_limited", "The course model service is rate limited or its quota is unavailable. Try later or contact the teaching team.", 503)
+            raise ServiceError("provider_rate_limited", "The NVIDIA model service is rate limited or its quota is unavailable. Try later or check your NVIDIA API quota.", 503)
         if response.status_code in {401, 403}:
-            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the course key locally.", 503)
+            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the NVIDIA key locally.", 503)
         if response.status_code < 200 or response.status_code >= 300:
             raise ServiceError("provider_error", "The language-normalization service returned an error.")
         if len(response.content) > 100_000:
@@ -123,10 +124,10 @@ class ModelProvider:
         """Classify an item without claiming facility-specific acceptance."""
         settings = self.settings
         if not settings.api_key or not settings.model:
-            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured course model.", 503)
+            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured model.", 503)
         parsed = urlparse(settings.base_url)
-        if parsed.scheme != "https" or parsed.hostname != "token-plan.cn-beijing.maas.aliyuncs.com" or parsed.path.rstrip("/") != "/compatible-mode/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
-            raise ServiceError("invalid_provider_url", "The provider URL must be the sponsored Alibaba Cloud Bailian OpenAI-compatible endpoint.", 503)
+        if parsed.scheme != "https" or parsed.hostname != "integrate.api.nvidia.com" or parsed.path.rstrip("/") != "/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
+            raise ServiceError("invalid_provider_url", "The provider URL must be the NVIDIA NIM OpenAI-compatible endpoint.", 503)
         context = corpus.general_context()
         schema = GeneralGuidance.model_json_schema()
         lang_instruction = (
@@ -155,6 +156,7 @@ class ModelProvider:
             "max_tokens": settings.max_tokens,
             "stream": False,
             "response_format": {"type": "json_object"},
+            "chat_template_kwargs": {"enable_thinking": False},
         }
         async with self._provider_slot():
             try:
@@ -165,9 +167,9 @@ class ModelProvider:
             except httpx.RequestError:
                 raise ServiceError("provider_unreachable", "The general-guidance service could not be reached. No category was produced.") from None
         if response.status_code == 429:
-            raise ServiceError("provider_rate_limited", "The course model service is rate limited or its quota is unavailable. Try later or contact the teaching team.", 503)
+            raise ServiceError("provider_rate_limited", "The NVIDIA model service is rate limited or its quota is unavailable. Try later or check your NVIDIA API quota.", 503)
         if response.status_code in {401, 403}:
-            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the course key locally.", 503)
+            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the NVIDIA key locally.", 503)
         if response.status_code < 200 or response.status_code >= 300:
             raise ServiceError("provider_error", "The general-guidance service returned an error. No category was produced.")
         if len(response.content) > 100_000:
@@ -191,11 +193,11 @@ class ModelProvider:
     async def decide(self, description: str, corpus: Corpus, rules: list[dict]) -> ModelDecision:
         settings = self.settings
         if not settings.api_key or not settings.model:
-            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured course model.", 503)
+            raise ServiceError("live_not_configured", "Live mode needs a server-side API key and a configured model.", 503)
         parsed = urlparse(settings.base_url)
         # A typo or altered URL must never forward a group credential elsewhere.
-        if parsed.scheme != "https" or parsed.hostname != "token-plan.cn-beijing.maas.aliyuncs.com" or parsed.path.rstrip("/") != "/compatible-mode/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
-            raise ServiceError("invalid_provider_url", "The provider URL must be the sponsored Alibaba Cloud Bailian OpenAI-compatible endpoint.", 503)
+        if parsed.scheme != "https" or parsed.hostname != "integrate.api.nvidia.com" or parsed.path.rstrip("/") != "/v1" or parsed.query or parsed.fragment or parsed.username or parsed.password or parsed.port not in (None, 443):
+            raise ServiceError("invalid_provider_url", "The provider URL must be the NVIDIA NIM OpenAI-compatible endpoint.", 503)
         try:
             skill = settings.skill_path.read_text(encoding="utf-8")
         except OSError:
@@ -222,6 +224,7 @@ class ModelProvider:
             "max_tokens": settings.max_tokens,
             "stream": False,
             "response_format": {"type": "json_object"},
+            "chat_template_kwargs": {"enable_thinking": False},
         }
         # Do not queue bursts: reject concurrent calls instead of spending shared quota.
         async with self._provider_slot():
@@ -233,9 +236,9 @@ class ModelProvider:
             except httpx.RequestError:
                 raise ServiceError("provider_unreachable", "The model service could not be reached. No recycling decision was generated.") from None
         if response.status_code == 429:
-            raise ServiceError("provider_rate_limited", "The course model service is rate limited or its quota is unavailable. Try later or contact the teaching team.", 503)
+            raise ServiceError("provider_rate_limited", "The NVIDIA model service is rate limited or its quota is unavailable. Try later or check your NVIDIA API quota.", 503)
         if response.status_code in {401, 403}:
-            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the course key locally.", 503)
+            raise ServiceError("provider_authentication_failed", "The model service rejected the server credential. Check the NVIDIA key locally.", 503)
         if response.status_code < 200 or response.status_code >= 300:
             raise ServiceError("provider_error", "The model service returned an error. No recycling decision was generated.")
         if len(response.content) > 100_000:
